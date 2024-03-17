@@ -16,6 +16,9 @@
 #include "openthread/tasklet.h"
 #include "openthread/udp.h"
 
+#include "nvs_flash.h"
+#include "nvs.h"
+
 /**
  * Each send packet will have the following payload:
  * 
@@ -36,6 +39,9 @@
 #define MAIN_WAIT_TIME MS_TO_TICKS(5000)
 #define PACKET_SEND_DELAY_SECONDS 5
 #define IDLE_DELAY_TICKS MS_TO_TICKS(500)
+
+#define OT_SEND_CTR "ot-send-counter"
+#define OT_SEND_CTR_KEY "counter"
 
 #define OT_DISCONNECTED(role) (role == OT_DEVICE_ROLE_DISABLED) || (role == OT_DEVICE_ROLE_DETACHED)
 
@@ -65,7 +71,8 @@ void udpSend(otInstance *aInstance,
              uint16_t port,
              uint16_t destPort,
              otSockAddr *aSockName,
-             otUdpSocket *aSocket);
+             otUdpSocket *aSocket,
+             nvs_handle_t counterHandle);
 
 void checkConnection(otInstance *aInstance);
 

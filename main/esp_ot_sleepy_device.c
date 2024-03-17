@@ -132,43 +132,6 @@ static void ot_deep_sleep_init(void)
     ESP_ERROR_CHECK(gpio_pulldown_dis(gpio_wakeup_pin));
 }
 
-typedef struct state_changed_cbk_ctx {
-  otSockAddr aSockName;
-  otUdpSocket aSocket;
-} state_changed_cbk_ctx;
-
-static void ot_state_change_callback(otChangedFlags changed_flags, void* ctx)
-{
-    state_changed_cbk_ctx *stack_context = (state_changed_cbk_ctx *) ctx;
-
-    static otDeviceRole s_previous_role = OT_DEVICE_ROLE_DISABLED;
-    otInstance* instance = esp_openthread_get_instance();
-    if (!instance) {
-        return;
-    }
-
-    bool packetSent = false;
-    otDeviceRole role = otThreadGetDeviceRole(instance);
-
-    if (role == OT_DEVICE_ROLE_CHILD && s_previous_role != OT_DEVICE_ROLE_CHILD)
-    {
-      udpSend(esp_openthread_get_instance(), UDP_SOCK_PORT, UDP_DEST_PORT,
-              &(stack_context->aSockName), &(stack_context->aSocket));
-      packetSent = true;
-    }
-    s_previous_role = role;
-
-    if (packetSent) {
-      vTaskDelay(IDLE_DELAY_TICKS);
-
-      ESP_LOGI(TAG, "Enter deep sleep");
-      gettimeofday(&s_sleep_enter_time, NULL);
-
-      esp_deep_sleep_start();
-    }
-    return;
-}
-
 static void ot_task_worker(void *aContext)
 {
     esp_openthread_platform_config_t config = {
@@ -228,10 +191,24 @@ void app_main(void)
     otSockAddr aSockName;
     otUdpSocket aSocket;
 
+    nvs_handle_t counterHandle;
+    ESP_ERROR_CHECK(nvs_open(OT_SEND_CTR, NVS_READWRITE, &counterHandle));
+
+    uint32_t initialCount = 0;
+    esp_err_t error = nvs_get_u32(counterHandle, OT_SEND_CTR_KEY, &initialCount);
+    switch (error) {
+      case ESP_ERR_NVS_NOT_FOUND:
+        ESP_ERROR_CHECK(nvs_set_u32(counterHandle, OT_SEND_CTR_KEY, initialCount));
+        break;
+
+      default:
+        ESP_ERROR_CHECK(error);
+    }
+
     while (true)
     {
       udpSend(esp_openthread_get_instance(), UDP_SOCK_PORT, UDP_DEST_PORT,
-              &aSockName, &aSocket);
+              &aSockName, &aSocket, counterHandle);
 
       // Cannot sleep immediately after, or packet will not sent.
       // Some time is needed to process and transmit the packet.
