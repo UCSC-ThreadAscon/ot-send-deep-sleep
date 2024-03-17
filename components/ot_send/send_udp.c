@@ -43,11 +43,11 @@ uint32_t udpAttachPayload(otMessage *aMessage) {
   return count - 1;
 }
 
-void udpSend(otInstance *aInstance,
-             uint16_t port,
-             uint16_t destPort,
-             otUdpSocket *aSocket,
-             otMessageInfo *aMessageInfo)
+void udpTransmitMessage(otInstance *aInstance,
+                        uint16_t port,
+                        uint16_t destPort,
+                        otUdpSocket *aSocket,
+                        otMessageInfo *aMessageInfo)
 {
   otMessage *aMessage = otUdpNewMessage(aInstance, NULL);
 
@@ -59,11 +59,11 @@ void udpSend(otInstance *aInstance,
   return;
 }
 
-void udpSendInfinite(otInstance *aInstance,
-                     uint16_t port,
-                     uint16_t destPort,
-                     otSockAddr *aSockName,
-                     otUdpSocket *aSocket)
+void udpSend(otInstance *aInstance,
+             uint16_t port,
+             uint16_t destPort,
+             otSockAddr *aSockName,
+             otUdpSocket *aSocket)
 {
   checkConnection(aInstance);
 
@@ -79,9 +79,7 @@ void udpSendInfinite(otInstance *aInstance,
   otIp6Address *peerAddr = &(aMessageInfo.mPeerAddr);
   handleError(otIp6AddressFromString(RECEIVER_ADDRESS, peerAddr));
 
-  while (true) {
-    udpSend(aInstance, port, destPort, aSocket, &aMessageInfo);
-    vTaskDelay(PACKET_SEND_DELAY);
-  }
+  udpTransmitMessage(aInstance, port, destPort, aSocket, &aMessageInfo);
+  vTaskDelay(PACKET_SEND_DELAY);
   return;
 }
