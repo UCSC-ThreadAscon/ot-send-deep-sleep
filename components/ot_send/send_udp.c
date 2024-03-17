@@ -80,6 +80,5 @@ void udpSend(otInstance *aInstance,
   handleError(otIp6AddressFromString(RECEIVER_ADDRESS, peerAddr));
 
   udpTransmitMessage(aInstance, port, destPort, aSocket, &aMessageInfo);
-  vTaskDelay(PACKET_SEND_DELAY);
   return;
 }

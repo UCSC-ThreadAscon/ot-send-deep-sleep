@@ -32,6 +32,7 @@
 #define PAYLOAD_SIZE 24
 
 #define MS_TO_TICKS(ms) ms / portTICK_PERIOD_MS
+#define MS_TO_SECONDS(ms) ms / 1000
 #define DEFAULT_WAIT_TIME MS_TO_TICKS(100)
 #define PACKET_SEND_DELAY MS_TO_TICKS(500) // 500 ms
 #define SEND_WAIT_TIME MS_TO_TICKS(1000) // 1 second
@@ -59,8 +60,6 @@
  * https://docs.google.com/document/d/1o-NaEOA-vzWPCv7VX1dONUfwos2epveDk4H_Y2Y5g1Y/edit?usp=sharing
 */
 #define EmptyMemory(pointer, size) memset((void *) pointer, 0, size)
-
-void ot_task_worker(void *aContext);
 
 void udpSend(otInstance *aInstance,
              uint16_t port,
