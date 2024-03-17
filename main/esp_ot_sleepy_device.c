@@ -190,6 +190,9 @@ static void ot_task_worker(void *aContext)
 
     create_config_network(esp_openthread_get_instance());
 
+    // TX power must be set before starting the OpenThread CLI.
+    setTxPower();
+
     // Run the main loop
     esp_openthread_launch_mainloop();
 

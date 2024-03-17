@@ -509,6 +509,12 @@ CONFIG_PARTITION_TABLE_MD5=y
 # end of Partition Table
 
 #
+# OpenThread Deep Sleep Sender
+#
+CONFIG_TX_POWER=20
+# end of OpenThread Deep Sleep Sender
+
+#
 # Compiler options
 #
 CONFIG_COMPILER_OPTIMIZATION_DEBUG=y
