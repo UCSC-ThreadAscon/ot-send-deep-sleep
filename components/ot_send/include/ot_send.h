@@ -35,9 +35,11 @@
 #define PAYLOAD_SIZE 24
 
 #define MS_TO_TICKS(ms) ms / portTICK_PERIOD_MS
+#define MS_TO_MICRO(ms) ms * 1000
+
 #define DEFAULT_WAIT_TIME_MS MS_TO_TICKS(100)
 #define MAIN_WAIT_TIME MS_TO_TICKS(5000)
-#define PACKET_SEND_DELAY_SECONDS 5
+#define PACKET_SEND_DELAY_MS 5000
 #define IDLE_DELAY_TICKS MS_TO_TICKS(500)
 
 #define OT_SEND_CTR "ot-send-counter"
