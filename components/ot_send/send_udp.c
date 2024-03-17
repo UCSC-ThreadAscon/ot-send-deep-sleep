@@ -65,6 +65,8 @@ void udpSend(otInstance *aInstance,
              otSockAddr *aSockName,
              otUdpSocket *aSocket)
 {
+  checkConnection(aInstance);
+
   aSockName->mAddress = *otThreadGetMeshLocalEid(aInstance);
   aSockName->mPort = port;
   udpCreateSocket(aSocket, aInstance, aSockName);
