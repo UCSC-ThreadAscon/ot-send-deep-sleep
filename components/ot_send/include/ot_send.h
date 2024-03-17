@@ -34,7 +34,7 @@
 #define MS_TO_TICKS(ms) ms / portTICK_PERIOD_MS
 #define MS_TO_SECONDS(ms) ms / 1000
 #define DEFAULT_WAIT_TIME MS_TO_TICKS(100)
-#define PACKET_SEND_DELAY MS_TO_TICKS(500) // 500 ms
+#define PACKET_SEND_DELAY MS_TO_TICKS(5000) // 5 seconds
 #define SEND_WAIT_TIME MS_TO_TICKS(1000) // 1 second
 
 #define OT_DISCONNECTED(role) (role == OT_DEVICE_ROLE_DISABLED) || (role == OT_DEVICE_ROLE_DETACHED)

@@ -12,6 +12,7 @@
  * CONDITIONS OF ANY KIND, either express or implied.
 */
 #include "txpower.h"
+#include "ot_send.h"
 
 #include <stdint.h>
 #include <stdio.h>
@@ -36,7 +37,10 @@
 #error "Openthread sleepy device is only supported for the SoCs which have IEEE 802.15.4 module"
 #endif
 
-#define TAG "ot_esp_power_save"
+#define TAG "ot_send_deep_sleep"
+
+static otSockAddr aSockName;
+static otUdpSocket aSocket;
 
 static RTC_DATA_ATTR struct timeval s_sleep_enter_time;
 static esp_timer_handle_t s_oneshot_timer;
@@ -81,37 +85,27 @@ static void ot_state_change_callback(otChangedFlags changed_flags, void* ctx)
     }
     otDeviceRole role = otThreadGetDeviceRole(instance);
     if (role == OT_DEVICE_ROLE_CHILD && s_previous_role != OT_DEVICE_ROLE_CHILD) {
-        // Start the one-shot timer
-        const int before_deep_sleep_time_sec = 5;
-        ESP_LOGI(TAG, "Start one-shot timer for %ds to enter the deep sleep", before_deep_sleep_time_sec);
-        ESP_ERROR_CHECK(esp_timer_start_once(s_oneshot_timer, before_deep_sleep_time_sec * 1000000));
+      // Send a packet
+      udpSend(esp_openthread_get_instance(), UDP_SOCK_PORT, UDP_DEST_PORT,
+              &aSockName, &aSocket);
+
+      // Enter deep sleep
+      // ESP_LOGI(TAG, "Enter deep sleep");
+      // gettimeofday(&s_sleep_enter_time, NULL);
+      // esp_deep_sleep_start();
     }
     s_previous_role = role;
 }
 
-static void s_oneshot_timer_callback(void* arg)
-{
-    // Enter deep sleep
-    ESP_LOGI(TAG, "Enter deep sleep");
-    gettimeofday(&s_sleep_enter_time, NULL);
-    esp_deep_sleep_start();
-}
-
+/**
+ * Within this function, we print the reason for the wake-up and configure the method of waking up from deep sleep.
+ * This example provides support for two wake-up sources from deep sleep: RTC timer and GPIO.
+ * 
+ * The one-shot timer will start when the device transitions to the CHILD state for the first time.
+ * After a 5-second delay, the device will enter deep sleep.
+*/
 static void ot_deep_sleep_init(void)
 {
-    // Within this function, we print the reason for the wake-up and configure the method of waking up from deep sleep.
-    // This example provides support for two wake-up sources from deep sleep: RTC timer and GPIO.
-
-    // The one-shot timer will start when the device transitions to the CHILD state for the first time.
-    // After a 5-second delay, the device will enter deep sleep.
-
-    const esp_timer_create_args_t s_oneshot_timer_args = {
-            .callback = &s_oneshot_timer_callback,
-            .name = "one-shot"
-    };
-
-    ESP_ERROR_CHECK(esp_timer_create(&s_oneshot_timer_args, &s_oneshot_timer));
-
     // Print the wake-up reason:
     struct timeval now;
     gettimeofday(&now, NULL);
@@ -134,7 +128,7 @@ static void ot_deep_sleep_init(void)
 
     // Set the methods of how to wake up:
     // 1. RTC timer waking-up
-    const int wakeup_time_sec = 20;
+    const int wakeup_time_sec = MS_TO_SECONDS(PACKET_SEND_DELAY);
     ESP_LOGI(TAG, "Enabling timer wakeup, %ds\n", wakeup_time_sec);
     ESP_ERROR_CHECK(esp_sleep_enable_timer_wakeup(wakeup_time_sec * 1000000));
 
