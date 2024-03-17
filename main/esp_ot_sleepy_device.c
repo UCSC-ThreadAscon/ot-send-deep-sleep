@@ -158,12 +158,12 @@ static void ot_state_change_callback(otChangedFlags changed_flags, void* ctx)
     }
     s_previous_role = role;
 
-    if (packetSent) {
-      // Enter deep sleep
-      ESP_LOGI(TAG, "Enter deep sleep");
-      gettimeofday(&s_sleep_enter_time, NULL);
-      esp_deep_sleep_start();
-    }
+    // if (packetSent) {
+    //   // Enter deep sleep
+    //   ESP_LOGI(TAG, "Enter deep sleep");
+    //   gettimeofday(&s_sleep_enter_time, NULL);
+    //   esp_deep_sleep_start();
+    // }
     return;
 }
 
@@ -190,6 +190,7 @@ static void ot_task_worker(void *aContext)
     esp_netif_set_default_netif(openthread_netif);
 
     state_changed_cbk_ctx context;
+    EmptyMemory(&context, sizeof(state_changed_cbk_ctx));
     otSetStateChangedCallback(esp_openthread_get_instance(), ot_state_change_callback, &context);
 
     create_config_network(esp_openthread_get_instance());
