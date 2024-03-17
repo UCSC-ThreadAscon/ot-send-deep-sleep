@@ -40,7 +40,6 @@
 #define TAG "ot_send_deep_sleep"
 
 static RTC_DATA_ATTR struct timeval s_sleep_enter_time;
-static esp_timer_handle_t s_oneshot_timer;
 
 static void create_config_network(otInstance *instance)
 {
@@ -191,7 +190,6 @@ static void ot_task_worker(void *aContext)
     esp_netif_set_default_netif(openthread_netif);
 
     state_changed_cbk_ctx context;
-    EmptyMemory(&context, sizeof(state_changed_cbk_ctx));
     otSetStateChangedCallback(esp_openthread_get_instance(), ot_state_change_callback, &context);
 
     create_config_network(esp_openthread_get_instance());
