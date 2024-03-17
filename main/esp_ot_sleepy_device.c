@@ -150,20 +150,22 @@ static void ot_state_change_callback(otChangedFlags changed_flags, void* ctx)
     bool packetSent = false;
     otDeviceRole role = otThreadGetDeviceRole(instance);
 
-    if (role == OT_DEVICE_ROLE_CHILD && s_previous_role != OT_DEVICE_ROLE_CHILD) {
-      // Send a packet
+    if (role == OT_DEVICE_ROLE_CHILD && s_previous_role != OT_DEVICE_ROLE_CHILD)
+    {
       udpSend(esp_openthread_get_instance(), UDP_SOCK_PORT, UDP_DEST_PORT,
               &(stack_context->aSockName), &(stack_context->aSocket));
       packetSent = true;
     }
     s_previous_role = role;
 
-    // if (packetSent) {
-    //   // Enter deep sleep
-    //   ESP_LOGI(TAG, "Enter deep sleep");
-    //   gettimeofday(&s_sleep_enter_time, NULL);
-    //   esp_deep_sleep_start();
-    // }
+    if (packetSent) {
+      vTaskDelay(IDLE_DELAY_TICKS);
+
+      ESP_LOGI(TAG, "Enter deep sleep");
+      gettimeofday(&s_sleep_enter_time, NULL);
+
+      esp_deep_sleep_start();
+    }
     return;
 }
 
@@ -188,10 +190,6 @@ static void ot_task_worker(void *aContext)
     // Initialize the esp_netif bindings
     openthread_netif = init_openthread_netif(&config);
     esp_netif_set_default_netif(openthread_netif);
-
-    state_changed_cbk_ctx context;
-    EmptyMemory(&context, sizeof(state_changed_cbk_ctx));
-    otSetStateChangedCallback(esp_openthread_get_instance(), ot_state_change_callback, &context);
 
     create_config_network(esp_openthread_get_instance());
 
@@ -226,4 +224,26 @@ void app_main(void)
     ESP_ERROR_CHECK(esp_vfs_eventfd_register(&eventfd_config));
 
     xTaskCreate(ot_task_worker, "ot_power_save_main", 4096, NULL, 5, NULL);
+
+    otSockAddr aSockName;
+    otUdpSocket aSocket;
+
+    while (true)
+    {
+      udpSend(esp_openthread_get_instance(), UDP_SOCK_PORT, UDP_DEST_PORT,
+              &aSockName, &aSocket);
+
+      // Cannot sleep immediately after, or packet will not sent.
+      // Some time is needed to process and transmit the packet.
+      //
+      // As a useful heuristic, we wait `IDLE_DELAY_TICKS` befores sleeping.
+      //
+      vTaskDelay(IDLE_DELAY_TICKS);
+
+      ESP_LOGI(TAG, "Enter deep sleep");
+      gettimeofday(&s_sleep_enter_time, NULL);
+
+      esp_deep_sleep_start();
+    }
+    return;
 }
