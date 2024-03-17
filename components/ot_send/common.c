@@ -12,7 +12,7 @@ void checkConnection(otInstance *aInstance) {
   otDeviceRole currentRole;
   do {
     currentRole = otThreadGetDeviceRole(aInstance);
-    vTaskDelay(DEFAULT_WAIT_TIME);
+    vTaskDelay(DEFAULT_WAIT_TIME_MS);
   }
   while(OT_DISCONNECTED(currentRole));
 
