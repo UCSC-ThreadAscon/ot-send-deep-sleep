@@ -83,18 +83,24 @@ static void ot_state_change_callback(otChangedFlags changed_flags, void* ctx)
     if (!instance) {
         return;
     }
+
+    bool packetSent = false;
     otDeviceRole role = otThreadGetDeviceRole(instance);
+
     if (role == OT_DEVICE_ROLE_CHILD && s_previous_role != OT_DEVICE_ROLE_CHILD) {
       // Send a packet
       udpSend(esp_openthread_get_instance(), UDP_SOCK_PORT, UDP_DEST_PORT,
               &aSockName, &aSocket);
-
-      // Enter deep sleep
-      // ESP_LOGI(TAG, "Enter deep sleep");
-      // gettimeofday(&s_sleep_enter_time, NULL);
-      // esp_deep_sleep_start();
+      packetSent = true;
     }
     s_previous_role = role;
+
+    if (packetSent) {
+      // Enter deep sleep
+      ESP_LOGI(TAG, "Enter deep sleep");
+      gettimeofday(&s_sleep_enter_time, NULL);
+      esp_deep_sleep_start();
+    }
 }
 
 /**
@@ -128,7 +134,7 @@ static void ot_deep_sleep_init(void)
 
     // Set the methods of how to wake up:
     // 1. RTC timer waking-up
-    const int wakeup_time_sec = MS_TO_SECONDS(PACKET_SEND_DELAY);
+    const int wakeup_time_sec = 5;
     ESP_LOGI(TAG, "Enabling timer wakeup, %ds\n", wakeup_time_sec);
     ESP_ERROR_CHECK(esp_sleep_enable_timer_wakeup(wakeup_time_sec * 1000000));
 
