@@ -39,9 +39,6 @@
 
 #define TAG "ot_send_deep_sleep"
 
-static otSockAddr aSockName;
-static otUdpSocket aSocket;
-
 static RTC_DATA_ATTR struct timeval s_sleep_enter_time;
 static esp_timer_handle_t s_oneshot_timer;
 
@@ -73,34 +70,6 @@ static esp_netif_t *init_openthread_netif(const esp_openthread_platform_config_t
     ESP_ERROR_CHECK(esp_netif_attach(netif, esp_openthread_netif_glue_init(config)));
 
     return netif;
-}
-
-static void ot_state_change_callback(otChangedFlags changed_flags, void* ctx)
-{
-    OT_UNUSED_VARIABLE(ctx);
-    static otDeviceRole s_previous_role = OT_DEVICE_ROLE_DISABLED;
-    otInstance* instance = esp_openthread_get_instance();
-    if (!instance) {
-        return;
-    }
-
-    bool packetSent = false;
-    otDeviceRole role = otThreadGetDeviceRole(instance);
-
-    if (role == OT_DEVICE_ROLE_CHILD && s_previous_role != OT_DEVICE_ROLE_CHILD) {
-      // Send a packet
-      udpSend(esp_openthread_get_instance(), UDP_SOCK_PORT, UDP_DEST_PORT,
-              &aSockName, &aSocket);
-      packetSent = true;
-    }
-    s_previous_role = role;
-
-    if (packetSent) {
-      // Enter deep sleep
-      ESP_LOGI(TAG, "Enter deep sleep");
-      gettimeofday(&s_sleep_enter_time, NULL);
-      esp_deep_sleep_start();
-    }
 }
 
 /**
@@ -164,6 +133,40 @@ static void ot_deep_sleep_init(void)
     ESP_ERROR_CHECK(gpio_pulldown_dis(gpio_wakeup_pin));
 }
 
+typedef struct state_changed_cbk_ctx {
+  otSockAddr aSockName;
+  otUdpSocket aSocket;
+} state_changed_cbk_ctx;
+
+static void ot_state_change_callback(otChangedFlags changed_flags, void* ctx)
+{
+    state_changed_cbk_ctx *stack_context = (state_changed_cbk_ctx *) ctx;
+
+    static otDeviceRole s_previous_role = OT_DEVICE_ROLE_DISABLED;
+    otInstance* instance = esp_openthread_get_instance();
+    if (!instance) {
+        return;
+    }
+
+    bool packetSent = false;
+    otDeviceRole role = otThreadGetDeviceRole(instance);
+
+    if (role == OT_DEVICE_ROLE_CHILD && s_previous_role != OT_DEVICE_ROLE_CHILD) {
+      // Send a packet
+      udpSend(esp_openthread_get_instance(), UDP_SOCK_PORT, UDP_DEST_PORT,
+              &(stack_context->aSockName), &(stack_context->aSocket));
+      packetSent = true;
+    }
+    s_previous_role = role;
+
+    if (packetSent) {
+      // Enter deep sleep
+      ESP_LOGI(TAG, "Enter deep sleep");
+      gettimeofday(&s_sleep_enter_time, NULL);
+      esp_deep_sleep_start();
+    }
+    return;
+}
 
 static void ot_task_worker(void *aContext)
 {
@@ -186,7 +189,10 @@ static void ot_task_worker(void *aContext)
     // Initialize the esp_netif bindings
     openthread_netif = init_openthread_netif(&config);
     esp_netif_set_default_netif(openthread_netif);
-    otSetStateChangedCallback(esp_openthread_get_instance(), ot_state_change_callback, NULL);
+
+    state_changed_cbk_ctx context;
+    EmptyMemory(&context, sizeof(state_changed_cbk_ctx));
+    otSetStateChangedCallback(esp_openthread_get_instance(), ot_state_change_callback, &context);
 
     create_config_network(esp_openthread_get_instance());
 
