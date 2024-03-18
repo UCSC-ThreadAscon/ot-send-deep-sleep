@@ -1,10 +1,22 @@
+#
+# I use the following resource to learn how to create KConfig
+# configurations:
+# https://medium.com/@bhautik.markeye/esp-idf-configuration-how-to-add-custom-configuration-in-project-config-728f81b8d0d8.
+#
+
 menu "OpenThread Deep Sleep Sender"
 
-    config TX_POWER
-      int 'Set the 802.15.4 TX power used by OpenThread'
-      range -128 127
-      default 20
-      help
-          Set the 802.15.4 transmission power (in dBm) for OpenThread.
-          The recommended TX power values are 20 dBm, 9 dBm, 0 dBm, and -25 dBm.
+  config TX_POWER
+    int 'Set the 802.15.4 TX power used by OpenThread'
+    range -128 127
+    default 20
+    help
+        Set the 802.15.4 transmission power (in dBm) for OpenThread.
+        The recommended TX power values are 20 dBm, 9 dBm, 0 dBm, and -25 dBm.
+
+  config RECEIVER_ADDRESS
+    string 'The IPv6 address of the receiver'
+    default "ff03::1"
+    help
+        The IPv6 address of the receiver that the sender will send packets to.
 endmenu
