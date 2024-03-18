@@ -1,7 +1,6 @@
 #ifndef OT_SEND_
 #define OT_SEND_
 
-#include "ot_send.h"
 #include <openthread/logging.h>
 
 #include "esp_err.h"
