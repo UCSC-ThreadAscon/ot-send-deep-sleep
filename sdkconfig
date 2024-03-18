@@ -512,6 +512,7 @@ CONFIG_PARTITION_TABLE_MD5=y
 # OpenThread Deep Sleep Sender
 #
 CONFIG_TX_POWER=9
+CONFIG_RECEIVER_ADDRESS="fd84:7733:23a0:f199:fb4d:61da:c6d8:60c3"
 # end of OpenThread Deep Sleep Sender
 
 #
