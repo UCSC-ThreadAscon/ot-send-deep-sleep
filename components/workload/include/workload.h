@@ -76,6 +76,9 @@ void printMeshLocalEid(otInstance *aInstance);
 #define PERIODIC_PAYLOAD_SIZE 248
 #define PERIODIC_WAIT_TIME_MS CONFIG_PERIODIC_WAIT_TIME
 
+#define WORKER_STACK_MEMORY 5120
+#define WORKER_PRIORITY 5
+
 #define COAP_SERVER_PORT CONFIG_COAP_SERVER_PORT
 #define COAP_SOCK_PORT OT_DEFAULT_COAP_PORT
 
@@ -88,9 +91,8 @@ typedef enum type {
 uint16_t getPayloadLength(const otMessage *aMessage);
 void getPayload(const otMessage *aMessage, void* buffer);
 
-/* ---- CoAP Server API ---- */
-
 /* ---- CoAP Client API ---- */
 void sendRequest(type type, otSockAddr *socket);
-void periodicWorker(void* context);
 uint32_t aperiodicWaitTimeMs();
+void periodicWorker(void* context);
+void aperiodicWorker(void *context);

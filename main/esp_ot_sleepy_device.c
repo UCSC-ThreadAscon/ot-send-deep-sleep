@@ -213,38 +213,17 @@ void app_main(void)
     socket.mPort = COAP_SERVER_PORT;
 
     /**
-     * Sending of periodic packets will be handled by separate
-     * worker thread.
+     * Sending of packets will be handled by separate
+     * worker threads.
     */
-    xTaskCreate(periodicWorker, "periodic_client", 10240,
-                (void *) &socket, 5, NULL);
+    xTaskCreate(periodicWorker, "periodic_client", WORKER_STACK_MEMORY,
+                (void *) &socket, WORKER_PRIORITY, NULL);
+    xTaskCreate(aperiodicWorker, "aperiodic_client", WORKER_STACK_MEMORY,
+                (void * ) &socket, WORKER_PRIORITY, NULL);
 
     /**
-     * Sending of aperiodic packets is handled below.
+     * Keep main thread open so the memory associated with "socket" still exists.
     */
-    while (true) {
-      sendRequest(APeriodic, &socket);
-
-      uint32_t nextWaitTime = aperiodicWaitTimeMs();
-      otLogNotePlat(
-        "Will wait %" PRIu32 " ms before sending next aperiodic CoAP request.",
-        nextWaitTime
-      );
-
-      TickType_t lastWakeupTime = xTaskGetTickCount();
-
-      /**
-       * If quotient "nextWaitTime" < "portTICK_PERIOD_MS", then
-       * MS_TO_TICKS(nextWaitTime) == 0, causing `vTaskDelayUntil()`
-       * to crash. When this happens, set the delay to be exactly
-       * `portTICK_PERIOD_MS`.
-      */
-      TickType_t nextWaitTimeTicks =
-        MS_TO_TICKS(nextWaitTime) == 0 ? portTICK_PERIOD_MS :
-          MS_TO_TICKS(nextWaitTime);
-
-      vTaskDelayUntil(&lastWakeupTime, nextWaitTimeTicks);
-     }
-
+    while (true) { vTaskDelay(MAIN_WAIT_TIME); }
     return;
 }
