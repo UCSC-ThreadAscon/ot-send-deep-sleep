@@ -89,10 +89,8 @@ uint16_t getPayloadLength(const otMessage *aMessage);
 void getPayload(const otMessage *aMessage, void* buffer);
 
 /* ---- CoAP Server API ---- */
-otError createAPeriodicResource(otCoapResource *aperiodic);
-otError createPeriodicResource(otCoapResource *periodic);
-uint32_t aperiodicWaitTimeMs();
 
 /* ---- CoAP Client API ---- */
 void sendRequest(type type, otSockAddr *socket);
 void periodicWorker(void* context);
+uint32_t aperiodicWaitTimeMs();
