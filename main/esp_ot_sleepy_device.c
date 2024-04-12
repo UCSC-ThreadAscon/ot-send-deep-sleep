@@ -104,8 +104,8 @@ static void ot_deep_sleep_init(void)
 
     // Set the methods of how to wake up:
     // 1. RTC timer waking-up
-    const int wakeup_time_ms = POLL_PERIOD_MS;
-    ESP_LOGI(TAG, "Enabling timer wakeup, %dms\n", wakeup_time_ms);
+    const int wakeup_time_ms = PERIODIC_WAIT_TIME_MS;
+    ESP_LOGI(TAG, "Enabling timer wakeup: %dms\n", PERIODIC_WAIT_TIME_MS);
     ESP_ERROR_CHECK(esp_sleep_enable_timer_wakeup(MS_TO_MICRO(wakeup_time_ms)));
 
     // 2. GPIO waking-up

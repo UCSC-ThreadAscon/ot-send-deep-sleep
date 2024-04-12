@@ -26,6 +26,9 @@ void handleResponse(void *aContext,
     otLogNotePlat("Response from %s of size %" PRIu16 " bytes.",
                   senderAddr, payloadLen);
   }
+
+  otLogNotePlat("Going to deep sleep.");
+  esp_deep_sleep_start();
   return;
 }
 
