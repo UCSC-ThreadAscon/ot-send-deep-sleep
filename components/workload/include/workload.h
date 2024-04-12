@@ -58,7 +58,7 @@ static inline void EmptyMemory(void* pointer, size_t size) {
 #define MS_TO_MICRO(ms) ms * 1000
 
 #define CONNECTION_WAIT_TIME_MS MS_TO_TICKS(100)
-#define MAIN_WAIT_TIME MS_TO_TICKS(5000) // 5 seconds
+#define THREAD_WAIT_TIME MS_TO_TICKS(5000) // 5 seconds
 
 void checkConnection(otInstance *aInstance);
 void handleError(otError error, char* desc);
@@ -70,6 +70,12 @@ void printMeshLocalEid(otInstance *aInstance);
     handleError(error, desc);                           \
     return;                                             \
   }                                                     \
+
+/**
+ * Keeps a thread open so the memory associated with "socket" still exists.
+*/
+#define KEEP_THREAD_ALIVE()                           \
+  while (true) { vTaskDelay(THREAD_WAIT_TIME); }      \
 
 #define WORKER_STACK_MEMORY 5120
 #define WORKER_PRIORITY 5

@@ -6,18 +6,12 @@
 
 void periodicWorker(void* context) {
   otSockAddr *socket = (otSockAddr *) context;
+  sendRequest(Periodic, socket);
 
-  while (true) {
-    sendRequest(Periodic, socket);
-    otLogNotePlat("Sent CoAP request.");
+  otLogNotePlat("Sent scenario 1 packet.");
+  otLogNotePlat("Will wait %d ms before sending next scenario 1 packet.",
+                PERIODIC_WAIT_TIME_MS);
 
-    otLogNotePlat(
-      "Will wait %d ms before sending next scenario 1 packet.",
-      PERIODIC_WAIT_TIME_MS
-    );
-
-    TickType_t lastWakeupTime = xTaskGetTickCount();
-    vTaskDelayUntil(&lastWakeupTime, MS_TO_TICKS(PERIODIC_WAIT_TIME_MS));
-  }
+  KEEP_THREAD_ALIVE();
   return;
 }

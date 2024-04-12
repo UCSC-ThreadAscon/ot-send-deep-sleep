@@ -73,65 +73,10 @@ static esp_netif_t *init_openthread_netif(const esp_openthread_platform_config_t
     return netif;
 }
 
-/**
- * Within this function, we print the reason for the wake-up and configure the method of waking up from deep sleep.
- * This example provides support for two wake-up sources from deep sleep: RTC timer and GPIO.
- * 
- * The one-shot timer will start when the device transitions to the CHILD state for the first time.
- * After a 5-second delay, the device will enter deep sleep.
-*/
-static void ot_deep_sleep_init(void)
+static void otDeepSleepInit(int wakeupTimeMs)
 {
-    // Print the wake-up reason:
-    struct timeval now;
-    gettimeofday(&now, NULL);
-    int sleep_time_ms = (now.tv_sec - s_sleep_enter_time.tv_sec) * 1000 + (now.tv_usec - s_sleep_enter_time.tv_usec) / 1000;
-    esp_sleep_wakeup_cause_t wake_up_cause = esp_sleep_get_wakeup_cause();
-    switch (wake_up_cause) {
-    case ESP_SLEEP_WAKEUP_TIMER: {
-        ESP_LOGI(TAG, "Wake up from timer. Time spent in deep sleep and boot: %dms", sleep_time_ms);
-        break;
-    }
-    case ESP_SLEEP_WAKEUP_EXT1: {
-        ESP_LOGI(TAG, "Wake up from GPIO. Time spent in deep sleep and boot: %dms", sleep_time_ms);
-        break;
-    }
-    case ESP_SLEEP_WAKEUP_UNDEFINED:
-    default:
-        ESP_LOGI(TAG, "Not a deep sleep reset");
-        break;
-    }
-
-    // Set the methods of how to wake up:
-    // 1. RTC timer waking-up
-    const int wakeup_time_ms = PERIODIC_WAIT_TIME_MS;
-    ESP_LOGI(TAG, "Enabling timer wakeup: %dms\n", PERIODIC_WAIT_TIME_MS);
-    ESP_ERROR_CHECK(esp_sleep_enable_timer_wakeup(MS_TO_MICRO(wakeup_time_ms)));
-
-    // 2. GPIO waking-up
-#if CONFIG_IDF_TARGET_ESP32C6
-    // For ESP32C6 boards, RTCIO only supports GPIO0~GPIO7
-    // GPIO7 pull down to wake up
-    const int gpio_wakeup_pin = 7;
-#elif CONFIG_IDF_TARGET_ESP32H2
-    // You can wake up by pulling down GPIO9. On ESP32H2 development boards, the BOOT button is connected to GPIO9.
-    // You can use the BOOT button to wake up the boards directly.
-    const int gpio_wakeup_pin = 9;
-#endif
-    const uint64_t gpio_wakeup_pin_mask = 1ULL << gpio_wakeup_pin;
-    // The configuration mode depends on your hardware design.
-    // Since the BOOT button is connected to a pull-up resistor, the wake-up mode is configured as LOW.
-    const uint64_t ext_wakeup_mode = 0;
-    ESP_ERROR_CHECK(esp_sleep_enable_ext1_wakeup_io(gpio_wakeup_pin_mask, ext_wakeup_mode));
-
-    // Also these two GPIO configurations are also depended on the hardware design.
-    // The BOOT button is connected to the pull-up resistor, so enable the pull-up mode and disable the pull-down mode.
-
-    // Notice: if these GPIO configurations do not match the hardware design, the deep sleep module will enable the GPIO hold
-    // feature to hold the GPIO voltage when enter the sleep, which will ensure the board be waked up by GPIO. But it will cause
-    // 3~4 times power consumption increasing during sleep.
-    ESP_ERROR_CHECK(gpio_pullup_en(gpio_wakeup_pin));
-    ESP_ERROR_CHECK(gpio_pulldown_dis(gpio_wakeup_pin));
+    ESP_LOGI(TAG, "Enabling timer wakeup: %dms\n", wakeupTimeMs);
+    ESP_ERROR_CHECK(esp_sleep_enable_timer_wakeup(MS_TO_MICRO(wakeupTimeMs)));
 }
 
 static void ot_task_worker(void *aContext)
@@ -144,8 +89,6 @@ static void ot_task_worker(void *aContext)
 
     // Initialize the OpenThread stack
     ESP_ERROR_CHECK(esp_openthread_init(&config));
-
-    ot_deep_sleep_init();
 
 #if CONFIG_OPENTHREAD_LOG_LEVEL_DYNAMIC
     // The OpenThread log level directly matches ESP log level
@@ -191,6 +134,8 @@ void app_main(void)
     xTaskCreate(ot_task_worker, "ot_power_save_main", 4096, NULL, 5, NULL);
 
     /** ---- CoAP Client Code ---- */
+    otDeepSleepInit(PERIODIC_WAIT_TIME_MS);
+
     checkConnection(OT_INSTANCE);
     printMeshLocalEid(OT_INSTANCE);
 
@@ -221,9 +166,6 @@ void app_main(void)
     // xTaskCreate(aperiodicWorker, "aperiodic_client", WORKER_STACK_MEMORY,
     //             (void * ) &socket, WORKER_PRIORITY, NULL);
 
-    /**
-     * Keep main thread open so the memory associated with "socket" still exists.
-    */
-    while (true) { vTaskDelay(MAIN_WAIT_TIME); }
+    KEEP_THREAD_ALIVE();
     return;
 }
