@@ -39,8 +39,6 @@
 
 #define TAG "ot_send_deep_sleep"
 
-static RTC_DATA_ATTR struct timeval s_sleep_enter_time;
-
 static void create_config_network(otInstance *instance)
 {
     otLinkModeConfig linkMode = { 0 };

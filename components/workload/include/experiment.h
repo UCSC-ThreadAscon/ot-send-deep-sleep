@@ -12,7 +12,7 @@
 #define APERIODIC_URI "aperiodic"
 
 #define APERIODIC_PAYLOAD_SIZE 5
-#define PERIODIC_PAYLOAD_SIZE 248
+#define PERIODIC_PAYLOAD_SIZE 216
 
 #define PERIODIC_WAIT_TIME_MS 5000 // 5 seconds
 
