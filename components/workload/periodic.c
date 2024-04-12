@@ -9,10 +9,10 @@ void periodicWorker(void* context) {
 
   while (true) {
     sendRequest(Periodic, socket);
-    otLogNotePlat("Successfully sent CoAP request.");
+    otLogNotePlat("Sent CoAP request.");
 
     otLogNotePlat(
-      "Will wait %d ms before sending next the periodic CoAP request.",
+      "Will wait %d ms before sending next scenario 1 packet.",
       PERIODIC_WAIT_TIME_MS
     );
 

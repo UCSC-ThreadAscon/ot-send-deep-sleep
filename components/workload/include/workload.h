@@ -1,4 +1,4 @@
-#include <openthread/logging.h>
+#include "experiment.h"
 
 #include "esp_err.h"
 #include "esp_log.h"
@@ -69,12 +69,6 @@ void printMeshLocalEid(otInstance *aInstance);
     handleError(error, desc);                           \
     return;                                             \
   }                                                     \
-
-#define PERIODIC_URI "periodic"
-#define APERIODIC_URI "aperiodic"
-#define APERIODIC_PAYLOAD_SIZE 5
-#define PERIODIC_PAYLOAD_SIZE 248
-#define PERIODIC_WAIT_TIME_MS CONFIG_PERIODIC_WAIT_TIME
 
 #define WORKER_STACK_MEMORY 5120
 #define WORKER_PRIORITY 5

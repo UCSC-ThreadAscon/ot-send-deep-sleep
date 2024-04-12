@@ -49,7 +49,7 @@ static void create_config_network(otInstance *instance)
     linkMode.mDeviceType = false;
     linkMode.mNetworkData = false;
 
-    if (otLinkSetPollPeriod(instance, CONFIG_POLL_PERIOD) != OT_ERROR_NONE) {
+    if (otLinkSetPollPeriod(instance, POLL_PERIOD_MS) != OT_ERROR_NONE) {
         ESP_LOGE(TAG, "Failed to set OpenThread pollperiod.");
         abort();
     }
@@ -104,7 +104,7 @@ static void ot_deep_sleep_init(void)
 
     // Set the methods of how to wake up:
     // 1. RTC timer waking-up
-    const int wakeup_time_ms = CONFIG_POLL_PERIOD;
+    const int wakeup_time_ms = POLL_PERIOD_MS;
     ESP_LOGI(TAG, "Enabling timer wakeup, %dms\n", wakeup_time_ms);
     ESP_ERROR_CHECK(esp_sleep_enable_timer_wakeup(MS_TO_MICRO(wakeup_time_ms)));
 
@@ -218,8 +218,8 @@ void app_main(void)
     */
     xTaskCreate(periodicWorker, "periodic_client", WORKER_STACK_MEMORY,
                 (void *) &socket, WORKER_PRIORITY, NULL);
-    xTaskCreate(aperiodicWorker, "aperiodic_client", WORKER_STACK_MEMORY,
-                (void * ) &socket, WORKER_PRIORITY, NULL);
+    // xTaskCreate(aperiodicWorker, "aperiodic_client", WORKER_STACK_MEMORY,
+    //             (void * ) &socket, WORKER_PRIORITY, NULL);
 
     /**
      * Keep main thread open so the memory associated with "socket" still exists.
