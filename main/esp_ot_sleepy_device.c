@@ -11,8 +11,8 @@
  * software is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
  * CONDITIONS OF ANY KIND, either express or implied.
 */
-#include "txpower.h"
-#include "ot_send.h"
+#include "utilities.h"
+#include "workload.h"
 
 #include <stdint.h>
 #include <stdio.h>
@@ -49,10 +49,12 @@ static void create_config_network(otInstance *instance)
     linkMode.mDeviceType = false;
     linkMode.mNetworkData = false;
 
-    if (otLinkSetPollPeriod(instance, CONFIG_OPENTHREAD_NETWORK_POLLPERIOD_TIME) != OT_ERROR_NONE) {
+    if (otLinkSetPollPeriod(instance, CONFIG_POLL_PERIOD) != OT_ERROR_NONE) {
         ESP_LOGE(TAG, "Failed to set OpenThread pollperiod.");
         abort();
     }
+    ESP_LOGI(TAG, "Poll period is currently at %" PRIu32 ".",
+             otLinkGetPollPeriod(instance));
 
     if (otThreadSetLinkMode(instance, linkMode) != OT_ERROR_NONE) {
         ESP_LOGE(TAG, "Failed to set OpenThread linkmode.");
@@ -102,7 +104,7 @@ static void ot_deep_sleep_init(void)
 
     // Set the methods of how to wake up:
     // 1. RTC timer waking-up
-    const int wakeup_time_ms = PACKET_SEND_DELAY_MS;
+    const int wakeup_time_ms = CONFIG_POLL_PERIOD;
     ESP_LOGI(TAG, "Enabling timer wakeup, %dms\n", wakeup_time_ms);
     ESP_ERROR_CHECK(esp_sleep_enable_timer_wakeup(MS_TO_MICRO(wakeup_time_ms)));
 
@@ -188,39 +190,5 @@ void app_main(void)
 
     xTaskCreate(ot_task_worker, "ot_power_save_main", 4096, NULL, 5, NULL);
 
-    otSockAddr aSockName;
-    otUdpSocket aSocket;
-
-    nvs_handle_t counterHandle;
-    ESP_ERROR_CHECK(nvs_open(OT_SEND_CTR, NVS_READWRITE, &counterHandle));
-
-    uint32_t initialCount = 0;
-    esp_err_t error = nvs_get_u32(counterHandle, OT_SEND_CTR_KEY, &initialCount);
-    switch (error) {
-      case ESP_ERR_NVS_NOT_FOUND:
-        ESP_ERROR_CHECK(nvs_set_u32(counterHandle, OT_SEND_CTR_KEY, initialCount));
-        break;
-
-      default:
-        ESP_ERROR_CHECK(error);
-    }
-
-    while (true)
-    {
-      udpSend(esp_openthread_get_instance(), UDP_SOCK_PORT, UDP_DEST_PORT,
-              &aSockName, &aSocket, counterHandle);
-
-      // Cannot sleep immediately after, or packet will not sent.
-      // Some time is needed to process and transmit the packet.
-      //
-      // As a useful heuristic, we wait `IDLE_DELAY_TICKS` befores sleeping.
-      //
-      vTaskDelay(IDLE_DELAY_TICKS);
-
-      ESP_LOGI(TAG, "Enter deep sleep");
-      gettimeofday(&s_sleep_enter_time, NULL);
-
-      esp_deep_sleep_start();
-    }
     return;
 }
