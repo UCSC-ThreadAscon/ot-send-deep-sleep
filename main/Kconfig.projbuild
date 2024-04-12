@@ -30,7 +30,7 @@ menu "OpenThread Deep Sleep Sender"
 
     config COAP_SERVER_PORT
       int 'The port number for the CoAP server.'
-      default 5684
+      default 5683
       help
           Sets the port used by CoAP server side.
 

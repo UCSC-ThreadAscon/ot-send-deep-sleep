@@ -190,5 +190,61 @@ void app_main(void)
 
     xTaskCreate(ot_task_worker, "ot_power_save_main", 4096, NULL, 5, NULL);
 
+    /** ---- CoAP Client Code ---- */
+    checkConnection(OT_INSTANCE);
+    printMeshLocalEid(OT_INSTANCE);
+
+    otError error = otCoapStart(OT_INSTANCE, COAP_SOCK_PORT);
+
+    if (error != OT_ERROR_NONE) {
+      otLogCritPlat("Failed to start COAP server.");
+    } else {
+      otLogNotePlat("Started CoAP server at port %d.", COAP_SERVER_PORT);
+    }
+
+    otSockAddr socket;
+    otIp6Address server;
+
+    EmptyMemory(&socket, sizeof(otSockAddr));
+    EmptyMemory(&server, sizeof(otIp6Address));
+
+    otIp6AddressFromString(CONFIG_SERVER_IP_ADDRESS, &server);
+    socket.mAddress = server;
+    socket.mPort = COAP_SERVER_PORT;
+
+    /**
+     * Sending of periodic packets will be handled by separate
+     * worker thread.
+    */
+    xTaskCreate(periodicWorker, "periodic_client", 10240,
+                (void *) &socket, 5, NULL);
+
+    /**
+     * Sending of aperiodic packets is handled below.
+    */
+    while (true) {
+      sendRequest(APeriodic, &socket);
+
+      uint32_t nextWaitTime = aperiodicWaitTimeMs();
+      otLogNotePlat(
+        "Will wait %" PRIu32 " ms before sending next aperiodic CoAP request.",
+        nextWaitTime
+      );
+
+      TickType_t lastWakeupTime = xTaskGetTickCount();
+
+      /**
+       * If quotient "nextWaitTime" < "portTICK_PERIOD_MS", then
+       * MS_TO_TICKS(nextWaitTime) == 0, causing `vTaskDelayUntil()`
+       * to crash. When this happens, set the delay to be exactly
+       * `portTICK_PERIOD_MS`.
+      */
+      TickType_t nextWaitTimeTicks =
+        MS_TO_TICKS(nextWaitTime) == 0 ? portTICK_PERIOD_MS :
+          MS_TO_TICKS(nextWaitTime);
+
+      vTaskDelayUntil(&lastWakeupTime, nextWaitTimeTicks);
+     }
+
     return;
 }
