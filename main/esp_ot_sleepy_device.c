@@ -73,7 +73,6 @@ static esp_netif_t *init_openthread_netif(const esp_openthread_platform_config_t
 
 static void otDeepSleepInit(int wakeupTimeMs)
 {
-    otLogNotePlat("Enabling timer wakeup: %dms\n", wakeupTimeMs);
     ESP_ERROR_CHECK(esp_sleep_enable_timer_wakeup(MS_TO_MICRO(wakeupTimeMs)));
 }
 
