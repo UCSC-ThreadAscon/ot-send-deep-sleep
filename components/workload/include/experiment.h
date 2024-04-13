@@ -13,10 +13,10 @@
 #define PERIODIC_URI "periodic"
 #define APERIODIC_URI "aperiodic"
 
-#define APERIODIC_PAYLOAD_SIZE 5
+#define APERIODIC_PAYLOAD_SIZE 4
 #define PERIODIC_PAYLOAD_SIZE 216
 
-#define PERIODIC_WAIT_TIME_MS 300000 // 5 minutes
+#define PERIODIC_WAIT_TIME_MS 5000 // 5 seconds
 
 bool waterLeakOccured();
 bool someoneAtSecondStory();
