@@ -19,5 +19,7 @@
 #define PERIODIC_WAIT_TIME_MS 5000 // 5 seconds
 
 bool waterLeakOccured();
+bool someoneAtSecondStory();
+bool someoneAtFrontDoor();
 
 #endif // EXPERIMENT_H
