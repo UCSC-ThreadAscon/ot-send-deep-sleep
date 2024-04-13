@@ -1,6 +1,8 @@
 #ifndef EXPERIMENT_H
 #define EXPERIMENT_H
 
+#include <stdbool.h>
+
 #define POLL_PERIOD_MS CONFIG_POLL_PERIOD
 
 /**
@@ -15,5 +17,7 @@
 #define PERIODIC_PAYLOAD_SIZE 216
 
 #define PERIODIC_WAIT_TIME_MS 5000 // 5 seconds
+
+bool waterLeakOccured();
 
 #endif // EXPERIMENT_H

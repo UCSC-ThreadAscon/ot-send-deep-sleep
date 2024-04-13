@@ -51,6 +51,19 @@ uint32_t aperiodicWaitTimeMs() {
   return (uint32_t) waitTimeMsFloor;
 }
 
+/**
+ * For the device near the washing machine, there is a 3% chance
+ * that a water leakge will occur.
+*/
+bool waterLeakOccured() {
+  uint32_t random = esp_random() % 100;
+  if (random < 3) {
+    otLogNotePlat("A water leakage has occured!");
+    return true;
+  }
+  return false;
+}
+
 void aperiodicSender(otSockAddr *socket) {
   sendRequest(APeriodic, socket);
 

@@ -178,12 +178,11 @@ void app_main(void)
     socket.mAddress = server;
     socket.mPort = COAP_SERVER_PORT;
 
-    if (type == Periodic) {
-      periodicSender(&socket);
-    }
-    else {
-      // TO-DO: Implement APeriodic sending for scenario 2 packets.
-    }
+    sendRequest(type, &socket);
+
+    /**
+     * Determine waht type of packet to send next.
+    */
 
     KEEP_THREAD_ALIVE();
     return;
