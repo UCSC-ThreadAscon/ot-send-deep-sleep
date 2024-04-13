@@ -53,12 +53,38 @@ uint32_t aperiodicWaitTimeMs() {
 
 /**
  * For the device near the washing machine, there is a 3% chance
- * that a water leakge will occur.
+ * that a water leakage will occur.
 */
 bool waterLeakOccured() {
   uint32_t random = esp_random() % 100;
   if (random < 50) {
     otLogNotePlat("A water leakage has occured!");
+    return true;
+  }
+  return false;
+}
+
+/**
+ * For the device upstairs, there is a 1% chance that someone
+ * will visit the second story door.
+*/
+bool someoneAtSecondStory() {
+  uint32_t random = esp_random() % 100;
+  if (random < 50) {
+    otLogNotePlat("Someone detected at the second story door!");
+    return true;
+  }
+  return false;
+}
+
+/**
+ * For the device at the front door, there is a 29% chance that someone
+ * will visit the front door.
+*/
+bool someoneAtFrontDoor() {
+  uint32_t random = esp_random() % 100;
+  if (random < 50) {
+    otLogNotePlat("Someone detected at the front door!");
     return true;
   }
   return false;
