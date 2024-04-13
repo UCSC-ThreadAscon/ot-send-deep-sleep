@@ -141,13 +141,13 @@ void app_main(void)
     nvs_handle_t packetTypeHandle;
     ESP_ERROR_CHECK(nvs_open(NVS_PACKET_TYPE_KEY, NVS_READWRITE, &packetTypeHandle));
 
-    type initialType = Periodic;
+    type type = Periodic;
     esp_err_t espError = nvs_get_u32(packetTypeHandle, NVS_PACKET_TYPE_KEY, 
-                                  (uint32_t *) &initialType);
+                                  (uint32_t *) &type);
     switch (espError) {
       case ESP_ERR_NVS_NOT_FOUND:
         ESP_ERROR_CHECK(nvs_set_u32(packetTypeHandle, NVS_PACKET_TYPE_KEY,
-                                    (uint32_t) initialType));
+                                    (uint32_t) type));
         break;
 
       default:
@@ -178,7 +178,12 @@ void app_main(void)
     socket.mAddress = server;
     socket.mPort = COAP_SERVER_PORT;
 
-    periodicSender(&socket);
+    if (type == Periodic) {
+      periodicSender(&socket);
+    }
+    else {
+      // TO-DO: Implement APeriodic sending for scenario 2 packets.
+    }
 
     KEEP_THREAD_ALIVE();
     return;
