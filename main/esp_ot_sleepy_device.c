@@ -183,15 +183,23 @@ void app_main(void)
     */
     bool sendScenario2 = waterLeakOccured();
 
+    int waitTime;
     if (!sendScenario2) {
       type = Periodic;
+      waitTime = PERIODIC_WAIT_TIME_MS;
     }
     else {
       type = APeriodic;
+
+      // To prevent aperiodic packets from being sent every 5 seconds,
+      // (like periodic packets), we force aperiodic packets to be sent
+      // at some time before the next 5 seconds.
+      //
+      waitTime = esp_random() % PERIODIC_WAIT_TIME_MS;
     }
 
     ESP_ERROR_CHECK(nvs_set_u32(packetTypeHandle, NVS_PACKET_TYPE_KEY, type));
-    otDeepSleepInit(PERIODIC_WAIT_TIME_MS);
+    otDeepSleepInit(waitTime);
 
     /**
      * Send the packet, then go to sleep after receiving a response.
@@ -204,7 +212,7 @@ void app_main(void)
       otLogNotePlat("Sent scenario 2 packet.");
     }
     otLogNotePlat("Will wait %d ms before sending next packet.",
-                  PERIODIC_WAIT_TIME_MS);
+                  waitTime);
 
     KEEP_THREAD_ALIVE();
     return;
