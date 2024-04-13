@@ -73,7 +73,7 @@ static esp_netif_t *init_openthread_netif(const esp_openthread_platform_config_t
 
 static void otDeepSleepInit(int wakeupTimeMs)
 {
-    ESP_LOGI(TAG, "Enabling timer wakeup: %dms\n", wakeupTimeMs);
+    otLogNotePlat("Enabling timer wakeup: %dms\n", wakeupTimeMs);
     ESP_ERROR_CHECK(esp_sleep_enable_timer_wakeup(MS_TO_MICRO(wakeupTimeMs)));
 }
 
@@ -181,7 +181,13 @@ void app_main(void)
     /**
      * Determine what type of packet to send next.
     */
+#if (CONFIG_SCENARIO == 1)
     bool sendScenario2 = waterLeakOccured();
+#elif (CONFIG_SCENARIO == 2)
+    bool sendScenario2 = someoneAtFrontDoor();
+#elif (CONFIG_SCENARIO == 3)
+    bool sendScenario3 = someoneAtSecondStory();
+#endif
 
     int waitTime;
     if (!sendScenario2) {
