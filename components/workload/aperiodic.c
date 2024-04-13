@@ -13,7 +13,7 @@
 #include "limits.h"
 
 /**
- * The smallessst value of lambda used in the experiments by
+ * The smallest value of lambda used in the experiments by
  * Betlzer et al. was 0.75. However, I noticed that 0.75 generated
  * very short delays that were usually less than 1 second.
  *

@@ -155,14 +155,7 @@ void app_main(void)
     socket.mAddress = server;
     socket.mPort = COAP_SERVER_PORT;
 
-    /**
-     * Sending of packets will be handled by separate
-     * worker threads.
-    */
-    xTaskCreate(periodicWorker, "periodic_client", WORKER_STACK_MEMORY,
-                (void *) &socket, WORKER_PRIORITY, NULL);
-    // xTaskCreate(aperiodicWorker, "aperiodic_client", WORKER_STACK_MEMORY,
-    //             (void * ) &socket, WORKER_PRIORITY, NULL);
+    periodicSender(&socket);
 
     KEEP_THREAD_ALIVE();
     return;

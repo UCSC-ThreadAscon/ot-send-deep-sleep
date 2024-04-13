@@ -4,8 +4,7 @@
 */
 #include "workload.h"
 
-void periodicWorker(void* context) {
-  otSockAddr *socket = (otSockAddr *) context;
+void periodicSender(otSockAddr *socket) {
   sendRequest(Periodic, socket);
 
   otLogNotePlat("Sent scenario 1 packet.");

@@ -95,5 +95,5 @@ void getPayload(const otMessage *aMessage, void* buffer);
 /* ---- CoAP Client API ---- */
 void sendRequest(type type, otSockAddr *socket);
 uint32_t aperiodicWaitTimeMs();
-void periodicWorker(void* context);
+void periodicSender(otSockAddr *socket);
 void aperiodicWorker(void *context);
