@@ -186,7 +186,7 @@ void app_main(void)
 #elif (CONFIG_SCENARIO == 2)
     bool sendScenario2 = someoneAtFrontDoor();
 #elif (CONFIG_SCENARIO == 3)
-    bool sendScenario3 = someoneAtSecondStory();
+    bool sendScenario2 = someoneAtSecondStory();
 #endif
 
     int waitTime;
@@ -197,9 +197,9 @@ void app_main(void)
     else {
       type = APeriodic;
 
-      // To prevent aperiodic packets from being sent every 5 seconds,
+      // To prevent aperiodic packets from being sent every PERIODIC_WAIT_TIME_MS,
       // (like periodic packets), we force aperiodic packets to be sent
-      // at some time before the next 5 seconds.
+      // at some time before the next PERIODIC_WAIT_TIME_MS.
       //
       waitTime = esp_random() % PERIODIC_WAIT_TIME_MS;
     }
