@@ -51,31 +51,13 @@ uint32_t aperiodicWaitTimeMs() {
   return (uint32_t) waitTimeMsFloor;
 }
 
-void aperiodicWorker(void *context) {
-  otSockAddr *socket = (otSockAddr *) context;
+void aperiodicSender(otSockAddr *socket) {
+  sendRequest(APeriodic, socket);
 
-  while (true) {
-    sendRequest(APeriodic, socket);
-
-    uint32_t nextWaitTime = aperiodicWaitTimeMs();
-    otLogNotePlat(
-      "Will wait %" PRIu32 " ms before sending next aperiodic CoAP request.",
-      nextWaitTime
-    );
-
-    TickType_t lastWakeupTime = xTaskGetTickCount();
-
-    /**
-     * If quotient "nextWaitTime" < "portTICK_PERIOD_MS", then
-     * MS_TO_TICKS(nextWaitTime) == 0, causing `vTaskDelayUntil()`
-     * to crash. When this happens, set the delay to be exactly
-     * `portTICK_PERIOD_MS`.
-    */
-    TickType_t nextWaitTimeTicks =
-      MS_TO_TICKS(nextWaitTime) == 0 ? portTICK_PERIOD_MS :
-        MS_TO_TICKS(nextWaitTime);
-
-    vTaskDelayUntil(&lastWakeupTime, nextWaitTimeTicks);
-  }
+  uint32_t nextWaitTime = aperiodicWaitTimeMs();
+  otLogNotePlat(
+    "Will wait %" PRIu32 " ms before sending next aperiodic packet.",
+    nextWaitTime
+  );
   return;
 }
