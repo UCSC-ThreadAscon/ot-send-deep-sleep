@@ -141,13 +141,13 @@ void app_main(void)
     nvs_handle_t packetTypeHandle;
     ESP_ERROR_CHECK(nvs_open(NVS_PACKET_TYPE_KEY, NVS_READWRITE, &packetTypeHandle));
 
-    type type = Periodic;
+    type currentType = Periodic;
     esp_err_t espError = nvs_get_u32(packetTypeHandle, NVS_PACKET_TYPE_KEY, 
-                                  (uint32_t *) &type);
+                                  (uint32_t *) &currentType);
     switch (espError) {
       case ESP_ERR_NVS_NOT_FOUND:
         ESP_ERROR_CHECK(nvs_set_u32(packetTypeHandle, NVS_PACKET_TYPE_KEY,
-                                    (uint32_t) type));
+                                    (uint32_t) currentType));
         break;
 
       default:
@@ -189,36 +189,38 @@ void app_main(void)
     bool sendScenario2 = someoneAtSecondStory();
 #endif
 
-    int waitTime;
+    int nextWaitTime;
+    type nextType;
+
     if (!sendScenario2) {
-      type = Periodic;
-      waitTime = PERIODIC_WAIT_TIME_MS;
+      nextType = Periodic;
+      nextWaitTime = PERIODIC_WAIT_TIME_MS;
     }
     else {
-      type = APeriodic;
+      nextType = APeriodic;
 
       // To prevent aperiodic packets from being sent every PERIODIC_WAIT_TIME_MS,
       // (like periodic packets), we force aperiodic packets to be sent
       // at some time before the next PERIODIC_WAIT_TIME_MS.
       //
-      waitTime = esp_random() % PERIODIC_WAIT_TIME_MS;
+      nextWaitTime = esp_random() % PERIODIC_WAIT_TIME_MS;
     }
 
-    ESP_ERROR_CHECK(nvs_set_u32(packetTypeHandle, NVS_PACKET_TYPE_KEY, type));
-    otDeepSleepInit(waitTime);
+    ESP_ERROR_CHECK(nvs_set_u32(packetTypeHandle, NVS_PACKET_TYPE_KEY, nextType));
+    otDeepSleepInit(nextWaitTime);
 
     /**
      * Send the packet, then go to sleep after receiving a response.
     */
-    sendRequest(type, &socket);
-
-    if (type == Periodic) {
+    sendRequest(currentType, &socket);
+    if (currentType == Periodic) {
       otLogNotePlat("Sent scenario 1 packet.");
     } else {
       otLogNotePlat("Sent scenario 2 packet.");
     }
+
     otLogNotePlat("Will wait %d ms before sending next packet.",
-                  waitTime);
+                  nextWaitTime);
 
     KEEP_THREAD_ALIVE();
     return;
