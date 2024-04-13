@@ -114,6 +114,8 @@ static void ot_task_worker(void *aContext)
 }
 
 
+#define NVS_PACKET_TYPE_KEY "workload_type"
+
 void app_main(void)
 {
     // Used eventfds:
@@ -131,7 +133,28 @@ void app_main(void)
 
     xTaskCreate(ot_task_worker, "ot_power_save_main", 4096, NULL, 5, NULL);
 
-    /** ---- CoAP Client Code ---- */
+    /**
+     * Non-Volatile Storage is used to determine whether or not the next packet
+     * to send should be an PERIODIC scenario 1 packet, or an APERIODIC scenario 2
+     * packet. 
+    */
+    nvs_handle_t packetTypeHandle;
+    ESP_ERROR_CHECK(nvs_open(NVS_PACKET_TYPE_KEY, NVS_READWRITE, &packetTypeHandle));
+
+    type initialType = Periodic;
+    esp_err_t espError = nvs_get_u32(packetTypeHandle, NVS_PACKET_TYPE_KEY, 
+                                  (uint32_t *) &initialType);
+    switch (espError) {
+      case ESP_ERR_NVS_NOT_FOUND:
+        ESP_ERROR_CHECK(nvs_set_u32(packetTypeHandle, NVS_PACKET_TYPE_KEY,
+                                    (uint32_t) initialType));
+        break;
+
+      default:
+        ESP_ERROR_CHECK(espError);
+    }
+
+    /** ---- CoAP Client Implementation ---- */
     otDeepSleepInit(PERIODIC_WAIT_TIME_MS);
 
     checkConnection(OT_INSTANCE);

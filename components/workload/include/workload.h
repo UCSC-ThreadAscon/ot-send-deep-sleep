@@ -84,8 +84,8 @@ void printMeshLocalEid(otInstance *aInstance);
 #define COAP_SOCK_PORT OT_DEFAULT_COAP_PORT
 
 typedef enum type {
-  APeriodic = 0,
-  Periodic = 1
+  Periodic = 1,
+  APeriodic = 2
 } type;
 
 /** ---- CoAP Common API ---- */
