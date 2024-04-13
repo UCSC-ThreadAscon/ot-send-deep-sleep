@@ -215,6 +215,13 @@ void app_main(void)
     if (currentType == Periodic) {
       otLogNotePlat("Sent scenario 1 packet.");
     } else {
+#if (CONFIG_SCENARIO == 1)
+    otLogNotePlat("A water leakage has occured!");
+#elif (CONFIG_SCENARIO == 2)
+    otLogNotePlat("Someone detected at the front door!");
+#elif (CONFIG_SCENARIO == 3)
+    otLogNotePlat("Someone detected at the second story door!");
+#endif
       otLogNotePlat("Sent scenario 2 packet.");
     }
 

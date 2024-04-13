@@ -16,7 +16,6 @@
 bool waterLeakOccured() {
   uint32_t random = esp_random() % 100;
   if (random < 3) {
-    otLogNotePlat("A water leakage has occured!");
     return true;
   }
   return false;
@@ -29,7 +28,6 @@ bool waterLeakOccured() {
 bool someoneAtSecondStory() {
   uint32_t random = esp_random() % 100;
   if (random < 1) {
-    otLogNotePlat("Someone detected at the second story door!");
     return true;
   }
   return false;
@@ -42,7 +40,6 @@ bool someoneAtSecondStory() {
 bool someoneAtFrontDoor() {
   uint32_t random = esp_random() % 100;
   if (random < 29) {
-    otLogNotePlat("Someone detected at the front door!");
     return true;
   }
   return false;
