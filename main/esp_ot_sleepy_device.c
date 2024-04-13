@@ -178,11 +178,33 @@ void app_main(void)
     socket.mAddress = server;
     socket.mPort = COAP_SERVER_PORT;
 
-    sendRequest(type, &socket);
+    /**
+     * Determine what type of packet to send next.
+    */
+    bool sendScenario2 = waterLeakOccured();
+
+    if (!sendScenario2) {
+      type = Periodic;
+    }
+    else {
+      type = APeriodic;
+    }
+
+    ESP_ERROR_CHECK(nvs_set_u32(packetTypeHandle, NVS_PACKET_TYPE_KEY, type));
+    otDeepSleepInit(PERIODIC_WAIT_TIME_MS);
 
     /**
-     * Determine waht type of packet to send next.
+     * Send the packet, then go to sleep after receiving a response.
     */
+    sendRequest(type, &socket);
+
+    if (type == Periodic) {
+      otLogNotePlat("Sent scenario 1 packet.");
+    } else {
+      otLogNotePlat("Sent scenario 2 packet.");
+    }
+    otLogNotePlat("Will wait %d ms before sending next packet.",
+                  PERIODIC_WAIT_TIME_MS);
 
     KEEP_THREAD_ALIVE();
     return;

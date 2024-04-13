@@ -6,11 +6,8 @@
 
 void periodicSender(otSockAddr *socket) {
   sendRequest(Periodic, socket);
-
   otLogNotePlat("Sent scenario 1 packet.");
   otLogNotePlat("Will wait %d ms before sending next scenario 1 packet.",
                 PERIODIC_WAIT_TIME_MS);
-
-  KEEP_THREAD_ALIVE();
   return;
 }

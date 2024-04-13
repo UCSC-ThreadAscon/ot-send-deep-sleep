@@ -57,7 +57,7 @@ uint32_t aperiodicWaitTimeMs() {
 */
 bool waterLeakOccured() {
   uint32_t random = esp_random() % 100;
-  if (random < 3) {
+  if (random < 50) {
     otLogNotePlat("A water leakage has occured!");
     return true;
   }
