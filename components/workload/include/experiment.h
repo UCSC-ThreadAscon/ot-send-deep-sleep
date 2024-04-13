@@ -16,8 +16,7 @@
 #define APERIODIC_PAYLOAD_SIZE 4
 #define PERIODIC_PAYLOAD_SIZE 216
 
-// #define PERIODIC_WAIT_TIME_MS 1000 * 30 // 30 seconds
-#define PERIODIC_WAIT_TIME_MS 300000
+#define PERIODIC_WAIT_TIME_MS 1000 * 30 // 30 seconds
 
 bool waterLeakOccured();
 bool someoneAtSecondStory();
