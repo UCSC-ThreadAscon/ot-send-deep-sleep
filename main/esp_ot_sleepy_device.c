@@ -159,6 +159,8 @@ void app_main(void)
     otLogNotePlat("The time the experimental trail will end is %" PRId64 ".",
                   timevalToMicro(tvExp));
 
-    otLogNotePlat("The time difference is %" PRIu64 " ms.", timeDiff(tvNow, tvExp));
+    uint64_t expDuration = timeDiff(tvNow, tvExp);
+    otLogNotePlat("The time difference is %" PRIu64 " ms.", expDuration);
+    otLogNotePlat("This time is approximately %" PRIu64 " minutes.", expDuration / 1000 / 60);
     return;
 }
