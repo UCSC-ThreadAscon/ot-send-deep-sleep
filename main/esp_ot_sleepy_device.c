@@ -153,7 +153,9 @@ void app_main(void)
      *        Go to sleep for 24 hours.
     */
     otLogNotePlat("The current time is %" PRId64 ".", getCurrentTime());
+
+    struct timeval tvExp = getFutureTimeval(EXP_TIME_SECONDS);
     otLogNotePlat("The time 3 hours from now is %" PRId64 ".",
-                  getFutureTime(EXP_TIME_SECONDS));
+                  timevalToMicro(tvExp));
     return;
 }

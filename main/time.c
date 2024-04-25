@@ -6,7 +6,7 @@
 
 #include "time.h"
 
-inline int64_t timevalToMicro(struct timeval time) {
+int64_t timevalToMicro(struct timeval time) {
   return (int64_t)time.tv_sec * 1000000L + (int64_t)time.tv_usec;
 }
 
@@ -20,9 +20,9 @@ int64_t getCurrentTime()
 /**
  * What will be the timestamp if if it is "x" seconds from now?
 */
-int64_t getFutureTime(int64_t seconds) {
+struct timeval getFutureTimeval(int64_t seconds) {
   struct timeval tvFuture;
   gettimeofday(&tvFuture, NULL);
   tvFuture.tv_sec += seconds;
-  return timevalToMicro(tvFuture);
+  return tvFuture;
 }

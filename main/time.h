@@ -20,7 +20,8 @@
 #include "openthread/logging.h"
 #include "openthread/thread.h"
 
+int64_t timevalToMicro(struct timeval time);
 int64_t getCurrentTime();
-int64_t getFutureTime(int64_t seconds);
+struct timeval getFutureTimeval(int64_t seconds);
 
 #endif // _TIME_H_
