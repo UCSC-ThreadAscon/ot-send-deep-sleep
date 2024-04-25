@@ -5,7 +5,6 @@
 */
 
 #include "time.h"
-#include "math.h"
 #include "assert.h"
 
 int64_t timevalToMicro(struct timeval time) {
@@ -36,7 +35,7 @@ struct timeval getFutureTimeval(int64_t seconds) {
  * This function assumes that "tv2" occurs later than "tv1". The function
  * returns the time elapsed starting at "tv1" to "tv2" in milliseconds.
 */
-uint64_t timeDiff(struct timeval tv1, struct timeval tv2) {
+uint64_t timeDiffMs(struct timeval tv1, struct timeval tv2) {
   return (tv2.tv_sec - tv1.tv_sec) * 1000 + (tv2.tv_usec - tv1.tv_usec) / 1000;
 }
 
@@ -44,8 +43,8 @@ uint64_t timeDiff(struct timeval tv1, struct timeval tv2) {
  * Selects a random wakeup time that is after timeval "tv1", but
  * before the end of timeval "tv2".
 */
-struct timeval randonTime(struct timeval tv1, struct timeval tv2) {
-  time_t durationSec = (tv2.tv_sec - tv1.tv_sec);
+struct timeval randomTime(struct timeval tv1, struct timeval tv2) {
+  time_t durationSec = tv2.tv_sec - tv1.tv_sec;
   time_t secondAfterNow = tv1.tv_sec + 1;
 
   struct timeval random;

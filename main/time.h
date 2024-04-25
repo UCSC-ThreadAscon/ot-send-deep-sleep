@@ -20,11 +20,13 @@
 #include "openthread/logging.h"
 #include "openthread/thread.h"
 
-#define TO_MINUTES(ms) (ms / 1000) / 60
+#define MS_TO_MINUTES(ms) (ms / 1000) / 60
+#define US_TO_MINUTES(us) MS_TO_MINUTES(us / 1000)
 
 int64_t timevalToMicro(struct timeval time);
 struct timeval getCurrentTimeval();
 struct timeval getFutureTimeval(int64_t seconds);
-uint64_t timeDiff(struct timeval tv1, struct timeval tv2);
+uint64_t timeDiffMs(struct timeval tv1, struct timeval tv2);
+struct timeval randomTime(struct timeval tv1, struct timeval tv2);
 
 #endif // _TIME_H_

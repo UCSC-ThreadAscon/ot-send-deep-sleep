@@ -155,7 +155,10 @@ void app_main(void)
     struct timeval tvNow = getCurrentTimeval(); 
     struct timeval tvExp = getFutureTimeval(EXP_TIME_SECONDS);
 
-    
+    for (int i = 0; i < 10; i++) {
+      otLogNotePlat("The next event will be in %" PRId64 " minutes.",
+              US_TO_MINUTES(timevalToMicro(randomTime(tvNow, tvExp))));
+    }
 
     return;
 }
