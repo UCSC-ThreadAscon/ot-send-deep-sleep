@@ -39,7 +39,7 @@
  *
  * Thus, the air quality monitor will trigger 30 * 2 = 60 times a year.
 */
-#define NUM_EVENTS_AIR_QUALITY_MONITOR 60
+#define FIRST_STORY_BACKDOOR 60
 
 #define NUM_EVENTS_TEST 10
 
