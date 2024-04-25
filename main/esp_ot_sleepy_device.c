@@ -155,7 +155,13 @@ void app_main(void)
     struct timeval tvNow = getCurrentTimeval(); 
     struct timeval tvExp = getFutureTimeval(EXP_TIME_SECONDS);
 
-    for (int i = 0; i < NUM_EVENTS_AIR_QUALITY_MONITOR; i++) {
+    /**
+     * TO-DO:
+     *  - Sort
+     *  - Remove duplicates
+    */
+
+    for (int i = 0; i < NUM_EVENTS_TEST; i++) {
       struct timeval tvRandom = randomTime(tvNow, tvExp);
       int64_t randomTimeMicro = timevalToMicro(tvRandom);
 
