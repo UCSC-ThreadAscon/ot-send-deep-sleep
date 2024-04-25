@@ -41,6 +41,6 @@
 */
 #define NUM_EVENTS_AIR_QUALITY_MONITOR 60
 
-#define NUM_EVENTS_TEST 10
+#define NUM_EVENTS_TEST 4
 
 #endif // EXPERIMENT_H
