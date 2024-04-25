@@ -20,8 +20,8 @@
 
 #define EXP_TIME_SECONDS 600 // 10 minutes for debugging
 
-bool waterLeakOccured();
-bool someoneAtSecondStory();
-bool someoneAtFrontDoor();
+#define NUM_EVENTS_SECOND_STORY 1
+#define NUM_EVENTS_FRONT_DOOR 28
+#define NUM_EVENTS_HUMIDIFIER 10
 
 #endif // EXPERIMENT_H
