@@ -152,7 +152,7 @@ void app_main(void)
      *        Send a "I’m still here" packet.
      *        Go to sleep for 24 hours.
     */
-    struct timeval tvNow = getCurrentTime(); 
+    struct timeval tvNow = getCurrentTimeval(); 
     otLogNotePlat("The current time is %" PRId64 ".", timevalToMicro(tvNow));
 
     struct timeval tvExp = getFutureTimeval(EXP_TIME_SECONDS);

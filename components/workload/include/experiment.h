@@ -18,7 +18,7 @@
 
 #define PERIODIC_WAIT_TIME_MS 1000 * 30 // 30 seconds
 
-#define EXP_TIME_SECONDS 10800 // 3 hours
+#define EXP_TIME_SECONDS 600 // 10 minutes for debugging
 
 bool waterLeakOccured();
 bool someoneAtSecondStory();
