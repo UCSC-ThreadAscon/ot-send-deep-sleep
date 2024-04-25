@@ -16,3 +16,13 @@ int64_t getCurrentTime()
   gettimeofday(&tvNow, NULL);
   return timevalToMicro(tvNow);
 }
+
+/**
+ * What will be the timestamp if if it is "x" seconds from now?
+*/
+int64_t getFutureTime(int64_t seconds) {
+  struct timeval tvFuture;
+  gettimeofday(&tvFuture, NULL);
+  tvFuture.tv_sec += seconds;
+  return timevalToMicro(tvFuture);
+}

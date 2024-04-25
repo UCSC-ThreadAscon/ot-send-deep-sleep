@@ -21,5 +21,6 @@
 #include "openthread/thread.h"
 
 int64_t getCurrentTime();
+int64_t getFutureTime(int64_t seconds);
 
 #endif // _TIME_H_

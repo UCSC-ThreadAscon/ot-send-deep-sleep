@@ -153,5 +153,6 @@ void app_main(void)
      *        Go to sleep for 24 hours.
     */
     otLogNotePlat("The current time is %" PRId64 ".", getCurrentTime());
+    otLogNotePlat("The time 3 hours from now is %" PRId64 ".", getFutureTime(10800));
     return;
 }
