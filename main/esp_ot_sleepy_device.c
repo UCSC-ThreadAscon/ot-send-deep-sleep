@@ -161,6 +161,7 @@ void app_main(void)
 
     uint64_t expDuration = timeDiff(tvNow, tvExp);
     otLogNotePlat("The time difference is %" PRIu64 " ms.", expDuration);
-    otLogNotePlat("This time is approximately %" PRIu64 " minutes.", expDuration / 1000 / 60);
+    otLogNotePlat("This time is approximately %" PRIu64 " minutes.",
+                  TO_MINUTES(expDuration));
     return;
 }

@@ -20,6 +20,8 @@
 #include "openthread/logging.h"
 #include "openthread/thread.h"
 
+#define TO_MINUTES(ms) (ms / 1000) / 60
+
 int64_t timevalToMicro(struct timeval time);
 struct timeval getCurrentTime();
 struct timeval getFutureTimeval(int64_t seconds);
