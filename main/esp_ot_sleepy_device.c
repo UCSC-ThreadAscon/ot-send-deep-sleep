@@ -175,7 +175,6 @@ void app_main(void)
 
     /**
      * TO-DO:
-     *  - Sort
      *  - Remove duplicates
     */
   int64_t eventsUs[NUM_EVENTS_TEST];
