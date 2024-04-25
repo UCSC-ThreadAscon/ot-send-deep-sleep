@@ -152,10 +152,13 @@ void app_main(void)
      *        Send a "I’m still here" packet.
      *        Go to sleep for 24 hours.
     */
-    otLogNotePlat("The current time is %" PRId64 ".", getCurrentTime());
+    struct timeval tvNow = getCurrentTime(); 
+    otLogNotePlat("The current time is %" PRId64 ".", timevalToMicro(tvNow));
 
     struct timeval tvExp = getFutureTimeval(EXP_TIME_SECONDS);
-    otLogNotePlat("The time 3 hours from now is %" PRId64 ".",
+    otLogNotePlat("The time the experimental trail will end is %" PRId64 ".",
                   timevalToMicro(tvExp));
+
+    otLogNotePlat("The time difference is %" PRIu64 " ms.", timeDiff(tvNow, tvExp));
     return;
 }

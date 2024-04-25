@@ -21,7 +21,8 @@
 #include "openthread/thread.h"
 
 int64_t timevalToMicro(struct timeval time);
-int64_t getCurrentTime();
+struct timeval getCurrentTime();
 struct timeval getFutureTimeval(int64_t seconds);
+uint64_t timeDiff(struct timeval tv1, struct timeval tv2);
 
 #endif // _TIME_H_
