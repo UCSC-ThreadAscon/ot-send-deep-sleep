@@ -133,26 +133,6 @@ int compare (const void* ptr1, const void* ptr2) {
   }
 }
 
-/**
- * ---- PSEUDOCODE ----
- *
- * When the device turns on:
- *    1. Works out the 4 wakeup times, records them in NVS.
- *    2. Generates UUID and records it in NVS.
- *    3. Run the onWakeup() algorithm.
- *
- * onWakeup():
- *    1. If woken up because of an event packet:
- *    2. Send an event packet.
- *    3. Go to sleep for the remainder of the 24 hours
- *
- *    Else:
- *      If next event is less than 24 hours away:
- *        Go to sleep for an appropriate amount of time.
- *      Else:
- *        Send a "I’m still here" packet.
- *        Go to sleep for 24 hours.
-*/
 void app_main(void)
 {
     // Used eventfds:
