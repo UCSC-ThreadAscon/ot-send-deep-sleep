@@ -20,27 +20,8 @@
 
 #define EXP_TIME_SECONDS 10800 // 10 minutes for debugging
 
-/**
- * Second story motion sensor triggers once a year.
-*/
-#define NUM_EVENTS_SECOND_STORY 1
-
-/**
- * Front door motion sensor tiggers 3 times a month, or
- * 12 * 5 = 36 times a year.
-*/
 #define NUM_EVENTS_FRONT_DOOR 36
-
-/**
- * Air quality monitor triggers once a day every weekend, when
- * the humidifier recommends me to open my windows in the morning/afternoon
- * when I at home, AND when I am in Santa Cruz, which happens
- * 10 * 3 = 30 times a year.
- *
- * Thus, the air quality monitor will trigger 30 * 2 = 60 times a year.
-*/
-#define FIRST_STORY_BACKDOOR 60
-
-#define NUM_EVENTS_TEST 10
+#define NUM_EVENTS_AIR_MONITOR 10
+#define NUM_EVENTS_SECOND_STORY 1
 
 #endif // EXPERIMENT_H
