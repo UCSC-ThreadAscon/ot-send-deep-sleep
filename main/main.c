@@ -13,10 +13,11 @@ void app_main(void)
   initAppMain();
 
   struct timeval events[NUM_EVENTS];
+  uuid deviceId;
 
   if (JUST_POWERED_ON)
   {
-    onPowerOn(events);
+    onPowerOn(events, &deviceId);
   }
   else
   {
