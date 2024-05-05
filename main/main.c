@@ -21,7 +21,7 @@ void app_main(void)
   }
 
   qsort(&events, NUM_EVENTS, sizeof(struct timeval), compareTimevals);
-  printEventsArray((struct timeval *) &events, NUM_EVENTS);
+  printEventsArray(events, NUM_EVENTS);
 
   return;
 }
