@@ -10,5 +10,7 @@ void onPowerOn(struct timeval *events)
   openReadWrite(NVS_NAMESPACE, &handle);
 
   writeTimevalArray(&handle, NVS_EVENTS_ARRAY, events, sizeof(events));
+
+  nvs_close(handle);
   return;
 }
