@@ -1,3 +1,6 @@
+#ifndef _WORKLOAD_H
+#define _WORKLOAD_H
+
 #include "experiment.h"
 
 #include "esp_sleep.h"
@@ -95,3 +98,5 @@ void getPayload(const otMessage *aMessage, void* buffer);
 /* ---- CoAP Client API ---- */
 void sendRequest(type type, otSockAddr *socket);
 void periodicSender(otSockAddr *socket);
+
+#endif // _WORKLOAD_H
