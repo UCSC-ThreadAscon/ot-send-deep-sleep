@@ -3,10 +3,9 @@
 #define BATTERY_WAIT_TIME_MS_TEST 5000
 
 /**
- * ---- TO-DO LIST ----
- *
- * 1. Get the device to go to deep sleep. Write code that can
- *    tell the difference between deep sleep wakeup, and being powered on.
+ * ---- CURRENT TO-DO ----
+ * Store EVERYTHING in NVS on power on. Then on wakeup, get everything
+ * from NVS and print it out.
 */
 
 #define JUST_POWERED_ON !isDeepSleepWakeup()
