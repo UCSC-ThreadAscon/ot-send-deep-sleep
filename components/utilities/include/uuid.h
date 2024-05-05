@@ -1,5 +1,7 @@
 #pragma once
 
+#include "hexdump.h"
+
 #include <stdlib.h>
 #include <stdint.h>
 #include <inttypes.h>
@@ -17,3 +19,5 @@
 typedef struct uuid {
   uint8_t bytes[UUID_SIZE_BYTES];
 } uuid;
+
+void generateUUID(uuid *uuid);
