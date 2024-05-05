@@ -16,7 +16,7 @@
 #define APERIODIC_PAYLOAD_SIZE 4
 #define PERIODIC_PAYLOAD_SIZE 216
 
-#define PERIODIC_WAIT_TIME_MS 1000 * 30 // 30 seconds
+#define BATTERY_WAIT_TIME_MS 1000 * 30 // 30 seconds
 
 #define EXP_TIME_SECONDS 10980 // ~183 minutes
 
