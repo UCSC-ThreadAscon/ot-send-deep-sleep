@@ -4,8 +4,9 @@
 
 #include <stdlib.h>
 #include <stdint.h>
+#include <inttypes.h>
 #include <stdio.h>
-#include <string.h>
+#include <stdbool.h>
 #include "esp_err.h"
 #include "esp_event.h"
 #include "esp_log.h"
@@ -16,3 +17,4 @@
 #include "openthread/logging.h"
 
 void initDeepSleepTimerMs(int wakeupTimeMs);
+bool isDeepSleepWakeup(void);
