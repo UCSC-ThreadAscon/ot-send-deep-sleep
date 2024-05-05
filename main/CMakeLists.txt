@@ -3,5 +3,6 @@ idf_component_register(SRCS "./time/time.c"
                             "./init/init.c"
                             "./sleep/sleep.c"
                             "./event/event.c"
+                            "./storage/storage.c"
                             "main.c"
                        INCLUDE_DIRS "include")

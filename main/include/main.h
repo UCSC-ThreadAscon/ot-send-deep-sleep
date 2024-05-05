@@ -5,6 +5,7 @@
 #include "init.h"
 #include "time.h"
 #include "sleep.h"
+#include "storage.h"
 
 #define NUM_EVENTS NUM_EVENTS_AIR_MONITOR
 
