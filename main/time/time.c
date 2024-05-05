@@ -61,15 +61,19 @@ struct timeval randomTime(struct timeval tv1, struct timeval tv2)
 }
 
 int compare(const void* ptr1, const void* ptr2) {
-  int64_t *numPtr1 = (int64_t *) ptr1;
-  int64_t *numPtr2 = (int64_t *) ptr2;
-  int64_t num1 = *numPtr1;
-  int64_t num2 = *numPtr2;
+  struct timeval *timevalPtr1 = (struct timeval *) ptr1;
+  struct timeval *timevalPtr2 = (struct timeval *) ptr2;
 
-  if (num1 < num2) {
+  struct timeval timeval1 = *timevalPtr1;
+  struct timeval timeval2 = *timevalPtr2;
+
+  int64_t micro1 = timevalToMicro(timeval1);
+  int64_t micro2 = timevalToMicro(timeval2);
+
+  if (micro1 < micro2) {
     return -1;
   }
-  else if (num1 == num2) {
+  else if (micro1 == micro2) {
     return 0;
   }
   else {
