@@ -20,7 +20,7 @@ struct timeval getCurrentTimeval()
 }
 
 /**
- * What will be the timestamp if if it is "x" seconds from now?
+ * What will be the timestamp "[insert number here]" seconds from now?
 */
 struct timeval getFutureTimeval(int64_t seconds)
 {
