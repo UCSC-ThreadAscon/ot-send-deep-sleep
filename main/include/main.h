@@ -9,6 +9,11 @@
 
 #define NUM_EVENTS NUM_EVENTS_AIR_MONITOR
 
+#define JUST_POWERED_ON !isDeepSleepWakeup()
+
+void onPowerOn(struct timeval *events,
+               nvs_handle_t *eventsHandle);
+
 void initEventsArray(struct timeval *events,
                      struct timeval start,
                      struct timeval end);
