@@ -6,6 +6,7 @@
 #include "time.h"
 #include "sleep.h"
 #include "storage.h"
+#include "uuid.h"
 
 #define NVS_NAMESPACE "sed_nvs"
 
