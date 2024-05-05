@@ -20,7 +20,7 @@ void app_main(void)
   }
   else
   {
-    otLogNotePlat("I just woke up from deep sleep!");
+    onDeepSleepWakeup(events);
   }
 
   checkConnection(esp_openthread_get_instance());

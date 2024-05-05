@@ -20,3 +20,7 @@ void writeTimevalArray(nvs_handle_t *handle,
   ESP_ERROR_CHECK(nvs_commit(*handle));
   return;
 }
+
+void readTimevalArray() {
+  return;
+}
