@@ -19,8 +19,8 @@ void app_main(void)
     // Print time in minutes for debugging.
     int64_t timeMicro = timevalToMicro(events[i]);
     int64_t timeMinutes = US_TO_MINUTES(timeMicro);
-    otLogNotePlat("The %" PRId64 "th event will be in " PRId64 " minutes.",
-                  timeMinutes);
+    otLogNotePlat("The %dth event will be in %" PRId64 " minutes.",
+                  i, timeMinutes);
   }
 
 
