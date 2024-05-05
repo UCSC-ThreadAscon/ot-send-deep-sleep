@@ -16,7 +16,9 @@
 #include "driver/uart.h"
 #include "openthread/logging.h"
 
-#define deepSleepStart() esp_deep_sleep_start();
+#define deepSleepStart()                      \
+  otLogNotePlat("Going to deep sleep.");      \
+  esp_deep_sleep_start();                     \
 
 void initDeepSleepTimerMs(int wakeupTimeMs);
 bool isDeepSleepWakeup(void);
