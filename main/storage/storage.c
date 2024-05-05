@@ -11,20 +11,20 @@ void openReadWrite(const char *namespace, nvs_handle_t *handle) {
   return;
 }
 
-void writeTimevalArray(nvs_handle_t *handle,
-                       const char* key,
-                       struct timeval *array,
-                       size_t arraySize)
+void nvsWriteArray(nvs_handle_t *handle,
+                   const char* key,
+                   void *array,
+                   size_t arraySize)
 {
   ESP_ERROR_CHECK(nvs_set_blob(*handle, key, array, arraySize));
   ESP_ERROR_CHECK(nvs_commit(*handle));
   return;
 }
 
-void readTimevalArray(nvs_handle_t *handle,
-                      const char* key,
-                      struct timeval *array,
-                      size_t arraySize)
+void nvsReadArray(nvs_handle_t *handle,
+                  const char* key,
+                  void *array,
+                  size_t arraySize)
 {
   ESP_ERROR_CHECK(nvs_get_blob(*handle, key, array, &arraySize));
   return;

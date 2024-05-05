@@ -19,12 +19,12 @@
 
 void openReadWrite(const char *namespace, nvs_handle_t *handle);
 
-void writeTimevalArray(nvs_handle_t *handle,
-                       const char* key,
-                       struct timeval *array,
-                       size_t arraySize);
+void nvsWriteArray(nvs_handle_t *handle,
+                     const char* key,
+                     void *array,
+                     size_t arraySize);
 
-void readTimevalArray(nvs_handle_t *handle,
-                      const char* key,
-                      struct timeval *array,
-                      size_t arraySize);
+void nvsReadArray(nvs_handle_t *handle,
+                  const char* key,
+                  void *array,
+                  size_t arraySize);
