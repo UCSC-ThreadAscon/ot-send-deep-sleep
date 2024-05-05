@@ -8,3 +8,11 @@ void printEventMinutes(int eventNum, struct timeval time)
                 eventNum, timeMinutes);
   return;
 }
+
+void printEventsArray(struct timeval *events, int numEvents) {
+  for (int i = 0; i < numEvents; i++)
+  {
+    printEventMinutes(i + 1, events[i]);
+  }
+  return;
+}

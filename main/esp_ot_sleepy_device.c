@@ -20,12 +20,7 @@ void app_main(void)
   }
 
   qsort(&events, NUM_EVENTS, sizeof(struct timeval), compareTimevals);
-
-  // Print time in minutes for debugging.
-  for (int i = 0; i < NUM_EVENTS; i++)
-  {
-    printEventMinutes(i + 1, events[i]);
-  }
+  printEventsArray(&events, NUM_EVENTS);
 
   return;
 }
