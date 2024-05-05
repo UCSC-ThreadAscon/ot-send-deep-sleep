@@ -1,3 +1,16 @@
+/*
+ * SPDX-FileCopyrightText: 2023 Espressif Systems (Shanghai) CO LTD
+ *
+ * SPDX-License-Identifier: CC0-1.0
+ *
+ * OpenThread Command Line Example
+ *
+ * This example code is in the Public Domain (or CC0 licensed, at your option.)
+ *
+ * Unless required by applicable law or agreed to in writing, this
+ * software is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied.
+*/
 #ifndef _INIT_H_
 #define _INIT_H_
 
@@ -28,5 +41,6 @@ void create_config_network(otInstance *instance);
 esp_netif_t *init_openthread_netif(const esp_openthread_platform_config_t *config);
 void otDeepSleepInit(int wakeupTimeMs);
 void ot_task_worker(void *aContext);
+void initAppMain();
 
 #endif // _INIT_H_
