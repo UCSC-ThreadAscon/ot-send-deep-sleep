@@ -33,4 +33,6 @@ struct timeval randomTime(struct timeval tv1, struct timeval tv2);
 
 int compareTimevals(const void* ptr1, const void* ptr2);
 
+void printEventMinutes(int eventNum, struct timeval time);
+
 #endif // _TIME_H_
