@@ -10,12 +10,13 @@
 
 #define JUST_POWERED_ON !isDeepSleepWakeup()
 
-void onPowerOn(struct timeval *events) {
-  struct timeval timevalNow = getCurrentTimeval(); 
-  struct timeval timevalExpEnd = getFutureTimeval(EXP_TIME_SECONDS);
-
-  initEventsArray(events, timevalNow, timevalExpEnd);
+void onPowerOn(struct timeval *events,
+               nvs_handle_t *eventsHandle)
+{
+  initEventsArray(events, getCurrentTimeval(), getFutureTimeval(EXP_TIME_SECONDS));
   printEventsArray(events, NUM_EVENTS);
+
+  openReadWrite(NVS_EVENTS_ARRAY, eventsHandle);
   return;
 }
 
@@ -24,10 +25,11 @@ void app_main(void)
   initAppMain();
 
   struct timeval events[NUM_EVENTS];
+  nvs_handle_t eventsHandle;
 
   if (JUST_POWERED_ON)
   {
-    onPowerOn(events);
+    onPowerOn(events, &eventsHandle);
   }
   else
   {
