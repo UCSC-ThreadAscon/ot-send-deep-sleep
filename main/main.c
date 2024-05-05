@@ -23,6 +23,7 @@ void app_main(void)
     otLogNotePlat("I just woke up from deep sleep!");
   }
 
+  checkConnection(esp_openthread_get_instance());
   initDeepSleepTimerMs(BATTERY_WAIT_TIME_MS_TEST);
   deepSleepStart();
   return;

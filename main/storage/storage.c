@@ -16,7 +16,7 @@ void writeTimevalArray(nvs_handle_t *handle,
                        struct timeval *array,
                        size_t arraySize)
 {
-  ESP_ERROR_CHECK(nvs_set_blob(handle, key, array, arraySize));
-  ESP_ERROR_CHECK(nvs_commit(handle));
+  ESP_ERROR_CHECK(nvs_set_blob(*handle, key, array, arraySize));
+  ESP_ERROR_CHECK(nvs_commit(*handle));
   return;
 }

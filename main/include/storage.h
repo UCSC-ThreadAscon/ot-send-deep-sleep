@@ -17,7 +17,7 @@
 #include "nvs_flash.h"
 #include "nvs.h"
 
-#define NVS_NAMESPACE "energy-usage-workload-sed"
+#define NVS_NAMESPACE "sed_nvs"
 #define NVS_EVENTS_ARRAY "events"
 
 void openReadWrite(const char *namespace, nvs_handle_t *handle);
