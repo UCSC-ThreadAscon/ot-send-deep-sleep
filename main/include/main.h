@@ -11,8 +11,7 @@
 
 #define JUST_POWERED_ON !isDeepSleepWakeup()
 
-void onPowerOn(struct timeval *events,
-               nvs_handle_t *eventsHandle);
+void onPowerOn(struct timeval *events);
 
 void initEventsArray(struct timeval *events,
                      struct timeval start,

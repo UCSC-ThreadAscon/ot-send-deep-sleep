@@ -13,11 +13,10 @@ void app_main(void)
   initAppMain();
 
   struct timeval events[NUM_EVENTS];
-  nvs_handle_t eventsHandle;
 
   if (JUST_POWERED_ON)
   {
-    onPowerOn(events, &eventsHandle);
+    onPowerOn(events);
   }
   else
   {

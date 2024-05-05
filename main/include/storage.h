@@ -6,6 +6,8 @@
 */
 #pragma once
 
+#include "time.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <inttypes.h>
@@ -15,6 +17,12 @@
 #include "nvs_flash.h"
 #include "nvs.h"
 
+#define NVS_NAMESPACE "energy-usage-workload-sed"
 #define NVS_EVENTS_ARRAY "events"
 
 void openReadWrite(const char *namespace, nvs_handle_t *handle);
+
+void writeTimevalArray(nvs_handle_t *handle,
+                       const char* key,
+                       struct timeval *array,
+                       size_t arraySize);
