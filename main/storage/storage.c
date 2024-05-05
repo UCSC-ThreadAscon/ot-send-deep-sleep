@@ -21,6 +21,12 @@ void writeTimevalArray(nvs_handle_t *handle,
   return;
 }
 
-void readTimevalArray() {
+void readTimevalArray(nvs_handle_t *handle,
+                      const char* key,
+                      struct timeval *array,
+                      size_t arraySize)
+{
+  ESP_ERROR_CHECK(nvs_get_blob(*handle, key, array, &arraySize));
+  ESP_ERROR_CHECK(nvs_commit(*handle));
   return;
 }

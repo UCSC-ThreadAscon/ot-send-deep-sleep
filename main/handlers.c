@@ -14,11 +14,13 @@ void onPowerOn(struct timeval *events)
   return;
 }
 
-void onDeepSleepWakeup(struct timeval *events) {
+void onDeepSleepWakeup(struct timeval *events)
+{
   nvs_handle_t handle;
   openReadWrite(NVS_NAMESPACE, &handle);
 
-  otLogNotePlat("I just woke up from deep sleep!");
+  readTimevalArray(&handle, NVS_EVENTS_ARRAY, events, sizeof(events));
+  printEventsArray(events, NUM_EVENTS);
 
   nvs_close(handle);
   return;

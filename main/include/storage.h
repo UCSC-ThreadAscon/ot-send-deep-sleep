@@ -17,12 +17,14 @@
 #include "nvs_flash.h"
 #include "nvs.h"
 
-#define NVS_NAMESPACE "sed_nvs"
-#define NVS_EVENTS_ARRAY "events"
-
 void openReadWrite(const char *namespace, nvs_handle_t *handle);
 
 void writeTimevalArray(nvs_handle_t *handle,
                        const char* key,
                        struct timeval *array,
                        size_t arraySize);
+
+void readTimevalArray(nvs_handle_t *handle,
+                      const char* key,
+                      struct timeval *array,
+                      size_t arraySize);

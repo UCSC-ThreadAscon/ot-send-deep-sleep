@@ -7,7 +7,10 @@
 #include "sleep.h"
 #include "storage.h"
 
+#define NVS_NAMESPACE "sed_nvs"
+
 #define NUM_EVENTS NUM_EVENTS_AIR_MONITOR
+#define NVS_EVENTS_ARRAY "events"
 
 #define JUST_POWERED_ON !isDeepSleepWakeup()
 
