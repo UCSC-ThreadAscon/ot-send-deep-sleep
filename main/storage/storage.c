@@ -27,6 +27,5 @@ void readTimevalArray(nvs_handle_t *handle,
                       size_t arraySize)
 {
   ESP_ERROR_CHECK(nvs_get_blob(*handle, key, array, &arraySize));
-  ESP_ERROR_CHECK(nvs_commit(*handle));
   return;
 }
