@@ -17,7 +17,7 @@
 #error "Openthread sleepy device is only supported for the SoCs which have IEEE 802.15.4 module"
 #endif
 
-#define TAG "ot_send_deep_sleep"
+#define TAG "enery_usage_workload_sed"
 
 void create_config_network(otInstance *instance)
 {
@@ -49,11 +49,6 @@ esp_netif_t *init_openthread_netif(const esp_openthread_platform_config_t *confi
     ESP_ERROR_CHECK(esp_netif_attach(netif, esp_openthread_netif_glue_init(config)));
 
     return netif;
-}
-
-void otDeepSleepInit(int wakeupTimeMs)
-{
-    ESP_ERROR_CHECK(esp_sleep_enable_timer_wakeup(MS_TO_MICRO(wakeupTimeMs)));
 }
 
 void ot_task_worker(void *aContext)

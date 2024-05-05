@@ -39,7 +39,6 @@
 
 void create_config_network(otInstance *instance);
 esp_netif_t *init_openthread_netif(const esp_openthread_platform_config_t *config);
-void otDeepSleepInit(int wakeupTimeMs);
 void ot_task_worker(void *aContext);
 void initAppMain();
 
