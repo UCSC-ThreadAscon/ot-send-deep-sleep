@@ -13,6 +13,7 @@
 */
 #include "utilities.h"
 #include "workload.h"
+#include "time.h"
 
 #include <stdlib.h>
 #include <stdint.h>
