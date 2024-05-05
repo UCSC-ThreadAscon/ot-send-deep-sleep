@@ -60,7 +60,7 @@ struct timeval randomTime(struct timeval tv1, struct timeval tv2)
   return random;
 }
 
-int compare(const void* ptr1, const void* ptr2) {
+int compareTimevals(const void* ptr1, const void* ptr2) {
   struct timeval *timevalPtr1 = (struct timeval *) ptr1;
   struct timeval *timevalPtr2 = (struct timeval *) ptr2;
 
