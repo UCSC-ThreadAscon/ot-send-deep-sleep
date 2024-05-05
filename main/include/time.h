@@ -29,4 +29,6 @@ struct timeval getFutureTimeval(int64_t seconds);
 uint64_t timeDiffMs(struct timeval tv1, struct timeval tv2);
 struct timeval randomTime(struct timeval tv1, struct timeval tv2);
 
+int compare(const void* ptr1, const void* ptr2);
+
 #endif // _TIME_H_

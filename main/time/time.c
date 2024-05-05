@@ -55,3 +55,20 @@ struct timeval randomTime(struct timeval tv1, struct timeval tv2) {
   assert(random.tv_sec < tv2.tv_sec);
   return random;
 }
+
+int compare(const void* ptr1, const void* ptr2) {
+  int64_t *numPtr1 = (int64_t *) ptr1;
+  int64_t *numPtr2 = (int64_t *) ptr2;
+  int64_t num1 = *numPtr1;
+  int64_t num2 = *numPtr2;
+
+  if (num1 < num2) {
+    return -1;
+  }
+  else if (num1 == num2) {
+    return 0;
+  }
+  else {
+    return 1;
+  }
+}

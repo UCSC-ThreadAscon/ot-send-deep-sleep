@@ -3,23 +3,6 @@
 #include "init.h"
 #include "time.h"
 
-int compare (const void* ptr1, const void* ptr2) {
-  int64_t *numPtr1 = (int64_t *) ptr1;
-  int64_t *numPtr2 = (int64_t *) ptr2;
-  int64_t num1 = *numPtr1;
-  int64_t num2 = *numPtr2;
-
-  if (num1 < num2) {
-    return -1;
-  }
-  else if (num1 == num2) {
-    return 0;
-  }
-  else {
-    return 1;
-  }
-}
-
 void app_main(void)
 {
   initAppMain();
