@@ -4,6 +4,7 @@ idf_component_register(SRCS "./time/time.c"
                             "./sleep/sleep.c"
                             "./event/event.c"
                             "./storage/storage.c"
+                            "./uuid/uuid.c"
                             "handlers.c"
                             "main.c"
                        INCLUDE_DIRS "include")
