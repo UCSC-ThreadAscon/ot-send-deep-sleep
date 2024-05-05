@@ -6,6 +6,8 @@ void generateUUID(uuid *uuid) {
 }
 
 void printUUID(uuid *uuid) {
-  hexDump(uuid->bytes, UUID_SIZE_BYTES, "Sleepy End Device UUID");
+  uint32_t test = esp_random();
+
+  hexDump(&test, sizeof(uint32_t), "Sleepy End Device UUID");
   return;
 }
