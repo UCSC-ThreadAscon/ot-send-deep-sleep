@@ -7,7 +7,8 @@
 #include "time.h"
 #include "assert.h"
 
-int64_t timevalToMicro(struct timeval time) {
+int64_t timevalToMicro(struct timeval time)
+{
   return (int64_t)time.tv_sec * 1000000L + (int64_t)time.tv_usec;
 }
 
@@ -21,7 +22,8 @@ struct timeval getCurrentTimeval()
 /**
  * What will be the timestamp if if it is "x" seconds from now?
 */
-struct timeval getFutureTimeval(int64_t seconds) {
+struct timeval getFutureTimeval(int64_t seconds)
+{
   struct timeval tvFuture;
   gettimeofday(&tvFuture, NULL);
   tvFuture.tv_sec += seconds;
@@ -35,7 +37,8 @@ struct timeval getFutureTimeval(int64_t seconds) {
  * This function assumes that "tv2" occurs later than "tv1". The function
  * returns the time elapsed starting at "tv1" to "tv2" in milliseconds.
 */
-uint64_t timeDiffMs(struct timeval tv1, struct timeval tv2) {
+uint64_t timeDiffMs(struct timeval tv1, struct timeval tv2)
+{
   return (tv2.tv_sec - tv1.tv_sec) * 1000 + (tv2.tv_usec - tv1.tv_usec) / 1000;
 }
 
@@ -43,7 +46,8 @@ uint64_t timeDiffMs(struct timeval tv1, struct timeval tv2) {
  * Selects a random wakeup time that is after timeval "tv1", but
  * before the end of timeval "tv2".
 */
-struct timeval randomTime(struct timeval tv1, struct timeval tv2) {
+struct timeval randomTime(struct timeval tv1, struct timeval tv2)
+{
   time_t durationSec = tv2.tv_sec - tv1.tv_sec;
   time_t secondAfterNow = tv1.tv_sec + 1;
 
