@@ -21,13 +21,13 @@
 
 #define JUST_POWERED_ON !isDeepSleepWakeup()
 
-typedef uint8_t EventNum;
+typedef uint8_t EventsIndex;
 
 typedef struct NvsData
 {
   struct timeval events[NUM_EVENTS];
   uuid deviceId;
-  EventNum eventNum;
+  EventsIndex eventsIndex;
 }
 NvsData;
 
