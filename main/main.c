@@ -5,7 +5,7 @@
  * 1. Create an index of the current event packet to send, and update it
  *    upon every wakeup.
  * 2. Use that index, and the API you created to manage it, to determine
- *    how long the devie should sleep before sending the next event packet.
+ *    how long the device should sleep before sending the next event packet.
 */
 
 void app_main(void)
