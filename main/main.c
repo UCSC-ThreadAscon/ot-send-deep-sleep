@@ -16,7 +16,7 @@ void app_main(void)
   struct timeval events[NUM_EVENTS];
   uuid deviceId;
 
-  EmptyMemory(events, NUM_EVENTS * sizeof(struct timeval));
+  EmptyMemory(events, EVENTS_ARRAY_SIZE);
   EmptyMemory(&deviceId, sizeof(uuid));
 
   if (JUST_POWERED_ON)
