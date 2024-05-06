@@ -32,7 +32,8 @@ void handleResponse(void *aContext,
   return;
 }
 
-void createMessageInfo(otSockAddr *aSocket, otMessageInfo *aMessageInfo) {
+void createMessageInfo(otSockAddr *aSocket, otMessageInfo *aMessageInfo)
+{
   aMessageInfo->mHopLimit = 0;  // default
 
   aMessageInfo->mPeerAddr = aSocket->mAddress;
@@ -43,7 +44,8 @@ void createMessageInfo(otSockAddr *aSocket, otMessageInfo *aMessageInfo) {
   return;
 }
 
-void sendRequest(type type, otSockAddr *socket) {
+void sendRequest(type type, otSockAddr *socket)
+{
   otMessageInfo aMessageInfo;
   EmptyMemory(&aMessageInfo, sizeof(otMessageInfo));
   createMessageInfo(socket, &aMessageInfo);
