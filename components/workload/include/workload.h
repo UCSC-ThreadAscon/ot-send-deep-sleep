@@ -23,10 +23,9 @@ otSockAddr createSocket(const char *recvAddrString);
 
 /* ---- CoAP Client API ---- */
 void request(otSockAddr *socket, void *payload, size_t payloadSize);
-void periodicSender(otSockAddr *socket);
 
 /* ---- CoAP Response Handler ---- */
-void responeCallback(void *aContext,
-                    otMessage *aMessage,
-                    const otMessageInfo *aMessageInfo,
-                    otError aResult);
+void responseCallback(void *aContext,
+                      otMessage *aMessage,
+                      const otMessageInfo *aMessageInfo,
+                      otError aResult);

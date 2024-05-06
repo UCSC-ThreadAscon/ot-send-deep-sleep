@@ -16,7 +16,7 @@ otMessage* createCoapMessage()
   return newMessage;
 }
 
-inline void createMessageInfo(otSockAddr *aSocket, otMessageInfo *aMessageInfo)
+void createMessageInfo(otSockAddr *aSocket, otMessageInfo *aMessageInfo)
 {
   aMessageInfo->mHopLimit = 0;  // default
 
@@ -28,7 +28,7 @@ inline void createMessageInfo(otSockAddr *aSocket, otMessageInfo *aMessageInfo)
   return;
 }
 
-inline void createHeaders(otMessage *aRequest, otMessageInfo *aMessageInfo)
+void createHeaders(otMessage *aRequest, otMessageInfo *aMessageInfo)
 {
   otError error = OT_ERROR_NONE;
 
@@ -41,7 +41,7 @@ inline void createHeaders(otMessage *aRequest, otMessageInfo *aMessageInfo)
   return;
 }
 
-inline void addPayload(otMessage *aRequest,
+void addPayload(otMessage *aRequest,
                        void *payload,
                        size_t payloadSize)
 {
@@ -56,15 +56,15 @@ inline void addPayload(otMessage *aRequest,
   return;
 }
 
-static inline void send(otMessage *aRequest, otMessageInfo *aMessageInfo)
+void send(otMessage *aRequest, otMessageInfo *aMessageInfo)
 {
   otError error = otCoapSendRequest(OT_INSTANCE, aRequest, aMessageInfo,
-                                    responeCallback, NULL);
+                                    responseCallback, NULL);
   HandleMessageError("send request", aRequest, error);
   return;
 }
 
-inline void printMessageSent(otSockAddr *socket, size_t payloadSize)
+void printMessageSent(otSockAddr *socket, size_t payloadSize)
 {
   char destString[OT_IP6_ADDRESS_STRING_SIZE];
 

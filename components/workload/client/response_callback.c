@@ -6,7 +6,7 @@
 */
 #include "workload.h"
 
-void responeCallback(void *aContext,
+void responseCallback(void *aContext,
                      otMessage *aMessage,
                      const otMessageInfo *aMessageInfo,
                      otError aResult)

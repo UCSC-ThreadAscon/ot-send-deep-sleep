@@ -15,9 +15,11 @@ void app_main(void)
 
   struct timeval events[NUM_EVENTS];
   uuid deviceId;
+  otSockAddr socket;
 
   EmptyMemory(events, EVENTS_ARRAY_SIZE);
   EmptyMemory(&deviceId, sizeof(uuid));
+  EmptyMemory(&socket, sizeof(otSockAddr));
 
   if (JUST_POWERED_ON)
   {
@@ -27,6 +29,8 @@ void app_main(void)
   {
     onDeepSleepWakeup(events, &deviceId);
   }
+
+  sendEventPacket(&socket);
 
   initDeepSleepTimerMs(BATTERY_WAIT_TIME_MS_TEST);
   deepSleepStart();

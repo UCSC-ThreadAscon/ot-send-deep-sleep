@@ -1,5 +1,4 @@
-idf_component_register(SRCS "periodic.c"
-                            "common.c"
+idf_component_register(SRCS "common.c"
                             "./client/request.c"
                             "./client/response_callback.c"
                        INCLUDE_DIRS "include"
