@@ -37,8 +37,9 @@ void onDeepSleepWakeup(struct timeval *events, uuid *deviceId)
   return;
 }
 
-void sendEventPacket(otSockAddr *socket) {
-  *socket = createSocket(CONFIG_RECEIVER_ADDRESS);
+void sendEventPacket(otSockAddr *socket)
+{
+  *socket = createSocket(CONFIG_SERVER_IP_ADDRESS);
   char testPayload[] = "hello";
   request(socket, (void *) testPayload, sizeof(testPayload));
   return;
