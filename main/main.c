@@ -10,26 +10,24 @@ void app_main(void)
   initAppMain();
   checkConnection(esp_openthread_get_instance());
 
-  struct timeval events[NUM_EVENTS];
-  uuid deviceId;
+  NvsData nvsData;
   otSockAddr socket;
 
-  EmptyMemory(events, EVENTS_ARRAY_SIZE);
-  EmptyMemory(&deviceId, sizeof(uuid));
+  EmptyMemory(&nvsData, sizeof(NvsData));
   EmptyMemory(&socket, sizeof(otSockAddr));
 
   if (JUST_POWERED_ON)
   {
-    onPowerOn(events, &deviceId);
+    onPowerOn(nvsData.events, &(nvsData.deviceId));
   }
   else
   {
-    onDeepSleepWakeup(events, &deviceId);
+    onDeepSleepWakeup(nvsData.events, &(nvsData.deviceId));
   }
 
   initDeepSleepTimerMs(BATTERY_WAIT_TIME_MS_TEST);
 
   coapStart();
-  sendEventPacket(&socket, deviceId);
+  sendEventPacket(&socket, nvsData.deviceId);
   return;
 }
