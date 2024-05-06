@@ -50,15 +50,20 @@ struct timeval randomTime(struct timeval tv1, struct timeval tv2)
 {
   assert(toMicro(tv1) < toMicro(tv2));
 
-  time_t durationSec = tv2.tv_sec - tv1.tv_sec;
-  time_t secondAfterNow = tv1.tv_sec + 1;
-
   struct timeval random;
-  random.tv_sec = (esp_random() % durationSec) + secondAfterNow;
+  random.tv_sec = 0;
   random.tv_usec = 0;
 
-  assert(toMicro(random) > toMicro(tv1));
-  assert(toMicro(random) < toMicro(tv2));
+  do {
+      time_t durationSec = tv2.tv_sec - tv1.tv_sec;
+      time_t secondAfterNow = tv1.tv_sec + 1;
+
+      random.tv_sec = (esp_random() % durationSec) + secondAfterNow;
+      random.tv_usec = 0;
+  } 
+  while((toMicro(random) <= toMicro(tv1)) ||
+        (toMicro(random) >= toMicro(tv2)));
+
   return random;
 }
 
