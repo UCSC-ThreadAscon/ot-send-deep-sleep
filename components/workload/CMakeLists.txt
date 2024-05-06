@@ -3,4 +3,4 @@ idf_component_register(SRCS "./client/request.c"
                             "./common/common.c"
                             "./common/coap_common.c"
                        INCLUDE_DIRS "include"
-                       PRIV_REQUIRES "openthread")
+                       PRIV_REQUIRES "openthread" "utilities")

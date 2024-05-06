@@ -5,6 +5,7 @@
  * https://github.com/UCSC-ThreadAscon/openthread/tree/main/src/cli
 */
 #include "workload.h"
+#include "sleep.h"
 
 void responseCallback(void *aContext,
                      otMessage *aMessage,
@@ -27,5 +28,6 @@ void responseCallback(void *aContext,
                   senderAddr, payloadLen);
   }
 
+  deepSleepStart();
   return;
 }
