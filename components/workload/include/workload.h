@@ -22,7 +22,7 @@ void getPayload(const otMessage *aMessage, void* buffer);
 otSockAddr createSocket(const char *recvAddrString);
 
 /* ---- CoAP Client API ---- */
-void sendRequest(type type, otSockAddr *socket);
+void request(otSockAddr *socket, void *payload, size_t payloadSize);
 void periodicSender(otSockAddr *socket);
 
 /* ---- CoAP Response Handler ---- */
