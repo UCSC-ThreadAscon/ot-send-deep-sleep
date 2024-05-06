@@ -39,3 +39,6 @@ void initEventsArray(struct timeval *events,
                      struct timeval start,
                      struct timeval end);
 void sendEventPacket(otSockAddr *socket, uuid deviceId);
+
+EventsIndex initEventsIndex(nvs_handle_t handle);
+void printEventsIndex(EventsIndex index);
