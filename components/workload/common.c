@@ -12,7 +12,8 @@ void handleError(otError error, char* desc)
   return;
 }
 
-void checkConnection(otInstance *aInstance) {
+void checkConnection(otInstance *aInstance)
+{
   otDeviceRole currentRole;
   do {
     currentRole = otThreadGetDeviceRole(aInstance);
