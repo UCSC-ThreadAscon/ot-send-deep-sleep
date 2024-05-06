@@ -13,7 +13,7 @@ void onPowerOn(struct timeval *events, uuid *deviceId)
 
 #if DEBUG
   printEventsArray(events, NUM_EVENTS);
-  printUUID(deviceId);
+  printBytesUUID(deviceId);
 #endif
 
   nvs_close(handle);
