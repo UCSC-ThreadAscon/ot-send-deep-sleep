@@ -19,7 +19,14 @@ void printMeshLocalEid(otInstance *aInstance);
 /** ---- CoAP Common API ---- */
 uint16_t getPayloadLength(const otMessage *aMessage);
 void getPayload(const otMessage *aMessage, void* buffer);
+otSockAddr createSocket(const char *recvAddrString);
 
 /* ---- CoAP Client API ---- */
 void sendRequest(type type, otSockAddr *socket);
 void periodicSender(otSockAddr *socket);
+
+/* ---- CoAP Response Handler ---- */
+void handleResponse(void *aContext,
+                    otMessage *aMessage,
+                    const otMessageInfo *aMessageInfo,
+                    otError aResult);

@@ -6,22 +6,6 @@
 */
 #include "workload.h"
 
-otSockAddr createSocket(const char *recvAddrString)
-{
-  otSockAddr newSocket;
-  otIp6Address recvAddr;
-
-  EmptyMemory(&newSocket, sizeof(otSockAddr));
-  EmptyMemory(&recvAddr, sizeof(otIp6Address));
-
-  otIp6AddressFromString(recvAddrString, &recvAddr);
-
-  newSocket.mAddress = recvAddr;
-  newSocket.mPort = COAP_SOCK_PORT;
-
-  return newSocket;
-}
-
 otMessage* createCoapMessage()
 {
   otMessage *newMessage = otCoapNewMessage(OT_INSTANCE, NULL);
@@ -32,7 +16,19 @@ otMessage* createCoapMessage()
   return newMessage;
 }
 
-inline void initCoapRequest(otMessage *aRequest, otMessageInfo *aMessageInfo)
+inline void createMessageInfo(otSockAddr *aSocket, otMessageInfo *aMessageInfo)
+{
+  aMessageInfo->mHopLimit = 0;  // default
+
+  aMessageInfo->mPeerAddr = aSocket->mAddress;
+  aMessageInfo->mPeerPort = aSocket->mPort;
+
+  aMessageInfo->mSockAddr = *otThreadGetMeshLocalEid(OT_INSTANCE);
+  aMessageInfo->mSockPort = COAP_SOCK_PORT;
+  return;
+}
+
+inline void createHeaders(otMessage *aRequest, otMessageInfo *aMessageInfo)
 {
   otError error = OT_ERROR_NONE;
 
@@ -41,17 +37,60 @@ inline void initCoapRequest(otMessage *aRequest, otMessageInfo *aMessageInfo)
 
   error = otCoapMessageAppendUriPathOptions(aRequest, BORDER_ROUTER_URI);
   HandleMessageError("append uri options", aRequest, error);
+
   return;
 }
 
-void request(otSockAddr *socket, void* payload, size_t payloadSize)
+inline void addPayload(otMessage *aRequest,
+                       void *payload,
+                       size_t payloadSize)
+{
+  otError error = OT_ERROR_NONE;
+
+  error = otCoapMessageSetPayloadMarker(aRequest);
+  HandleMessageError("set payload marker", aRequest, error);
+
+  error = otMessageAppend(aRequest, payload, payloadSize);
+  HandleMessageError("message append", aRequest, error);
+
+  return;
+}
+
+static inline void send(otMessage *aRequest, otMessageInfo *aMessageInfo)
+{
+  otError error = otCoapSendRequest(OT_INSTANCE, aRequest, aMessageInfo,
+                                    handleResponse, NULL);
+  HandleMessageError("send request", aRequest, error);
+  return;
+}
+
+inline void printMessageSent(otSockAddr *socket, size_t payloadSize)
+{
+  char destString[OT_IP6_ADDRESS_STRING_SIZE];
+
+  otIp6AddressToString(&(socket->mAddress),
+                       destString,
+                       OT_IP6_ADDRESS_STRING_SIZE);
+
+  otLogNotePlat("Sent a message of %d bytes to %s.", 
+                payloadSize, destString);
+  return;
+}
+
+void request(otSockAddr *socket, void *payload, size_t payloadSize)
 {
   otMessageInfo aMessageInfo;
   otMessage *aRequest;
-  EmptyMemory(&aMessageInfo, sizeof(otMessageInfo));
 
+  EmptyMemory(&aMessageInfo, sizeof(otMessageInfo));
   createMessageInfo(socket, &aMessageInfo);
+
   aRequest = createCoapMessage();
 
+  createHeaders(aRequest, &aMessageInfo);
+  addPayload(aRequest, payload, payloadSize);
+  send(aRequest, &aMessageInfo);
+
+  printMessageSent(socket, payloadSize);
   return;
 }

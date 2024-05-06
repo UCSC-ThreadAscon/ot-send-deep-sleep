@@ -64,3 +64,19 @@ void printMeshLocalEid(otInstance *aInstance)
   otLogNotePlat("The Mesh Local EID is %s.", mleidString);
   return;
 }
+
+otSockAddr createSocket(const char *recvAddrString)
+{
+  otSockAddr newSocket;
+  otIp6Address recvAddr;
+
+  EmptyMemory(&newSocket, sizeof(otSockAddr));
+  EmptyMemory(&recvAddr, sizeof(otIp6Address));
+
+  otIp6AddressFromString(recvAddrString, &recvAddr);
+
+  newSocket.mAddress = recvAddr;
+  newSocket.mPort = COAP_SOCK_PORT;
+
+  return newSocket;
+}
