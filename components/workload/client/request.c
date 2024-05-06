@@ -21,3 +21,37 @@ otSockAddr createSocket(const char *recvAddrString)
 
   return newSocket;
 }
+
+otMessage* createCoapMessage()
+{
+  otMessage *newMessage = otCoapNewMessage(OT_INSTANCE, NULL);
+  if (newMessage == NULL) {
+    otLogCritPlat("Failed to create CoAP request.");
+    return NULL;
+  }
+  return newMessage;
+}
+
+inline void initCoapRequest(otMessage *aRequest, otMessageInfo *aMessageInfo)
+{
+  otError error = OT_ERROR_NONE;
+
+  otCoapMessageInit(aRequest, OT_COAP_TYPE_CONFIRMABLE, OT_COAP_CODE_POST);
+  otCoapMessageGenerateToken(aRequest, OT_COAP_DEFAULT_TOKEN_LENGTH);
+
+  error = otCoapMessageAppendUriPathOptions(aRequest, BORDER_ROUTER_URI);
+  HandleMessageError("append uri options", aRequest, error);
+  return;
+}
+
+void request(otSockAddr *socket, void* payload, size_t payloadSize)
+{
+  otMessageInfo aMessageInfo;
+  otMessage *aRequest;
+  EmptyMemory(&aMessageInfo, sizeof(otMessageInfo));
+
+  createMessageInfo(socket, &aMessageInfo);
+  aRequest = createCoapMessage();
+
+  return;
+}
