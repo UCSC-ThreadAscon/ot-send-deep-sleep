@@ -2,9 +2,11 @@
 
 #include "utilities.h"
 #include "workload.h"
-#include "init.h"
 #include "time.h"
 #include "sleep.h"
+
+#include "init.h"
+#include "payload.h"
 #include "storage.h"
 #include "uuid.h"
 #include "flags.h"
