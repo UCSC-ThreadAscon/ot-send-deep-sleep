@@ -1,3 +1,3 @@
 #pragma once
 
-#define NVS_DEBUG 0
+#define NVS_DEBUG 1
