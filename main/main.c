@@ -4,8 +4,7 @@
 
 /**
  * ---- CURRENT TO-DO ----
- * Send one event packet every 5 seconds. Along the way, refactor your CoAP
- * client code.
+ * Send one event packet for each evnt in the "events" timeval array.
 */
 
 void app_main(void)
