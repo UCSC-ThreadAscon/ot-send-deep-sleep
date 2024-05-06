@@ -29,3 +29,15 @@ void nvsReadArray(nvs_handle_t *handle,
   ESP_ERROR_CHECK(nvs_get_blob(*handle, key, array, &arraySize));
   return;
 }
+
+uint8_t nvsReadByteUInt(nvs_handle_t *handle, const char* key) {
+  uint8_t numberRead = 0;
+  ESP_ERROR_CHECK(nvs_get_u8(*handle, key, &numberRead));
+  return numberRead;
+}
+
+void nvsWriteByteUInt(nvs_handle_t *handle, const char* key, uint8_t number) {
+  ESP_ERROR_CHECK(nvs_set_u8(*handle, key, number));
+  ESP_ERROR_CHECK(nvs_commit(*handle));
+  return;
+}

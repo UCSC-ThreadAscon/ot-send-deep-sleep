@@ -14,8 +14,8 @@ void initEventsArray(struct timeval *events,
 }
 
 /**
- * Creates the event number which starts at the first event
- * in the events array, and then write the events number to NVS.
+ * Creates an event index which refers to the first event
+ * in the events array, and then write this event index to NVS.
 */
 EventsIndex initEventsIndex() {
   EventsIndex eventsIndex = 0;
