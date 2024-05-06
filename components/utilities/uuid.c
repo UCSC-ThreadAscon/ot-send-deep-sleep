@@ -12,15 +12,7 @@ void generateUUID(uuid *uuid) {
 
 #define ONE_BYTE_HEX_STRING sizeof(char) * 2
 
-void printBytesUUID(uuid *uuid) {
-  uint8_t *uuidBytes = uuid->bytes;
-  char uuidString[32];
-
-  for (int byte = 0; byte < UUID_SIZE_BYTES; byte += 1) {
-    char *string = &(uuidString[byte * ONE_BYTE_HEX_STRING]);
-    sprintf(string, "%X", uuidBytes[byte]);
-  }
-
-  otLogNotePlat("The UUID is 0x%s.", uuidString);
+void printUUID(uuid *uuid) {
+  hexDump(uuid->bytes, UUID_SIZE_BYTES, "Sleepy End Device UUID");
   return;
 }

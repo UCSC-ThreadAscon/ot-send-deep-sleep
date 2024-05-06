@@ -25,4 +25,4 @@ typedef struct uuid {
 } uuid;
 
 void generateUUID(uuid *uuid);
-void printBytesUUID(uuid *uuid);
+void printUUID(uuid *uuid);

@@ -1,4 +1,5 @@
 #include "hexdump.h"
+#include "workload.h"
 
 void printHexDump(otLogHexDumpInfo *aInfo) {
   otError error = OT_ERROR_NONE;
@@ -19,7 +20,7 @@ void printHexDump(otLogHexDumpInfo *aInfo) {
 
 void hexDump(void *data, uint16_t dataLength, const char* title) {
   otLogHexDumpInfo hexDump;
-  memset(&hexDump, 0, sizeof(otLogHexDumpInfo));
+  EmptyMemory(&hexDump, sizeof(otLogHexDumpInfo));
 
   hexDump.mDataBytes = (uint8_t *) data;
   hexDump.mDataLength = dataLength;
