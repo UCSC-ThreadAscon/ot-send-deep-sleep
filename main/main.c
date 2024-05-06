@@ -16,13 +16,16 @@ void app_main(void)
   struct timeval events[NUM_EVENTS];
   uuid deviceId;
 
+  EmptyMemory(events, NUM_EVENTS * sizeof(struct timeval));
+  EmptyMemory(&deviceId, sizeof(uuid));
+
   if (JUST_POWERED_ON)
   {
     onPowerOn(events, &deviceId);
   }
   else
   {
-    onDeepSleepWakeup(events);
+    onDeepSleepWakeup(events, &deviceId);
   }
 
   initDeepSleepTimerMs(BATTERY_WAIT_TIME_MS_TEST);

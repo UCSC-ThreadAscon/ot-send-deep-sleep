@@ -21,7 +21,7 @@
 #define JUST_POWERED_ON !isDeepSleepWakeup()
 
 void onPowerOn(struct timeval *events, uuid *deviceId);
-void onDeepSleepWakeup(struct timeval *events);
+void onDeepSleepWakeup(struct timeval *events, uuid *deviceId);
 
 void initEventsArray(struct timeval *events,
                      struct timeval start,
