@@ -7,10 +7,10 @@ void onPowerOn(struct timeval *events, uuid *deviceId)
 
   initEventsArray(events, getCurrentTimeval(),
                   getFutureTimeval(EXP_TIME_SECONDS_TEST));
-  nvsWriteArray(&handle, NVS_EVENTS_ARRAY, events, EVENTS_ARRAY_SIZE);
+  nvsWriteArray(handle, NVS_EVENTS_ARRAY, events, EVENTS_ARRAY_SIZE);
 
   generateUUID(deviceId);
-  nvsWriteArray(&handle, NVS_UUID, deviceId, UUID_SIZE_BYTES);
+  nvsWriteArray(handle, NVS_UUID, deviceId, UUID_SIZE_BYTES);
 
 #if NVS_DEBUG
   printEventsArray(events, NUM_EVENTS);

@@ -11,33 +11,33 @@ void openReadWrite(const char *namespace, nvs_handle_t *handle) {
   return;
 }
 
-void nvsWriteArray(nvs_handle_t *handle,
+void nvsWriteArray(nvs_handle_t handle,
                    const char* key,
                    void *array,
                    size_t arraySize)
 {
-  ESP_ERROR_CHECK(nvs_set_blob(*handle, key, array, arraySize));
-  ESP_ERROR_CHECK(nvs_commit(*handle));
+  ESP_ERROR_CHECK(nvs_set_blob(handle, key, array, arraySize));
+  ESP_ERROR_CHECK(nvs_commit(handle));
   return;
 }
 
-void nvsReadArray(nvs_handle_t *handle,
+void nvsReadArray(nvs_handle_t handle,
                   const char* key,
                   void *array,
                   size_t arraySize)
 {
-  ESP_ERROR_CHECK(nvs_get_blob(*handle, key, array, &arraySize));
+  ESP_ERROR_CHECK(nvs_get_blob(handle, key, array, &arraySize));
   return;
 }
 
-uint8_t nvsReadByteUInt(nvs_handle_t *handle, const char* key) {
+uint8_t nvsReadByteUInt(nvs_handle_t handle, const char* key) {
   uint8_t numberRead = 0;
-  ESP_ERROR_CHECK(nvs_get_u8(*handle, key, &numberRead));
+  ESP_ERROR_CHECK(nvs_get_u8(handle, key, &numberRead));
   return numberRead;
 }
 
-void nvsWriteByteUInt(nvs_handle_t *handle, const char* key, uint8_t number) {
-  ESP_ERROR_CHECK(nvs_set_u8(*handle, key, number));
-  ESP_ERROR_CHECK(nvs_commit(*handle));
+void nvsWriteByteUInt(nvs_handle_t handle, const char* key, uint8_t number) {
+  ESP_ERROR_CHECK(nvs_set_u8(handle, key, number));
+  ESP_ERROR_CHECK(nvs_commit(handle));
   return;
 }

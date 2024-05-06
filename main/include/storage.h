@@ -19,15 +19,15 @@
 
 void openReadWrite(const char *namespace, nvs_handle_t *handle);
 
-void nvsWriteArray(nvs_handle_t *handle,
-                     const char* key,
-                     void *array,
-                     size_t arraySize);
+void nvsWriteArray(nvs_handle_t handle,
+                   const char* key,
+                   void *array,
+                   size_t arraySize);
 
-void nvsReadArray(nvs_handle_t *handle,
+void nvsReadArray(nvs_handle_t handle,
                   const char* key,
                   void *array,
                   size_t arraySize);
 
-uint8_t nvsReadByteUInt(nvs_handle_t *handle, const char* key);
-void nvsWriteByteUInt(nvs_handle_t *handle, const char* key, uint8_t number);
+uint8_t nvsReadByteUInt(nvs_handle_t handle, const char* key);
+void nvsWriteByteUInt(nvs_handle_t handle, const char* key, uint8_t number);

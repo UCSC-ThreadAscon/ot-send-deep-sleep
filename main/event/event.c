@@ -17,7 +17,7 @@ void initEventsArray(struct timeval *events,
  * Creates an event index which refers to the first event
  * in the events array, and then write this event index to NVS.
 */
-EventsIndex initEventsIndex() {
+EventsIndex initEventsIndex(nvs_handle_t handle) {
   EventsIndex eventsIndex = 0;
   return eventsIndex;
 }
