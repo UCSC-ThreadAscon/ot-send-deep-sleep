@@ -2,7 +2,7 @@
 
 /**
  * ---- CURRENT TO-DO ----
- * Send one event packet for each evnt in the "events" timeval array.
+ * Send one event packet for each event in the "events" timeval array.
 */
 
 void app_main(void)
