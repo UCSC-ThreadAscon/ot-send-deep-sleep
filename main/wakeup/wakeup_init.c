@@ -1,7 +1,6 @@
 #include "main.h"
 
-void onDeepSleepWakeup(struct timeval *events, uuid *deviceId)
-{
+void wakeupInit(struct timeval *events, uuid *deviceId) {
   nvs_handle_t handle;
   openReadWrite(NVS_NAMESPACE, &handle);
 

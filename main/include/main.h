@@ -29,7 +29,8 @@ typedef struct NvsData
 NvsData;
 
 void onPowerOn(struct timeval *events, uuid *deviceId);
-void onDeepSleepWakeup(struct timeval *events, uuid *deviceId);
+void wakeupInit(struct timeval *events, uuid *deviceId);
+void onWakeup(struct timeval *events, uuid *deviceId);
 
 void sendEventPacket(otSockAddr *socket, uuid deviceId);
 
