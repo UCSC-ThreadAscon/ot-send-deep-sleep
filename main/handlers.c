@@ -11,7 +11,7 @@ void onPowerOn(struct timeval *events, uuid *deviceId)
   generateUUID(deviceId);
   nvsWriteArray(&handle, NVS_UUID, deviceId, UUID_SIZE_BYTES);
 
-#if DEBUG
+#if NVS_DEBUG
   printEventsArray(events, NUM_EVENTS);
   printUUID(deviceId);
 #endif
@@ -28,7 +28,7 @@ void onDeepSleepWakeup(struct timeval *events, uuid *deviceId)
   nvsReadArray(&handle, NVS_EVENTS_ARRAY, events, EVENTS_ARRAY_SIZE);
   nvsReadArray(&handle, NVS_UUID, deviceId, UUID_SIZE_BYTES);
 
-#if DEBUG
+#if NVS_DEBUG
   printEventsArray(events, NUM_EVENTS);
   printUUID(deviceId);
 #endif

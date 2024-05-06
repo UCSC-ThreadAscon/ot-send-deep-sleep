@@ -7,8 +7,7 @@
 #include "sleep.h"
 #include "storage.h"
 #include "uuid.h"
-
-#define DEBUG 1
+#include "flags.h"
 
 #define NVS_NAMESPACE "sed_nvs"
 
