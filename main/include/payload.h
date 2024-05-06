@@ -11,3 +11,5 @@ typedef struct EventPayload
   bool eventOccured;
 }
 EventPayload;
+
+EventPayload createEventPayload(uuid deviceId);

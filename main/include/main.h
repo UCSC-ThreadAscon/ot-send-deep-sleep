@@ -24,7 +24,7 @@
 void onPowerOn(struct timeval *events, uuid *deviceId);
 void onDeepSleepWakeup(struct timeval *events, uuid *deviceId);
 
-void sendEventPacket(otSockAddr *socket);
+void sendEventPacket(otSockAddr *socket, uuid deviceId);
 
 void initEventsArray(struct timeval *events,
                      struct timeval start,

@@ -33,6 +33,6 @@ void app_main(void)
   initDeepSleepTimerMs(BATTERY_WAIT_TIME_MS_TEST);
 
   coapStart();
-  sendEventPacket(&socket);
+  sendEventPacket(&socket, deviceId);
   return;
 }

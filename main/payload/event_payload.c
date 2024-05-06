@@ -1,5 +1,3 @@
-#pragma once
-
 #include "payload.h"
 
 EventPayload createEventPayload(uuid deviceId) {
