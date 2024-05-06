@@ -11,12 +11,6 @@
 #include "esp_sleep.h"
 #include "esp_timer.h"
 #include "esp_openthread.h"
-#include "esp_openthread_netif_glue.h"
-#include "esp_ot_sleepy_device_config.h"
-#include "esp_vfs_eventfd.h"
-#include "nvs_flash.h"
-#include "driver/rtc_io.h"
-#include "driver/uart.h"
 #include "openthread/logging.h"
 #include "openthread/thread.h"
 

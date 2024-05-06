@@ -12,8 +12,6 @@
 #include "esp_log.h"
 #include "esp_sleep.h"
 #include "esp_timer.h"
-#include "esp_ot_sleepy_device_config.h"
-#include "driver/uart.h"
 #include "openthread/logging.h"
 
 #define deepSleepStart()                      \
