@@ -27,6 +27,7 @@ typedef struct NvsData
 {
   struct timeval events[NUM_EVENTS];
   uuid deviceId;
+  EventNum eventNum;
 }
 NvsData;
 

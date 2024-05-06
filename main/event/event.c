@@ -12,3 +12,12 @@ void initEventsArray(struct timeval *events,
   qsort(events, NUM_EVENTS, sizeof(struct timeval), compareTimevals);
   return;
 }
+
+/**
+ * Creates the event number which starts at the first event
+ * in the events array, and then write the events number to NVS.
+*/
+EventNum initEventNum() {
+  EventNum eventNum = 0;
+  return eventNum;
+}
