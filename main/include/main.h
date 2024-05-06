@@ -21,6 +21,8 @@
 
 #define JUST_POWERED_ON !isDeepSleepWakeup()
 
+typedef uint8_t EventNum;
+
 typedef struct NvsData
 {
   struct timeval events[NUM_EVENTS];
@@ -32,8 +34,7 @@ void onPowerOn(struct timeval *events, uuid *deviceId);
 void wakeupInit(struct timeval *events, uuid *deviceId);
 void onWakeup(struct timeval *events, uuid *deviceId);
 
-void sendEventPacket(otSockAddr *socket, uuid deviceId);
-
 void initEventsArray(struct timeval *events,
                      struct timeval start,
                      struct timeval end);
+void sendEventPacket(otSockAddr *socket, uuid deviceId);
