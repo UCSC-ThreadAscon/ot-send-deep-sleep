@@ -5,7 +5,8 @@ void onPowerOn(struct timeval *events, uuid *deviceId)
   nvs_handle_t handle;
   openReadWrite(NVS_NAMESPACE, &handle);
 
-  initEventsArray(events, getCurrentTimeval(), getFutureTimeval(EXP_TIME_SECONDS));
+  initEventsArray(events, getCurrentTimeval(),
+                  getFutureTimeval(EXP_TIME_SECONDS_TEST));
   nvsWriteArray(&handle, NVS_EVENTS_ARRAY, events, EVENTS_ARRAY_SIZE);
 
   generateUUID(deviceId);

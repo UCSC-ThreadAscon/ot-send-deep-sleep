@@ -1,7 +1,5 @@
 #include "main.h"
 
-#define BATTERY_WAIT_TIME_MS_TEST 5000
-
 /**
  * ---- CURRENT TO-DO ----
  * Send one event packet for each evnt in the "events" timeval array.
