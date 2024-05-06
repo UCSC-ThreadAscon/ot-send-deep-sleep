@@ -59,7 +59,7 @@ inline void addPayload(otMessage *aRequest,
 static inline void send(otMessage *aRequest, otMessageInfo *aMessageInfo)
 {
   otError error = otCoapSendRequest(OT_INSTANCE, aRequest, aMessageInfo,
-                                    handleResponse, NULL);
+                                    responeCallback, NULL);
   HandleMessageError("send request", aRequest, error);
   return;
 }

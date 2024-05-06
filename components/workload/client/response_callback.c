@@ -6,10 +6,10 @@
 */
 #include "workload.h"
 
-void handleResponse(void *aContext,
-                    otMessage *aMessage,
-                    const otMessageInfo *aMessageInfo,
-                    otError aResult)
+void responeCallback(void *aContext,
+                     otMessage *aMessage,
+                     const otMessageInfo *aMessageInfo,
+                     otError aResult)
 {
   if (aResult != OT_ERROR_NONE) {
     otLogWarnPlat("Response error: %s", otThreadErrorToString(aResult));

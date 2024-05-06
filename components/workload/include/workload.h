@@ -26,7 +26,7 @@ void sendRequest(type type, otSockAddr *socket);
 void periodicSender(otSockAddr *socket);
 
 /* ---- CoAP Response Handler ---- */
-void handleResponse(void *aContext,
+void responeCallback(void *aContext,
                     otMessage *aMessage,
                     const otMessageInfo *aMessageInfo,
                     otError aResult);
