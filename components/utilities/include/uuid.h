@@ -1,5 +1,7 @@
 #pragma once
 
+#include "hexdump.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>

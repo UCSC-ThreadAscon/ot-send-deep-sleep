@@ -11,6 +11,7 @@
 void app_main(void)
 {
   initAppMain();
+  checkConnection(esp_openthread_get_instance());
 
   struct timeval events[NUM_EVENTS];
   uuid deviceId;
@@ -24,7 +25,6 @@ void app_main(void)
     onDeepSleepWakeup(events);
   }
 
-  checkConnection(esp_openthread_get_instance());
   initDeepSleepTimerMs(BATTERY_WAIT_TIME_MS_TEST);
   deepSleepStart();
   return;

@@ -19,6 +19,7 @@ void printHexDump(otLogHexDumpInfo *aInfo) {
 
 void hexDump(void *data, uint16_t dataLength, const char* title) {
   otLogHexDumpInfo hexDump;
+  memset(&hexDump, 0, sizeof(otLogHexDumpInfo));
 
   hexDump.mDataBytes = (uint8_t *) data;
   hexDump.mDataLength = dataLength;
