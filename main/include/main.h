@@ -31,7 +31,9 @@ typedef struct NvsData
 }
 NvsData;
 
-void onPowerOn(struct timeval *events, uuid *deviceId);
+void onPowerOn(struct timeval *events,
+               uuid *deviceId,
+               EventsIndex *index);
 void wakeupInit(struct timeval *events, uuid *deviceId);
 void onWakeup(struct timeval *events, uuid *deviceId);
 

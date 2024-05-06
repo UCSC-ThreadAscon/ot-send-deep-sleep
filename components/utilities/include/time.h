@@ -21,7 +21,7 @@
 #define MS_TO_MINUTES(ms) MS_TO_SECONDS(ms) / 60
 #define US_TO_MINUTES(us) MS_TO_MINUTES(US_TO_MS(us))
 
-int64_t timevalToMicro(struct timeval time);
+int64_t toMicro(struct timeval time);
 struct timeval getCurrentTimeval();
 struct timeval getFutureTimeval(int64_t seconds);
 uint64_t timeDiffMs(struct timeval tv1, struct timeval tv2);

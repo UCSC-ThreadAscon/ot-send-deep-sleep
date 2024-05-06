@@ -1,6 +1,8 @@
 #include "main.h"
 
-void onPowerOn(struct timeval *events, uuid *deviceId)
+void onPowerOn(struct timeval *events,
+               uuid *deviceId,
+               EventsIndex *indexPtr)
 {
   nvs_handle_t handle;
   openReadWrite(NVS_NAMESPACE, &handle);
@@ -12,9 +14,12 @@ void onPowerOn(struct timeval *events, uuid *deviceId)
   generateUUID(deviceId);
   nvsWriteArray(handle, NVS_UUID, deviceId, UUID_SIZE_BYTES);
 
+  *indexPtr = initEventsIndex(handle);
+
 #if NVS_DEBUG
   printEventsArray(events, NUM_EVENTS);
   printUUID(deviceId);
+  printEventsIndex(*indexPtr);
 #endif
 
   nvs_close(handle);

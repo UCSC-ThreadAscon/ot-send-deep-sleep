@@ -2,7 +2,7 @@
 
 void printEventMinutes(int eventNum, struct timeval time)
 {
-  int64_t timeMicro = timevalToMicro(time);
+  int64_t timeMicro = toMicro(time);
   double timeMinutes = US_TO_MINUTES((double) timeMicro);
   otLogNotePlat("The %dth event will be in %.3f minutes.",
                 eventNum, timeMinutes);

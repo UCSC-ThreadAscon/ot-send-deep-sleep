@@ -21,7 +21,9 @@ void app_main(void)
 
   if (JUST_POWERED_ON)
   {
-    onPowerOn(nvsData.events, &(nvsData.deviceId));
+    onPowerOn(nvsData.events,
+              &(nvsData.deviceId),
+              &(nvsData.eventsIndex));
   }
   else
   {
