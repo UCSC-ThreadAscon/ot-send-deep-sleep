@@ -1,13 +1,14 @@
 #pragma once
 
-#include "main.h"
 #include "payload.h"
 
-#include <stdbool.h>
+EventPayload createEventPayload(uuid deviceId) {
+  EventPayload newEvent;
 
-typedef struct EventPayload
-{
-  uuid deviceId;
-  bool eventOccured;
+  EmptyMemory(&newEvent, sizeof(EventPayload));
+
+  newEvent.deviceId = deviceId;
+  newEvent.eventOccured = true;
+
+  return newEvent;
 }
-EventPayload;
