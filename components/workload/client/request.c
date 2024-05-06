@@ -5,3 +5,19 @@
  * https://github.com/UCSC-ThreadAscon/openthread/tree/main/src/cli
 */
 #include "workload.h"
+
+otSockAddr createSocket(const char *recvAddrString)
+{
+  otSockAddr newSocket;
+  otIp6Address recvAddr;
+
+  EmptyMemory(&newSocket, sizeof(otSockAddr));
+  EmptyMemory(&recvAddr, sizeof(otIp6Address));
+
+  otIp6AddressFromString(recvAddrString, &recvAddr);
+
+  newSocket.mAddress = recvAddr;
+  newSocket.mPort = COAP_SOCK_PORT;
+
+  return newSocket;
+}
