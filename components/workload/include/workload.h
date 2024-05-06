@@ -20,6 +20,7 @@ void printMeshLocalEid(otInstance *aInstance);
 uint16_t getPayloadLength(const otMessage *aMessage);
 void getPayload(const otMessage *aMessage, void* buffer);
 otSockAddr createSocket(const char *recvAddrString);
+void coapStart(void);
 
 /* ---- CoAP Client API ---- */
 void request(otSockAddr *socket, void *payload, size_t payloadSize);
