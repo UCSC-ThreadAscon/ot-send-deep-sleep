@@ -18,6 +18,7 @@ void initEventsArray(struct timeval *events,
  * in the events array, and then write this event index to NVS.
 */
 EventsIndex initEventsIndex(nvs_handle_t handle) {
-  EventsIndex eventsIndex = 0;
-  return eventsIndex;
+  EventsIndex index = 0;
+  nvsWriteByteUInt(handle, NVS_EVENTS_INDEX, index);
+  return index;
 }

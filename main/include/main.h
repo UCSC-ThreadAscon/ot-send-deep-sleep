@@ -11,15 +11,15 @@
 #include "uuid.h"
 #include "flags.h"
 
-#define NVS_NAMESPACE "sed_nvs"
+#define JUST_POWERED_ON !isDeepSleepWakeup()
 
 #define NUM_EVENTS NUM_EVENTS_FRONT_DOOR
 #define EVENTS_ARRAY_SIZE NUM_EVENTS * sizeof(struct timeval)
+
+#define NVS_NAMESPACE "sed_nvs"
 #define NVS_EVENTS_ARRAY "events"
-
 #define NVS_UUID "uuid"
-
-#define JUST_POWERED_ON !isDeepSleepWakeup()
+#define NVS_EVENTS_INDEX "events_index"
 
 typedef uint8_t EventsIndex;
 
