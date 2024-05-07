@@ -23,7 +23,6 @@ void onPowerOn(nvs_handle_t handle, struct timeval *events,
   // printUUID(deviceId);
   // printEventsIndex(eventsIndex);
   // printPacketType(packetType);
-  // printBatteryWakeup(*batteryWakeup);
 #endif
 
   return;

@@ -7,10 +7,3 @@ void moveToNextBatteryWakeup(nvs_handle_t handle, struct timeval *batteryWakeup,
   nvsWriteBlob(handle, NVS_BATTERY_WAKEUP, batteryWakeup, sizeof(struct timeval));
   return;
 }
-
-void printBatteryWakeup(struct timeval batteryWakeup)
-{
-  int64_t micro = toMicro(batteryWakeup);
-  double minutes = US_TO_MINUTES((double) micro);
-  return;
-}

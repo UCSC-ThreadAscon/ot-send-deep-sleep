@@ -11,7 +11,6 @@ void wakeupInit(nvs_handle_t handle, struct timeval *events, uuid *deviceId,
 #if NVS_DEBUG
   printEventsArray(events, NUM_EVENTS);
   // printUUID(deviceId);
-  // printBatteryWakeup(*nextBatteryWakeup);
 #endif
 
   return;
