@@ -19,6 +19,7 @@ void onPowerOn(nvs_handle_t handle, struct timeval *events, uuid *deviceId)
   printEventsArray(events, NUM_EVENTS);
   printUUID(deviceId);
   printEventsIndex(eventsIndex);
+  printPacketType(packetType);
 #endif
 
   return;
