@@ -13,7 +13,7 @@ void initEventsArray(struct timeval *events,
   return;
 }
 
-void printEventsIndex(EventsIndex index)
+void printEventsIndex(uint8_t index)
 {
   otLogNotePlat("Currently at event %" PRIu8 ".", index);
   return;

@@ -12,9 +12,13 @@ void onPowerOn(struct timeval *events, uuid *deviceId)
   generateUUID(deviceId);
   nvsWriteArray(handle, NVS_UUID, deviceId, UUID_SIZE_BYTES);
 
+  uint8_t eventsIndex = 0;
+  nvsWriteByteUInt(handle, NVS_EVENTS_INDEX, eventsIndex);
+
 #if NVS_DEBUG
   printEventsArray(events, NUM_EVENTS);
   printUUID(deviceId);
+  printEventsIndex(eventsIndex);
 #endif
 
   nvs_close(handle);
