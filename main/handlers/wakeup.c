@@ -26,7 +26,6 @@ uint64_t getNextSleepTime(struct timeval *events, uint8_t eventsIndex)
 {
     struct timeval tvNow = getCurrentTimeval();
     struct timeval tvNextEvent = events[eventsIndex];
-    assert(toMicro(tvNow) < toMicro(tvNextEvent));
     return timeDiffMs(tvNow, tvNextEvent);
 }
 
