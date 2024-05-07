@@ -2,5 +2,6 @@
 
 #include "storage.h"
 
-void nextBatteryWakeup(nvs_handle_t handle, struct timeval *batteryWakeup);
+void moveToNextBatteryWakeup(nvs_handle_t handle, struct timeval *batteryWakeup,
+                             struct timeval tvNow);
 void printBatteryWakeup(struct timeval batteryWakeup);

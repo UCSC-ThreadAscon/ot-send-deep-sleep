@@ -56,11 +56,12 @@ void setEventSleepTime(nvs_handle_t handle,
 
 void setBatterySleepTime(nvs_handle_t handle,
                          uint64_t sleepTime,
-                         struct timeval *batteryWakeup)
+                         struct timeval *batteryWakeup,
+                         struct timeval tvNow)
 {
   setPacketType(handle, BatteryPacket);
   initDeepSleepTimerMs(sleepTime);
-  nextBatteryWakeup(handle, batteryWakeup);
+  moveToNextBatteryWakeup(handle, batteryWakeup, tvNow);
   return;
 }
 
@@ -68,7 +69,8 @@ void onWakeup(nvs_handle_t handle,
               struct timeval *events,
               uuid *deviceId,
               otSockAddr *socket,
-              struct timeval *batteryWakeup)
+              struct timeval *batteryWakeup,
+              struct timeval tvNow)
 {
   uint8_t eventsIndex = nvsReadByteUInt(handle, NVS_EVENTS_INDEX);
   PacketSendType packetType = nvsReadByteUInt(handle, NVS_PACKET_TYPE);
@@ -83,7 +85,6 @@ void onWakeup(nvs_handle_t handle,
     sendBatteryPacket(socket, *deviceId);
   }
 
-  struct timeval tvNow = getCurrentTimeval();
   uint64_t nextBatterySleepTime = getNextBatterySleepTime(*batteryWakeup, tvNow);
 
   if (!noMoreEventsToSend(eventsIndex))
@@ -95,12 +96,12 @@ void onWakeup(nvs_handle_t handle,
     }
     else
     {
-      setBatterySleepTime(handle, nextBatterySleepTime, batteryWakeup);
+      setBatterySleepTime(handle, nextBatterySleepTime, batteryWakeup, tvNow);
     }
   }
   else
   {
-    setBatterySleepTime(handle, nextBatterySleepTime, batteryWakeup);
+    setBatterySleepTime(handle, nextBatterySleepTime, batteryWakeup, tvNow);
   }
 
 #if SHOW_DEBUG_STATS

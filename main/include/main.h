@@ -33,7 +33,8 @@ typedef enum PacketSendType
 PacketSendType;
 
 void onPowerOn(nvs_handle_t handle, struct timeval *events,
-               uuid *deviceId, struct timeval *batteryWakeup);
+               uuid *deviceId, struct timeval *batteryWakeup,
+               struct timeval tvNow);
 void wakeupInit(nvs_handle_t handle, struct timeval *events, uuid *deviceId,
                 struct timeval *batteryWakeup);
 
@@ -41,7 +42,8 @@ void onWakeup(nvs_handle_t handle,
               struct timeval *events,
               uuid *deviceId,
               otSockAddr *socket,
-              struct timeval *batteryWakeup);
+              struct timeval *batteryWakeup,
+              struct timeval tvNow);
 
 bool noMoreEventsToSend(uint8_t eventsIndex);
 void eventPacketsStats(uint8_t eventsIndex);

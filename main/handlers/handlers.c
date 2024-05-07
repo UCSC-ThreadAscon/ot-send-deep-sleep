@@ -1,10 +1,10 @@
 #include "main.h"
 
 void onPowerOn(nvs_handle_t handle, struct timeval *events,
-               uuid *deviceId, struct timeval *batteryWakeup)
+               uuid *deviceId, struct timeval *batteryWakeup,
+               struct timeval tvNow)
 {
-  initEventsArray(events, getCurrentTimeval(),
-                  getFutureTimeval(EXP_TIME_SECONDS_TEST));
+  initEventsArray(events, tvNow, getFutureTimeval(EXP_TIME_SECONDS_TEST));
   nvsWriteBlob(handle, NVS_EVENTS_ARRAY, events, EVENTS_ARRAY_SIZE);
 
   generateUUID(deviceId);
@@ -16,7 +16,7 @@ void onPowerOn(nvs_handle_t handle, struct timeval *events,
   PacketSendType packetType = BatteryPacket;
   nvsWriteByteUInt(handle, NVS_PACKET_TYPE, packetType);
 
-  nextBatteryWakeup(handle, batteryWakeup);
+  moveToNextBatteryWakeup(handle, batteryWakeup, tvNow);
 
 #if NVS_DEBUG
   printEventsArray(events, NUM_EVENTS);

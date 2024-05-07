@@ -4,6 +4,7 @@ void app_main(void)
 {
   initAppMain();
   checkConnection(esp_openthread_get_instance());
+  struct timeval tvWakeup = getCurrentTimeval();
 
   struct timeval events[NUM_EVENTS];
   struct timeval batteryWakeup;
@@ -22,7 +23,7 @@ void app_main(void)
   if (JUST_POWERED_ON)
   {
     onPowerOn(handle, events, &deviceId,
-              &batteryWakeup);
+              &batteryWakeup, tvWakeup);
   }
   else
   {
@@ -31,7 +32,7 @@ void app_main(void)
   }
 
   onWakeup(handle, events, &deviceId, &socket,
-           &batteryWakeup);
+           &batteryWakeup, tvWakeup);
   nvs_close(handle);
   return;
 }
