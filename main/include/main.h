@@ -23,5 +23,9 @@
 #define NVS_EVENTS_INDEX "events_index"
 
 void onPowerOn(nvs_handle_t handle, struct timeval *events, uuid *deviceId);
-void onWakeup(nvs_handle_t handle, struct timeval *events, uuid *deviceId);
 void wakeupInit(nvs_handle_t handle, struct timeval *events, uuid *deviceId);
+
+void onWakeup(nvs_handle_t handle,
+              struct timeval *events,
+              uuid *deviceId,
+              otSockAddr *socket);

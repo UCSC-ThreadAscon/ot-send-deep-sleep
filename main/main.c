@@ -26,10 +26,7 @@ void app_main(void)
     wakeupInit(handle, events, &deviceId);
   }
 
-  onWakeup(handle, events, &deviceId);
+  onWakeup(handle, events, &deviceId, &socket);
   nvs_close(handle);
-
-  coapStart();
-  sendEventPacket(&socket, deviceId);
   return;
 }

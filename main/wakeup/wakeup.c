@@ -24,7 +24,10 @@ static inline void moveOnToNextEvent(nvs_handle_t handle,
   return;
 }
 
-void onWakeup(nvs_handle_t handle, struct timeval *events, uuid *deviceId)
+void onWakeup(nvs_handle_t handle,
+              struct timeval *events,
+              uuid *deviceId,
+              otSockAddr *socket)
 {
   uint8_t eventsIndex = nvsReadByteUInt(handle, NVS_EVENTS_INDEX);
 
@@ -36,6 +39,9 @@ void onWakeup(nvs_handle_t handle, struct timeval *events, uuid *deviceId)
 
     initDeepSleepTimerMs(nextEventSleepTime);
     moveOnToNextEvent(handle, eventsIndex);
+
+    coapStart();
+    sendEventPacket(socket, *deviceId);
   }
 #if NVS_DEBUG
   else
