@@ -32,13 +32,16 @@ typedef enum PacketSendType
 PacketSendType;
 
 void onPowerOn(nvs_handle_t handle, struct timeval *events,
-               uuid *deviceId, struct timeval *nextBatteryWakeup);
-void wakeupInit(nvs_handle_t handle, struct timeval *events, uuid *deviceId);
+               uuid *deviceId, struct timeval *batteryWakeup);
+void wakeupInit(nvs_handle_t handle, struct timeval *events, uuid *deviceId,
+                struct timeval *batteryWakeup);
 
 void onWakeup(nvs_handle_t handle,
               struct timeval *events,
               uuid *deviceId,
               otSockAddr *socket);
+
+void nextBatteryWakeup(nvs_handle_t handle, struct timeval *batteryWakeup);
 
 bool noMoreEventsToSend(uint8_t eventsIndex);
 void eventPacketsStats(uint8_t eventsIndex);

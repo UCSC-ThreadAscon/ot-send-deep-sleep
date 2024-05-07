@@ -1,7 +1,7 @@
 #include "main.h"
 
 void onPowerOn(nvs_handle_t handle, struct timeval *events,
-               uuid *deviceId, struct timeval *nextBatteryWakeup)
+               uuid *deviceId, struct timeval *batteryWakeup)
 {
   initEventsArray(events, getCurrentTimeval(),
                   getFutureTimeval(EXP_TIME_SECONDS_TEST));
@@ -16,15 +16,14 @@ void onPowerOn(nvs_handle_t handle, struct timeval *events,
   PacketSendType packetType = BatteryPacket;
   nvsWriteByteUInt(handle, NVS_PACKET_TYPE, packetType);
 
-  nextBatteryWakeup->tv_sec = getCurrentTimeval().tv_sec + BATTERY_WAIT_TIME_SEC;
-  nvsWriteBlob(handle, NVS_BATTERY_WAKEUP, nextBatteryWakeup, sizeof(struct timeval));
+  nextBatteryWakeup(handle, batteryWakeup);
 
 #if NVS_DEBUG
   printEventsArray(events, NUM_EVENTS);
   printUUID(deviceId);
   printEventsIndex(eventsIndex);
   printPacketType(packetType);
-  printBatteryWakeup(*nextBatteryWakeup);
+  printBatteryWakeup(*batteryWakeup);
 #endif
 
   return;

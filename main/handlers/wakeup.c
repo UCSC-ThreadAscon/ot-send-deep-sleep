@@ -1,14 +1,17 @@
 #include "main.h"
 #include "assert.h"
 
-void wakeupInit(nvs_handle_t handle, struct timeval *events, uuid *deviceId)
+void wakeupInit(nvs_handle_t handle, struct timeval *events, uuid *deviceId,
+                struct timeval *nextBatteryWakeup)
 {
   nvsReadBlob(handle, NVS_EVENTS_ARRAY, events, EVENTS_ARRAY_SIZE);
   nvsReadBlob(handle, NVS_UUID, deviceId, UUID_SIZE_BYTES);
+  nvsReadBlob(handle, NVS_BATTERY_WAKEUP, nextBatteryWakeup, sizeof(struct timeval));
 
 #if NVS_DEBUG
   printEventsArray(events, NUM_EVENTS);
   printUUID(deviceId);
+  printBatteryWakeup(*nextBatteryWakeup);
 #endif
 
   return;

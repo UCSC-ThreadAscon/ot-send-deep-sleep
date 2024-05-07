@@ -30,11 +30,3 @@ void printPacketType(PacketSendType packetType)
   }
   return;
 }
-
-void printBatteryWakeup(struct timeval wakeupTime)
-{
-  int64_t micro = toMicro(wakeupTime);
-  double minutes = US_TO_MINUTES((double) micro);
-  otLogNotePlat("The next battery wakeup will be in %.3f minutes.", minutes);
-  return;
-}
