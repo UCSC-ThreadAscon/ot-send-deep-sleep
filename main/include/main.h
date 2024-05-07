@@ -24,7 +24,6 @@
 
 typedef enum PacketSendType
 {
-  NoPacket,
   EventPacket,
   BatteryPacket
 }
