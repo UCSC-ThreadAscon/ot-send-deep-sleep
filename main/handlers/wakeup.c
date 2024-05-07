@@ -86,6 +86,7 @@ void onWakeup(nvs_handle_t handle,
   }
 
   uint64_t nextBatterySleepTime = getNextBatterySleepTime(*batteryWakeup, tvNow);
+  otLogNotePlat("The next battery sleep time is %" PRIu64 ".", nextBatterySleepTime);
 
   if (!noMoreEventsToSend(eventsIndex))
   {
