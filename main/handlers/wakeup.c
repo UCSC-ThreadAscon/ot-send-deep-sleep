@@ -41,16 +41,16 @@ void onWakeup(nvs_handle_t handle,
     uint64_t sleepTime = getNextSleepTime(events, eventsIndex);
     initDeepSleepTimerMs(sleepTime);
     incrementEventsIndex(handle, eventsIndex);
+  }
 
-    if (isDeepSleepWakeup())
-    {
-      coapStart();
-      sendEventPacket(socket, *deviceId);
-    }
-    else
-    {
-      deepSleepStart();
-    }
+  if (isDeepSleepWakeup())
+  {
+    coapStart();
+    sendEventPacket(socket, *deviceId);
+  }
+  else // the device has just been powered on.
+  {
+    deepSleepStart();
   }
 
 #if EVENT_DEBUG
