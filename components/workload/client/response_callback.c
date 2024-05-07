@@ -12,9 +12,12 @@ void responseCallback(void *aContext,
                      const otMessageInfo *aMessageInfo,
                      otError aResult)
 {
-  if (aResult != OT_ERROR_NONE) {
+  if (aResult != OT_ERROR_NONE)
+  {
     otLogWarnPlat("Response error: %s", otThreadErrorToString(aResult));
-  } else {
+  }
+  else 
+  {
     uint16_t payloadLen = getPayloadLength(aMessage);
     char payload[payloadLen];
     EmptyMemory(payload, payloadLen);
