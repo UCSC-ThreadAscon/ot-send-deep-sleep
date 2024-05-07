@@ -1,10 +1,7 @@
 #include "main.h"
 
-void onPowerOn(struct timeval *events, uuid *deviceId)
+void onPowerOn(nvs_handle_t handle, struct timeval *events, uuid *deviceId)
 {
-  nvs_handle_t handle;
-  openReadWrite(NVS_NAMESPACE, &handle);
-
   initEventsArray(events, getCurrentTimeval(),
                   getFutureTimeval(EXP_TIME_SECONDS_TEST));
   nvsWriteArray(handle, NVS_EVENTS_ARRAY, events, EVENTS_ARRAY_SIZE);
@@ -21,7 +18,6 @@ void onPowerOn(struct timeval *events, uuid *deviceId)
   printEventsIndex(eventsIndex);
 #endif
 
-  nvs_close(handle);
   return;
 }
 

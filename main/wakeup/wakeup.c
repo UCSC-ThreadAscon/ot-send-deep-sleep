@@ -1,8 +1,6 @@
 #include "main.h"
 
-void wakeupInit(nvs_handle_t handle,
-                struct timeval *events,
-                uuid *deviceId)
+void wakeupInit(nvs_handle_t handle, struct timeval *events, uuid *deviceId)
 {
   nvsReadArray(handle, NVS_EVENTS_ARRAY, events, EVENTS_ARRAY_SIZE);
   nvsReadArray(handle, NVS_UUID, deviceId, UUID_SIZE_BYTES);
@@ -15,12 +13,8 @@ void wakeupInit(nvs_handle_t handle,
   return;
 }
 
-void onWakeup(struct timeval *events, uuid *deviceId)
+void onWakeup(nvs_handle_t handle, struct timeval *events, uuid *deviceId)
 {
-  nvs_handle_t handle;
-  openReadWrite(NVS_NAMESPACE, &handle);
-  wakeupInit(handle, events, deviceId);
-
   uint8_t eventsIndex = nvsReadByteUInt(handle, NVS_EVENTS_INDEX);
   if (eventsIndex < NUM_EVENTS)
   {
@@ -32,6 +26,5 @@ void onWakeup(struct timeval *events, uuid *deviceId)
   printEventsIndex(eventsIndex);
 #endif
 
-  nvs_close(handle);
   return;
 }

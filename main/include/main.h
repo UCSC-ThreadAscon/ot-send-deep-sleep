@@ -21,8 +21,9 @@
 #define NVS_UUID "uuid"
 #define NVS_EVENTS_INDEX "events_index"
 
-void onPowerOn(struct timeval *events, uuid *deviceId);
-void onWakeup(struct timeval *events, uuid *deviceId);
+void onPowerOn(nvs_handle_t handle, struct timeval *events, uuid *deviceId);
+void onWakeup(nvs_handle_t handle, struct timeval *events, uuid *deviceId);
+void wakeupInit(nvs_handle_t handle, struct timeval *events, uuid *deviceId);
 
 void initEventsArray(struct timeval *events,
                      struct timeval start,

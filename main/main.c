@@ -16,21 +16,29 @@ void app_main(void)
   struct timeval events[NUM_EVENTS];
   uuid deviceId;
   otSockAddr socket;
+  nvs_handle_t handle;
 
   EmptyMemory(events, sizeof(struct timeval));
   EmptyMemory(&deviceId, sizeof(uuid));
   EmptyMemory(&socket, sizeof(otSockAddr));
+  EmptyMemory(&handle, sizeof(nvs_handle_t));
+
+  openReadWrite(NVS_NAMESPACE, &handle);
 
   if (JUST_POWERED_ON)
   {
-    onPowerOn(events, &deviceId);
+    onPowerOn(handle, events, &deviceId);
   }
   else
   {
-    onWakeup(events, &deviceId);
+    wakeupInit(handle, events, &deviceId);
   }
 
+  onWakeup(handle, events, &deviceId);
+
   initDeepSleepTimerMs(BATTERY_WAIT_TIME_MS_TEST);
+
+  nvs_close(handle);
 
   coapStart();
   sendEventPacket(&socket, deviceId);
