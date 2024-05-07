@@ -35,7 +35,6 @@ void sendEventPacket(otSockAddr *socket, uuid deviceId)
 
 void sendBatteryPacket(otSockAddr *socket, uuid deviceId)
 {
-  otLogNotePlat("Sending a battery lifetime packet.");
   deepSleepStart();
   return;
 }

@@ -71,7 +71,7 @@ void onWakeup(nvs_handle_t handle,
 
   if (JUST_POWERED_ON)
   {
-    deepSleepStart();
+    sendBatteryPacket(socket, *deviceId);
   }
 
 #if SHOW_DEBUG_STATS
