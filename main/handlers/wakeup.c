@@ -48,7 +48,7 @@ void onWakeup(nvs_handle_t handle,
     coapStart();
     sendEventPacket(socket, *deviceId);
   }
-  else // the device has just been powered on.
+  else
   {
     deepSleepStart();
   }
