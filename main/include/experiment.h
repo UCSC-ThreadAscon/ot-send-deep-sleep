@@ -24,7 +24,8 @@
 #if (CONFIG_SCENARIO == 1)
 #define NUM_EVENTS NUM_EVENTS_FRONT_DOOR
 #elif (CONFIG_SCENARIO == 2)
-#define NUM_EVENTS NUM_EVENTS_AIR_MONITOR
+// #define NUM_EVENTS NUM_EVENTS_AIR_MONITOR
+#define NUM_EVENTS 2
 #else
 #define NUM_EVENTS NUM_EVENTS_SECOND_STORY
 #endif
@@ -41,4 +42,4 @@
  * The experimental runtime for testing purposes will be
  * 10 minutes, rather than 183 minutes.
 */
-#define EXP_TIME_SECONDS_TEST 10 * 60
+#define EXP_TIME_SECONDS_TEST 5 * 60
