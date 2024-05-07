@@ -73,19 +73,15 @@ void onWakeup(nvs_handle_t handle,
   uint8_t eventsIndex = nvsReadByteUInt(handle, NVS_EVENTS_INDEX);
   PacketSendType packetType = nvsReadByteUInt(handle, NVS_PACKET_TYPE);
 
+  coapStart();
   if (packetType == EventPacket)
   {
-    coapStart();
     sendEventPacket(socket, *deviceId);
   }
-
-  /**
-   * ---- TO-DO ----
-   * 1. Determine the next event wakeup time.
-   * 2. Compare that to the next battery wakeup time.
-   * 3. Determine which is less. You will send that one next.
-   *    Then sleep for the lesser amount of time.
-  */
+  else
+  {
+    sendBatteryPacket(socket, *deviceId);
+  }
 
   struct timeval tvNow = getCurrentTimeval();
   uint64_t nextBatterySleepTime = getNextBatterySleepTime(*batteryWakeup, tvNow);
@@ -105,11 +101,6 @@ void onWakeup(nvs_handle_t handle,
   else
   {
     setBatterySleepTime(handle, nextBatterySleepTime, batteryWakeup);
-  }
-
-  if (JUST_POWERED_ON)
-  {
-    sendBatteryPacket(socket, *deviceId);
   }
 
 #if SHOW_DEBUG_STATS
