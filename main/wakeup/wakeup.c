@@ -22,6 +22,11 @@ void onWakeup(struct timeval *events, uuid *deviceId)
   wakeupInit(handle, events, deviceId);
 
   uint8_t eventsIndex = nvsReadByteUInt(handle, NVS_EVENTS_INDEX);
+  if (eventsIndex < NUM_EVENTS)
+  {
+    eventsIndex += 1;
+    nvsWriteByteUInt(handle, NVS_EVENTS_INDEX, eventsIndex);
+  }
 
 #if NVS_DEBUG
   printEventsIndex(eventsIndex);
