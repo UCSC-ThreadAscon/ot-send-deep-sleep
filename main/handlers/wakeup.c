@@ -35,6 +35,7 @@ void onWakeup(nvs_handle_t handle,
               otSockAddr *socket)
 {
   uint8_t eventsIndex = nvsReadByteUInt(handle, NVS_EVENTS_INDEX);
+  PacketSendType packetType = nvsReadByteUInt(handle, NVS_PACKET_TYPE);
 
   if (!noMoreEventsToSend(eventsIndex))
   {
@@ -55,6 +56,7 @@ void onWakeup(nvs_handle_t handle,
 
 #if SHOW_DEBUG_STATS
   eventPacketsStats(eventsIndex);
+  printPacketType(packetType);
 #endif
 
   return;
