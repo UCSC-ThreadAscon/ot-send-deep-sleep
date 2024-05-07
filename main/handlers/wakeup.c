@@ -73,20 +73,9 @@ void onWakeup(nvs_handle_t handle,
               struct timeval tvNow)
 {
   uint8_t eventsIndex = nvsReadByteUInt(handle, NVS_EVENTS_INDEX);
-  PacketSendType packetType = nvsReadByteUInt(handle, NVS_PACKET_TYPE);
-
-  coapStart();
-  if (packetType == EventPacket)
-  {
-    sendEventPacket(socket, *deviceId);
-  }
-  else
-  {
-    sendBatteryPacket(socket, *deviceId);
-  }
+  PacketSendType currentPacketType = nvsReadByteUInt(handle, NVS_PACKET_TYPE);
 
   uint64_t nextBatterySleepTime = getNextBatterySleepTime(*batteryWakeup, tvNow);
-  otLogNotePlat("The next battery sleep time is %" PRIu64 ".", nextBatterySleepTime);
 
   if (!noMoreEventsToSend(eventsIndex))
   {
@@ -105,9 +94,19 @@ void onWakeup(nvs_handle_t handle,
     setBatterySleepTime(handle, nextBatterySleepTime, batteryWakeup, tvNow);
   }
 
+  coapStart();
+  if (currentPacketType == EventPacket)
+  {
+    sendEventPacket(socket, *deviceId);
+  }
+  else
+  {
+    sendBatteryPacket(socket, *deviceId);
+  }
+
 #if SHOW_DEBUG_STATS
   eventPacketsStats(eventsIndex);
-  printPacketType(packetType);
+  printPacketType(currentPacketType);
 #endif
 
   return;
