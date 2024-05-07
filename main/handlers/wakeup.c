@@ -72,10 +72,10 @@ void onWakeup(nvs_handle_t handle,
               struct timeval *batteryWakeup,
               struct timeval tvNow)
 {
-  uint8_t eventsIndex = nvsReadByteUInt(handle, NVS_EVENTS_INDEX);
   PacketSendType currentPacketType = nvsReadByteUInt(handle, NVS_PACKET_TYPE);
 
   uint64_t nextBatterySleepTime = getNextBatterySleepTime(*batteryWakeup, tvNow);
+  uint8_t eventsIndex = nvsReadByteUInt(handle, NVS_EVENTS_INDEX);
 
   if (!noMoreEventsToSend(eventsIndex))
   {
@@ -105,7 +105,6 @@ void onWakeup(nvs_handle_t handle,
   }
 
 #if SHOW_DEBUG_STATS
-  eventPacketsStats(eventsIndex);
   printPacketType(currentPacketType);
 #endif
 

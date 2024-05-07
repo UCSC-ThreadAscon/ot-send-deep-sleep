@@ -46,5 +46,4 @@ void onWakeup(nvs_handle_t handle,
               struct timeval tvNow);
 
 bool noMoreEventsToSend(uint8_t eventsIndex);
-void eventPacketsStats(uint8_t eventsIndex);
 void printPacketType(PacketSendType packetType);
