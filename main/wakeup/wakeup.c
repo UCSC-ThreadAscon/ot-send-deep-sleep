@@ -16,7 +16,7 @@ void wakeupInit(nvs_handle_t handle, struct timeval *events, uuid *deviceId)
 static inline void moveOnToNextEvent(nvs_handle_t handle,
                                      uint8_t currentEventsIndex)
 {
-  if (isDeepSleepWakeup() && (currentEventsIndex < NUM_EVENTS))
+  if (isDeepSleepWakeup())
   {
     currentEventsIndex += 1;
     nvsWriteByteUInt(handle, NVS_EVENTS_INDEX, currentEventsIndex);
@@ -28,12 +28,20 @@ void onWakeup(nvs_handle_t handle, struct timeval *events, uuid *deviceId)
 {
   uint8_t eventsIndex = nvsReadByteUInt(handle, NVS_EVENTS_INDEX);
 
-  /** TO-DO: Figure out how long to sleep for. */
-  initDeepSleepTimerMs(BATTERY_WAIT_TIME_MS_TEST);
+  if (eventsIndex < NUM_EVENTS)
+  {
+    struct timeval tvNow = getCurrentTimeval();
+    struct timeval tvCurrentEvent = events[eventsIndex];
+    uint64_t nextEventSleepTime = timeDiffMs(tvNow, tvCurrentEvent);
 
-  moveOnToNextEvent(handle, eventsIndex);
-
+    initDeepSleepTimerMs(nextEventSleepTime);
+    moveOnToNextEvent(handle, eventsIndex);
+  }
 #if NVS_DEBUG
+  else
+  {
+    otLogNotePlat("Sent all Event Packets.");
+  }
   printEventsIndex(eventsIndex);
 #endif
   return;

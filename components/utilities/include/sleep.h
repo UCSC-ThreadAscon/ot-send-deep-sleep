@@ -14,9 +14,6 @@
 #include "esp_timer.h"
 #include "openthread/logging.h"
 
-#define deepSleepStart()                      \
-  otLogNotePlat("Going to deep sleep.");      \
-  esp_deep_sleep_start();                     \
-
 void initDeepSleepTimerMs(int wakeupTimeMs);
 bool isDeepSleepWakeup(void);
+void deepSleepStart(void);
