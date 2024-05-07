@@ -21,6 +21,7 @@
 #define NVS_EVENTS_ARRAY "events"
 #define NVS_UUID "uuid"
 #define NVS_EVENTS_INDEX "events_index"
+#define NVS_PACKET_TYPE "packet_type"
 
 typedef enum PacketSendType
 {
@@ -39,3 +40,4 @@ void onWakeup(nvs_handle_t handle,
 
 bool noMoreEventsToSend(uint8_t eventsIndex);
 void eventPacketsStats(uint8_t eventsIndex);
+void printPacketType(PacketSendType packetType);

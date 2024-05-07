@@ -12,6 +12,9 @@ void onPowerOn(nvs_handle_t handle, struct timeval *events, uuid *deviceId)
   uint8_t eventsIndex = 0;
   nvsWriteByteUInt(handle, NVS_EVENTS_INDEX, eventsIndex);
 
+  PacketSendType packetType = BatteryPacket;
+  nvsWriteByteUInt(handle, NVS_PACKET_TYPE, packetType);
+
 #if NVS_DEBUG
   printEventsArray(events, NUM_EVENTS);
   printUUID(deviceId);

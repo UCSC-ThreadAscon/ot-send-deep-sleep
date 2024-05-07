@@ -7,7 +7,6 @@ void app_main(void)
 
   struct timeval events[NUM_EVENTS];
   uuid deviceId;
-  PacketSendType packetType;
   otSockAddr socket;
   nvs_handle_t handle;
 
@@ -15,7 +14,6 @@ void app_main(void)
   EmptyMemory(&deviceId, sizeof(uuid));
   EmptyMemory(&socket, sizeof(otSockAddr));
   EmptyMemory(&handle, sizeof(nvs_handle_t));
-  EmptyMemory(packetType, sizeof(PacketSendType));
 
   openReadWrite(NVS_NAMESPACE, &handle);
 
