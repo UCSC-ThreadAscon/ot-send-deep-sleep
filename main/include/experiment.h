@@ -4,7 +4,8 @@
 /**
  * Battery lifetime packets will be sent every 30 SECONDS.
 */
-#define BATTERY_WAIT_TIME_MS 1000 * 30
+#define BATTERY_WAIT_TIME_SEC 30
+#define BATTERY_WAIT_TIME_MS 1000 * BATTERY_WAIT_TIME_SEC
 
 /*
  * The duration of each experimential trial will always be:

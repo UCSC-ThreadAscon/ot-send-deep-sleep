@@ -22,6 +22,7 @@
 #define NVS_UUID "uuid"
 #define NVS_EVENTS_INDEX "events_index"
 #define NVS_PACKET_TYPE "packet_type"
+#define NVS_BATTERY_WAKEUP "battery_wakeup"
 
 typedef enum PacketSendType
 {
@@ -30,7 +31,8 @@ typedef enum PacketSendType
 }
 PacketSendType;
 
-void onPowerOn(nvs_handle_t handle, struct timeval *events, uuid *deviceId);
+void onPowerOn(nvs_handle_t handle, struct timeval *events,
+               uuid *deviceId, struct timeval *nextBatteryWakeup);
 void wakeupInit(nvs_handle_t handle, struct timeval *events, uuid *deviceId);
 
 void onWakeup(nvs_handle_t handle,
@@ -41,3 +43,4 @@ void onWakeup(nvs_handle_t handle,
 bool noMoreEventsToSend(uint8_t eventsIndex);
 void eventPacketsStats(uint8_t eventsIndex);
 void printPacketType(PacketSendType packetType);
+void printBatteryWakeup(struct timeval wakeupTime);

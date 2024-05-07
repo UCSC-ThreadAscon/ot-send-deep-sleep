@@ -6,6 +6,7 @@ void app_main(void)
   checkConnection(esp_openthread_get_instance());
 
   struct timeval events[NUM_EVENTS];
+  struct timeval nextBatteryWakeup;
   uuid deviceId;
   otSockAddr socket;
   nvs_handle_t handle;
@@ -14,12 +15,14 @@ void app_main(void)
   EmptyMemory(&deviceId, sizeof(uuid));
   EmptyMemory(&socket, sizeof(otSockAddr));
   EmptyMemory(&handle, sizeof(nvs_handle_t));
+  EmptyMemory(&nextBatteryWakeup, sizeof(struct timeval));
 
   openReadWrite(NVS_NAMESPACE, &handle);
 
   if (JUST_POWERED_ON)
   {
-    onPowerOn(handle, events, &deviceId);
+    onPowerOn(handle, events, &deviceId,
+              &nextBatteryWakeup);
   }
   else
   {

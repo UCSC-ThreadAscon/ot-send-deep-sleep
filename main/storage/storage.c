@@ -11,22 +11,22 @@ void openReadWrite(const char *namespace, nvs_handle_t *handle) {
   return;
 }
 
-void nvsWriteArray(nvs_handle_t handle,
+void nvsWriteBlob(nvs_handle_t handle,
                    const char* key,
-                   void *array,
-                   size_t arraySize)
+                   void *blob,
+                   size_t blobSize)
 {
-  ESP_ERROR_CHECK(nvs_set_blob(handle, key, array, arraySize));
+  ESP_ERROR_CHECK(nvs_set_blob(handle, key, blob, blobSize));
   ESP_ERROR_CHECK(nvs_commit(handle));
   return;
 }
 
-void nvsReadArray(nvs_handle_t handle,
+void nvsReadBlob(nvs_handle_t handle,
                   const char* key,
-                  void *array,
-                  size_t arraySize)
+                  void *blob,
+                  size_t blobSize)
 {
-  ESP_ERROR_CHECK(nvs_get_blob(handle, key, array, &arraySize));
+  ESP_ERROR_CHECK(nvs_get_blob(handle, key, blob, &blobSize));
   return;
 }
 
