@@ -15,7 +15,7 @@ void wakeupInit(nvs_handle_t handle, struct timeval *events, uuid *deviceId)
 }
 
 static inline void incrementEventsIndex(nvs_handle_t handle,
-                                     uint8_t currentEventsIndex)
+                                        uint8_t currentEventsIndex)
 {
   currentEventsIndex += 1;
   nvsWriteByteUInt(handle, NVS_EVENTS_INDEX, currentEventsIndex);
