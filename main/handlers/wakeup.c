@@ -53,16 +53,15 @@ void onWakeup(nvs_handle_t handle,
     }
   }
 
-#if NVS_DEBUG
+#if EVENT_DEBUG
   if (!noMoreEventsToSend(eventsIndex))
   {
-    otLogNotePlat("Sent %" PRIu8 " Event Packets so far.", eventsIndex);
+    otLogNotePlat("Sent %" PRIu8 " Event Packet(s) so far.", eventsIndex);
   }
   else
   {
     otLogNotePlat("Sent all Event Packets.");
   }
-  printEventsIndex(eventsIndex);
 #endif
 
   return;
