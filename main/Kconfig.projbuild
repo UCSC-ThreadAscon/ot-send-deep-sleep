@@ -34,7 +34,7 @@ menu "OpenThread Deep Sleep Sender"
           Sets the IPv6 address of the server to send CoAP packets to.
 
     config SCENARIO
-      int 'The specific use case of the device with respect to scenario 2.'
+      int 'The specific role that the device will play during the experiment.'
       default 1
       range 1 3
       help
