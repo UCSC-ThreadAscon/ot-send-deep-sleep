@@ -79,6 +79,14 @@ void onWakeup(nvs_handle_t handle,
   if (!noMoreEventsToSend(eventsIndex))
   {
     uint64_t nextEventSleepTime = getNextEventSleepTime(events, eventsIndex, tvNow);
+
+#if COMPARISON_DEBUG
+    otLogNotePlat("Next Battery Lifetime packet will be sent in %" PRIu64 " ms.",
+                  nextBatterySleepTime);
+    otLogNotePlat("Next Event packet will be sent in %" PRIu64 " ms.",
+                  nextEventSleepTime);
+#endif
+
     if (nextEventSleepTime <= nextBatterySleepTime)
     {
       setEventSleepTime(handle, nextEventSleepTime, eventsIndex);
