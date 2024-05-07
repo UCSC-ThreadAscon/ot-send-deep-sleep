@@ -16,12 +16,14 @@ void wakeupInit(nvs_handle_t handle, struct timeval *events, uuid *deviceId)
 static inline void moveOnToNextEvent(nvs_handle_t handle,
                                      uint8_t currentEventsIndex)
 {
-  if (isDeepSleepWakeup())
-  {
-    currentEventsIndex += 1;
-    nvsWriteByteUInt(handle, NVS_EVENTS_INDEX, currentEventsIndex);
-  }
+  currentEventsIndex += 1;
+  nvsWriteByteUInt(handle, NVS_EVENTS_INDEX, currentEventsIndex);
   return;
+}
+
+static inline bool noMoreEventsToSend(uint8_t eventsIndex)
+{
+  return eventsIndex >= NUM_EVENTS ? true : false;
 }
 
 void onWakeup(nvs_handle_t handle,
@@ -31,7 +33,7 @@ void onWakeup(nvs_handle_t handle,
 {
   uint8_t eventsIndex = nvsReadByteUInt(handle, NVS_EVENTS_INDEX);
 
-  if (eventsIndex < NUM_EVENTS)
+  if (!noMoreEventsToSend(eventsIndex))
   {
     struct timeval tvNow = getCurrentTimeval();
     struct timeval tvCurrentEvent = events[eventsIndex];
@@ -40,15 +42,24 @@ void onWakeup(nvs_handle_t handle,
     initDeepSleepTimerMs(nextEventSleepTime);
     moveOnToNextEvent(handle, eventsIndex);
 
-    coapStart();
-    sendEventPacket(socket, *deviceId);
+    if (isDeepSleepWakeup())
+    {
+      coapStart();
+      sendEventPacket(socket, *deviceId);
+    }
+    else 
+    {
+      deepSleepStart();
+    }
   }
+
 #if NVS_DEBUG
-  else
+  if (noMoreEventsToSend(eventsIndex))
   {
     otLogNotePlat("Sent all Event Packets.");
   }
   printEventsIndex(eventsIndex);
 #endif
+
   return;
 }
