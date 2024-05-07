@@ -22,6 +22,14 @@
 #define NVS_UUID "uuid"
 #define NVS_EVENTS_INDEX "events_index"
 
+typedef enum PacketSendType
+{
+  NoPacket,
+  EventPacket,
+  BatteryPacket
+}
+PacketSendType;
+
 void onPowerOn(nvs_handle_t handle, struct timeval *events, uuid *deviceId);
 void wakeupInit(nvs_handle_t handle, struct timeval *events, uuid *deviceId);
 
