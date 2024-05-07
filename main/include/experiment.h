@@ -27,3 +27,17 @@
 #else
 #define NUM_EVENTS NUM_EVENTS_SECOND_STORY
 #endif
+
+/** ---- Test Values ---- */
+
+/**
+ * Battery lifetime packets will be sent every 5 seconds,
+ * rather than 30 seconds, for testing purposes.
+*/
+#define BATTERY_WAIT_TIME_MS_TEST 5000
+
+/**
+ * The experimental runtime for testing purposes will be
+ * 10 minutes, rather than 183 minutes.
+*/
+#define EXP_TIME_SECONDS_TEST 10 * 60
