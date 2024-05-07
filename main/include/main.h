@@ -8,6 +8,7 @@
 #include "experiment.h"
 #include "init.h"
 #include "event.h"
+#include "battery.h"
 #include "payload.h"
 #include "storage.h"
 #include "uuid.h"
@@ -41,9 +42,6 @@ void onWakeup(nvs_handle_t handle,
               uuid *deviceId,
               otSockAddr *socket);
 
-void nextBatteryWakeup(nvs_handle_t handle, struct timeval *batteryWakeup);
-
 bool noMoreEventsToSend(uint8_t eventsIndex);
 void eventPacketsStats(uint8_t eventsIndex);
 void printPacketType(PacketSendType packetType);
-void printBatteryWakeup(struct timeval wakeupTime);
