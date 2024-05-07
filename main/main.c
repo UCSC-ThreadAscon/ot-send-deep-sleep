@@ -27,7 +27,9 @@ void app_main(void)
   }
   else
   {
-    onWakeup(nvsData.events, &(nvsData.deviceId));
+    onWakeup(nvsData.events,
+             &(nvsData.deviceId),
+             &(nvsData.eventsIndex));
   }
 
   initDeepSleepTimerMs(BATTERY_WAIT_TIME_MS_TEST);

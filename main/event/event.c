@@ -29,3 +29,8 @@ EventsIndex initEventsIndex(nvs_handle_t handle)
   nvsWriteByteUInt(handle, NVS_EVENTS_INDEX, index);
   return index;
 }
+
+EventsIndex readEventsIndex(nvs_handle_t handle)
+{
+  return nvsReadByteUInt(handle, NVS_EVENTS_INDEX);
+}
