@@ -21,8 +21,6 @@
 #define NVS_UUID "uuid"
 #define NVS_EVENTS_INDEX "events_index"
 
-typedef uint8_t EventsIndex;
-
 void onPowerOn(struct timeval *events, uuid *deviceId);
 void onWakeup(struct timeval *events, uuid *deviceId);
 
@@ -30,8 +28,3 @@ void initEventsArray(struct timeval *events,
                      struct timeval start,
                      struct timeval end);
 void sendEventPacket(otSockAddr *socket, uuid deviceId);
-
-EventsIndex initEventsIndex(nvs_handle_t handle);
-EventsIndex readEventsIndex(nvs_handle_t handle);
-void incEventsIndex(EventsIndex *indexPtr, nvs_handle_t handle);
-void printEventsIndex(EventsIndex index);
