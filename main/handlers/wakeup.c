@@ -22,11 +22,17 @@ static inline void incrementEventsIndex(nvs_handle_t handle,
   return;
 }
 
-uint64_t getNextSleepTime(struct timeval *events, uint8_t eventsIndex)
+uint64_t getNextEventSleepTime(struct timeval *events, uint8_t eventsIndex,
+                               struct timeval tvNow)
 {
-    struct timeval tvNow = getCurrentTimeval();
     struct timeval tvNextEvent = events[eventsIndex];
     return timeDiffMs(tvNow, tvNextEvent);
+}
+
+uint64_t getNextBatterySleepTime(struct timeval nextBatteryWakeupTime,
+                                 struct timeval tvNow)
+{
+  return timeDiffMs(tvNow, nextBatteryWakeupTime);
 }
 
 void setPacketType(nvs_handle_t handle, PacketSendType packetType)
@@ -58,8 +64,10 @@ void onWakeup(nvs_handle_t handle,
   */
   if (!noMoreEventsToSend(eventsIndex))
   {
-    uint64_t sleepTime = getNextSleepTime(events, eventsIndex);
-    initDeepSleepTimerMs(sleepTime);
+    struct timeval tvNow = getCurrentTimeval();
+    uint64_t nextEventSleepTime = getNextEventSleepTime(events, eventsIndex, tvNow);
+
+    initDeepSleepTimerMs(nextEventSleepTime);
     incrementEventsIndex(handle, eventsIndex);
 
     setPacketType(handle, EventPacket);
