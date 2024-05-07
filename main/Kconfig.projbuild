@@ -38,7 +38,7 @@ menu "OpenThread Deep Sleep Sender"
       default 1
       range 1 3
       help
-          Enter "1" if the device simulates the water leakage detector for the washing machine.
-          Enter "2" if the device simulates the motion sensor at the front door.
+          Enter "1" if the device simulates the motion sensor at the front door.
+          Enter "2" if the device simulates the air quality monitor in the bedroom.
           Enter "3" if the device simulates the motion sensor at the second story back door.
 endmenu
