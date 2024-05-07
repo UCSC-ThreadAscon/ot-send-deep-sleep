@@ -6,7 +6,7 @@
 */
 #pragma once
 
-#include "time.h"
+#include "time_api.h"
 
 #include <stdio.h>
 #include <stdlib.h>

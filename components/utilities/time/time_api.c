@@ -4,7 +4,7 @@
  * https://docs.espressif.com/projects/esp-idf/en/stable/esp32/api-reference/system/system_time.html
 */
 
-#include "time.h"
+#include "time_api.h"
 #include "assert.h"
 
 int64_t toMicro(struct timeval time)

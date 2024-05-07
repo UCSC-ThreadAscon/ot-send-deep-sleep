@@ -1,6 +1,6 @@
 #pragma once
 
-#include "time.h"
+#include "time_api.h"
 
 #include <stdlib.h>
 #include <stdint.h>

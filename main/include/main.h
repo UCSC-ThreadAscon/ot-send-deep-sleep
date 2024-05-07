@@ -2,7 +2,7 @@
 
 #include "utilities.h"
 #include "workload.h"
-#include "time.h"
+#include "time_api.h"
 #include "sleep.h"
 
 #include "init.h"
@@ -31,3 +31,5 @@ void initEventsArray(struct timeval *events,
 void sendEventPacket(otSockAddr *socket, uuid deviceId);
 
 void printEventsIndex(uint8_t index);
+void printEventsArray(struct timeval *events, int numEvents);
+void printEventMinutes(int eventNum, struct timeval time);
