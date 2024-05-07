@@ -54,7 +54,11 @@ void onWakeup(nvs_handle_t handle,
   }
 
 #if NVS_DEBUG
-  if (noMoreEventsToSend(eventsIndex))
+  if (!noMoreEventsToSend(eventsIndex))
+  {
+    otLogNotePlat("Sent %" PRIu8 " Event Packets so far.", eventsIndex - 1);
+  }
+  else
   {
     otLogNotePlat("Sent all Event Packets.");
   }
