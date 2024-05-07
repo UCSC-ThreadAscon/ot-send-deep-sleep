@@ -21,6 +21,12 @@ void onWakeup(struct timeval *events, uuid *deviceId)
   openReadWrite(NVS_NAMESPACE, &handle);
   wakeupInit(handle, events, deviceId);
 
+  uint8_t eventsIndex = nvsReadByteUInt(handle, NVS_EVENTS_INDEX);
+
+#if NVS_DEBUG
+  printEventsIndex(eventsIndex);
+#endif
+
   nvs_close(handle);
   return;
 }

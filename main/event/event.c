@@ -15,6 +15,6 @@ void initEventsArray(struct timeval *events,
 
 void printEventsIndex(uint8_t index)
 {
-  otLogNotePlat("Currently at event %" PRIu8 ".", index);
+  otLogNotePlat("Events index is at %" PRIu8 ".", index);
   return;
 }
