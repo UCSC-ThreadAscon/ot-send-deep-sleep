@@ -35,9 +35,6 @@ void app_main(void)
   }
 
   onWakeup(handle, events, &deviceId);
-
-  initDeepSleepTimerMs(BATTERY_WAIT_TIME_MS_TEST);
-
   nvs_close(handle);
 
   coapStart();

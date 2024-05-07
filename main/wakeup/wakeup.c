@@ -26,5 +26,6 @@ void onWakeup(nvs_handle_t handle, struct timeval *events, uuid *deviceId)
   printEventsIndex(eventsIndex);
 #endif
 
+  initDeepSleepTimerMs(BATTERY_WAIT_TIME_MS_TEST);
   return;
 }
