@@ -13,7 +13,7 @@
 
 #define JUST_POWERED_ON !isDeepSleepWakeup()
 
-#define NUM_EVENTS NUM_EVENTS_FRONT_DOOR
+#define NUM_EVENTS NUM_EVENTS_AIR_MONITOR
 #define EVENTS_ARRAY_SIZE NUM_EVENTS * sizeof(struct timeval)
 
 #define NVS_NAMESPACE "sed_nvs"
