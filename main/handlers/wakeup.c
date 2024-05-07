@@ -48,10 +48,6 @@ void onWakeup(nvs_handle_t handle,
     coapStart();
     sendEventPacket(socket, *deviceId);
   }
-  else
-  {
-    deepSleepStart();
-  }
 
   if (!noMoreEventsToSend(eventsIndex))
   {
@@ -60,6 +56,15 @@ void onWakeup(nvs_handle_t handle,
     incrementEventsIndex(handle, eventsIndex);
 
     setPacketType(handle, EventPacket);
+  }
+  else
+  {
+    setPacketType(handle, BatteryPacket);
+  }
+
+  if (JUST_POWERED_ON)
+  {
+    deepSleepStart();
   }
 
 #if SHOW_DEBUG_STATS
