@@ -9,7 +9,10 @@
 /*
  * The duration of each experimential trial will always be:
  *
- *    30 seconds * 365 days = 10950 seconds ~= 183 minutes.
+ *    30 seconds * 365 days = 10950 seconds ~= 182.5 minutes
+ *
+ * The ceil(182.5) = 183 minutes, and 183 minutes is equivalent to
+ * exactly 10980 seconds.
 */
 #define EXP_TIME_SECONDS 10980
 
