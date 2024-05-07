@@ -20,10 +20,10 @@ void onPowerOn(nvs_handle_t handle, struct timeval *events,
 
 #if NVS_DEBUG
   printEventsArray(events, NUM_EVENTS);
-  printUUID(deviceId);
-  printEventsIndex(eventsIndex);
-  printPacketType(packetType);
-  printBatteryWakeup(*batteryWakeup);
+  // printUUID(deviceId);
+  // printEventsIndex(eventsIndex);
+  // printPacketType(packetType);
+  // printBatteryWakeup(*batteryWakeup);
 #endif
 
   return;
@@ -31,6 +31,11 @@ void onPowerOn(nvs_handle_t handle, struct timeval *events,
 
 static int eventPacketsSent = 0;
 static int batteryPacketsSent = 0;
+
+void printStats() {
+  otLogNotePlat("Sent %d event packets so far.", eventPacketsSent);
+  otLogNotePlat("Sent %d battery packets so far.", batteryPacketsSent);
+}
 
 void sendEventPacket(otSockAddr *socket, uuid deviceId)
 {
@@ -40,7 +45,7 @@ void sendEventPacket(otSockAddr *socket, uuid deviceId)
 
 #if SHOW_DEBUG_STATS
   eventPacketsSent += 1;
-  otLogNotePlat("Sent %d event packets so far.", eventPacketsSent);
+  printStats();
 #endif
   return;
 }
@@ -49,7 +54,7 @@ void sendBatteryPacket(otSockAddr *socket, uuid deviceId)
 {
 #if SHOW_DEBUG_STATS
   batteryPacketsSent += 1;
-  otLogNotePlat("Sent %d battery packets so far.", batteryPacketsSent);
+  printStats();
 #endif
 
   deepSleepStart();
