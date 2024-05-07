@@ -30,7 +30,8 @@ void app_main(void)
                &batteryWakeup);
   }
 
-  onWakeup(handle, events, &deviceId, &socket);
+  onWakeup(handle, events, &deviceId, &socket,
+           &batteryWakeup);
   nvs_close(handle);
   return;
 }

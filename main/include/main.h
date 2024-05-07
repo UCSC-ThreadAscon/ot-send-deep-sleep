@@ -40,7 +40,8 @@ void wakeupInit(nvs_handle_t handle, struct timeval *events, uuid *deviceId,
 void onWakeup(nvs_handle_t handle,
               struct timeval *events,
               uuid *deviceId,
-              otSockAddr *socket);
+              otSockAddr *socket,
+              struct timeval *batteryWakeup);
 
 bool noMoreEventsToSend(uint8_t eventsIndex);
 void eventPacketsStats(uint8_t eventsIndex);

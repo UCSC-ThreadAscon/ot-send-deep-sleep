@@ -47,7 +47,8 @@ void setPacketType(nvs_handle_t handle, PacketSendType packetType)
 void onWakeup(nvs_handle_t handle,
               struct timeval *events,
               uuid *deviceId,
-              otSockAddr *socket)
+              otSockAddr *socket,
+              struct timeval *batteryWakeup)
 {
   uint8_t eventsIndex = nvsReadByteUInt(handle, NVS_EVENTS_INDEX);
   PacketSendType packetType = nvsReadByteUInt(handle, NVS_PACKET_TYPE);
