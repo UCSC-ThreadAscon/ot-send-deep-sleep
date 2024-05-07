@@ -35,8 +35,8 @@ void onPowerOn(struct timeval *events,
                uuid *deviceId,
                EventsIndex *indexPtr);
 void onWakeup(struct timeval *events,
-                uuid *deviceId,
-                EventsIndex *indexPtr);
+              uuid *deviceId,
+              EventsIndex *indexPtr);
 
 void initEventsArray(struct timeval *events,
                      struct timeval start,
@@ -45,4 +45,5 @@ void sendEventPacket(otSockAddr *socket, uuid deviceId);
 
 EventsIndex initEventsIndex(nvs_handle_t handle);
 EventsIndex readEventsIndex(nvs_handle_t handle);
+void incEventsIndex(EventsIndex *indexPtr, nvs_handle_t handle);
 void printEventsIndex(EventsIndex index);

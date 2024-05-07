@@ -34,3 +34,10 @@ EventsIndex readEventsIndex(nvs_handle_t handle)
 {
   return nvsReadByteUInt(handle, NVS_EVENTS_INDEX);
 }
+
+void incEventsIndex(EventsIndex *indexPtr, nvs_handle_t handle)
+{
+  *indexPtr += 1;
+  nvsWriteByteUInt(handle, NVS_EVENTS_INDEX, *indexPtr);
+  return;
+}
