@@ -49,6 +49,13 @@ void onWakeup(nvs_handle_t handle,
     sendEventPacket(socket, *deviceId);
   }
 
+  /**
+   * ---- TO-DO ----
+   * 1. Determine the next event wakeup time.
+   * 2. Compare that to the next battery wakeup time.
+   * 3. Determine which is less. You will send that one next.
+   *    Then sleep for the lesser amount of time.
+  */
   if (!noMoreEventsToSend(eventsIndex))
   {
     uint64_t sleepTime = getNextSleepTime(events, eventsIndex);
