@@ -7,12 +7,6 @@
 
 #define BORDER_ROUTER_URI "resource"
 
-#define PERIODIC_URI "periodic"
-#define APERIODIC_URI "aperiodic"
-
-#define APERIODIC_PAYLOAD_SIZE 4
-#define PERIODIC_PAYLOAD_SIZE 216
-
 #define BATTERY_WAIT_TIME_MS 1000 * 30 // 30 seconds
 
 #define EXP_TIME_SECONDS 10980 // ~183 minutes
