@@ -1,4 +1,5 @@
 #include "main.h"
+#include "assert.h"
 
 void wakeupInit(nvs_handle_t handle, struct timeval *events, uuid *deviceId)
 {
@@ -13,7 +14,7 @@ void wakeupInit(nvs_handle_t handle, struct timeval *events, uuid *deviceId)
   return;
 }
 
-static inline void moveOnToNextEvent(nvs_handle_t handle,
+static inline void incrementEventsIndex(nvs_handle_t handle,
                                      uint8_t currentEventsIndex)
 {
   currentEventsIndex += 1;
@@ -21,9 +22,12 @@ static inline void moveOnToNextEvent(nvs_handle_t handle,
   return;
 }
 
-static inline bool noMoreEventsToSend(uint8_t eventsIndex)
+uint64_t getNextSleepTime(struct timeval *events, uint8_t eventsIndex)
 {
-  return eventsIndex >= NUM_EVENTS ? true : false;
+    struct timeval tvNow = getCurrentTimeval();
+    struct timeval tvNextEvent = events[eventsIndex];
+    assert(toMicro(tvNow) < toMicro(tvNextEvent));
+    return timeDiffMs(tvNow, tvNextEvent);
 }
 
 void onWakeup(nvs_handle_t handle,
@@ -35,33 +39,23 @@ void onWakeup(nvs_handle_t handle,
 
   if (!noMoreEventsToSend(eventsIndex))
   {
-    struct timeval tvNow = getCurrentTimeval();
-    struct timeval tvCurrentEvent = events[eventsIndex];
-    uint64_t nextEventSleepTime = timeDiffMs(tvNow, tvCurrentEvent);
-
-    initDeepSleepTimerMs(nextEventSleepTime);
-    moveOnToNextEvent(handle, eventsIndex);
+    uint64_t sleepTime = getNextSleepTime(events, eventsIndex);
+    initDeepSleepTimerMs(sleepTime);
+    incrementEventsIndex(handle, eventsIndex);
 
     if (isDeepSleepWakeup())
     {
       coapStart();
       sendEventPacket(socket, *deviceId);
     }
-    else 
+    else
     {
       deepSleepStart();
     }
   }
 
 #if EVENT_DEBUG
-  if (!noMoreEventsToSend(eventsIndex))
-  {
-    otLogNotePlat("Sent %" PRIu8 " Event Packet(s) so far.", eventsIndex);
-  }
-  else
-  {
-    otLogNotePlat("Sent all Event Packets.");
-  }
+  eventPacketsStats(eventsIndex);
 #endif
 
   return;

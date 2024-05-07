@@ -29,3 +29,6 @@ void onWakeup(nvs_handle_t handle,
               struct timeval *events,
               uuid *deviceId,
               otSockAddr *socket);
+
+bool noMoreEventsToSend(uint8_t eventsIndex);
+void eventPacketsStats(uint8_t eventsIndex);

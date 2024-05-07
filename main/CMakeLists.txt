@@ -4,5 +4,6 @@ idf_component_register(SRCS "./init/init.c"
                             "./payload/event_payload.c"
                             "./handlers/wakeup.c"
                             "./handlers/handlers.c"
+                            "./handlers/debug.c"
                             "main.c"
                        INCLUDE_DIRS "include")
