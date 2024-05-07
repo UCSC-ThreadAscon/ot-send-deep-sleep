@@ -29,6 +29,12 @@ uint64_t getNextSleepTime(struct timeval *events, uint8_t eventsIndex)
     return timeDiffMs(tvNow, tvNextEvent);
 }
 
+void setPacketType(nvs_handle_t handle, PacketSendType packetType)
+{
+  nvsWriteByteUInt(handle, NVS_PACKET_TYPE, packetType);
+  return;
+}
+
 void onWakeup(nvs_handle_t handle,
               struct timeval *events,
               uuid *deviceId,
@@ -37,14 +43,7 @@ void onWakeup(nvs_handle_t handle,
   uint8_t eventsIndex = nvsReadByteUInt(handle, NVS_EVENTS_INDEX);
   PacketSendType packetType = nvsReadByteUInt(handle, NVS_PACKET_TYPE);
 
-  if (!noMoreEventsToSend(eventsIndex))
-  {
-    uint64_t sleepTime = getNextSleepTime(events, eventsIndex);
-    initDeepSleepTimerMs(sleepTime);
-    incrementEventsIndex(handle, eventsIndex);
-  }
-
-  if (isDeepSleepWakeup())
+  if (packetType == EventPacket)
   {
     coapStart();
     sendEventPacket(socket, *deviceId);
@@ -52,6 +51,15 @@ void onWakeup(nvs_handle_t handle,
   else
   {
     deepSleepStart();
+  }
+
+  if (!noMoreEventsToSend(eventsIndex))
+  {
+    uint64_t sleepTime = getNextSleepTime(events, eventsIndex);
+    initDeepSleepTimerMs(sleepTime);
+    incrementEventsIndex(handle, eventsIndex);
+
+    setPacketType(handle, EventPacket);
   }
 
 #if SHOW_DEBUG_STATS
