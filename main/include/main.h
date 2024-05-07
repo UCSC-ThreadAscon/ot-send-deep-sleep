@@ -23,20 +23,8 @@
 
 typedef uint8_t EventsIndex;
 
-typedef struct NvsData
-{
-  struct timeval events[NUM_EVENTS];
-  uuid deviceId;
-  EventsIndex eventsIndex;
-}
-NvsData;
-
-void onPowerOn(struct timeval *events,
-               uuid *deviceId,
-               EventsIndex *indexPtr);
-void onWakeup(struct timeval *events,
-              uuid *deviceId,
-              EventsIndex *indexPtr);
+void onPowerOn(struct timeval *events, uuid *deviceId);
+void onWakeup(struct timeval *events, uuid *deviceId);
 
 void initEventsArray(struct timeval *events,
                      struct timeval start,
