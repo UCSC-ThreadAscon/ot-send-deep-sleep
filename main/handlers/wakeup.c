@@ -53,7 +53,7 @@ void onWakeup(nvs_handle_t handle,
     deepSleepStart();
   }
 
-#if EVENT_DEBUG
+#if SHOW_DEBUG_STATS
   eventPacketsStats(eventsIndex);
 #endif
 
