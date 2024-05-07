@@ -6,6 +6,7 @@
 #include "sleep.h"
 
 #include "init.h"
+#include "event.h"
 #include "payload.h"
 #include "storage.h"
 #include "uuid.h"
@@ -24,12 +25,3 @@
 void onPowerOn(nvs_handle_t handle, struct timeval *events, uuid *deviceId);
 void onWakeup(nvs_handle_t handle, struct timeval *events, uuid *deviceId);
 void wakeupInit(nvs_handle_t handle, struct timeval *events, uuid *deviceId);
-
-void initEventsArray(struct timeval *events,
-                     struct timeval start,
-                     struct timeval end);
-void sendEventPacket(otSockAddr *socket, uuid deviceId);
-
-void printEventsIndex(uint8_t index);
-void printEventsArray(struct timeval *events, int numEvents);
-void printEventMinutes(int eventNum, struct timeval time);
