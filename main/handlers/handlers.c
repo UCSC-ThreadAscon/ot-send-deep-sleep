@@ -31,7 +31,8 @@ void onPowerOn(nvs_handle_t handle, struct timeval *events,
 static int eventPacketsSent = 0;
 static int batteryPacketsSent = 0;
 
-void printStats() {
+void printStats()
+{
   otLogNotePlat("Sent %d event packets so far.", eventPacketsSent);
   otLogNotePlat("Sent %d battery packets so far.", batteryPacketsSent);
 }
