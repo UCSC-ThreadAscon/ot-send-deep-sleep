@@ -5,6 +5,7 @@
 #include "time_api.h"
 #include "sleep.h"
 
+#include "experiment.h"
 #include "init.h"
 #include "event.h"
 #include "payload.h"

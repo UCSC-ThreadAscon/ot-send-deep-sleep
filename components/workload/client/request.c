@@ -42,8 +42,8 @@ void createHeaders(otMessage *aRequest, otMessageInfo *aMessageInfo)
 }
 
 void addPayload(otMessage *aRequest,
-                       void *payload,
-                       size_t payloadSize)
+                void *payload,
+                size_t payloadSize)
 {
   otError error = OT_ERROR_NONE;
 

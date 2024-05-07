@@ -1,15 +1,9 @@
 #pragma once
 
 #include "dependencies.h"
-#include "experiment.h"
 #include "inline.h"
 #include "print_macro.h"
 #include "macro.h"
-
-typedef enum type {
-  Periodic = 1,
-  APeriodic = 2
-} type;
 
 /* ---- Common API ---- */
 void checkConnection(otInstance *aInstance);
