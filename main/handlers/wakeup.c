@@ -32,15 +32,35 @@ uint64_t getNextEventSleepTime(struct timeval *events, uint8_t eventsIndex,
     return timeDiffMs(tvNow, tvNextEvent);
 }
 
-uint64_t getNextBatterySleepTime(struct timeval nextBatteryWakeupTime,
+uint64_t getNextBatterySleepTime(struct timeval batteryWakeupTime,
                                  struct timeval tvNow)
 {
-  return timeDiffMs(tvNow, nextBatteryWakeupTime);
+  return timeDiffMs(tvNow, batteryWakeupTime);
 }
 
 void setPacketType(nvs_handle_t handle, PacketSendType packetType)
 {
   nvsWriteByteUInt(handle, NVS_PACKET_TYPE, packetType);
+  return;
+}
+
+void setEventSleepTime(nvs_handle_t handle,
+                       uint64_t sleepTime,
+                       uint8_t eventsIndex)
+{
+  setPacketType(handle, EventPacket);
+  initDeepSleepTimerMs(sleepTime);
+  incrementEventsIndex(handle, eventsIndex);
+  return;
+}
+
+void setBatterySleepTime(nvs_handle_t handle,
+                         uint64_t sleepTime,
+                         struct timeval *batteryWakeup)
+{
+  setPacketType(handle, BatteryPacket);
+  initDeepSleepTimerMs(sleepTime);
+  nextBatteryWakeup(handle, batteryWakeup);
   return;
 }
 
@@ -66,19 +86,25 @@ void onWakeup(nvs_handle_t handle,
    * 3. Determine which is less. You will send that one next.
    *    Then sleep for the lesser amount of time.
   */
+
+  struct timeval tvNow = getCurrentTimeval();
+  uint64_t nextBatterySleepTime = getNextBatterySleepTime(*batteryWakeup, tvNow);
+
   if (!noMoreEventsToSend(eventsIndex))
   {
-    struct timeval tvNow = getCurrentTimeval();
     uint64_t nextEventSleepTime = getNextEventSleepTime(events, eventsIndex, tvNow);
-
-    initDeepSleepTimerMs(nextEventSleepTime);
-    incrementEventsIndex(handle, eventsIndex);
-
-    setPacketType(handle, EventPacket);
+    if (nextEventSleepTime <= nextBatterySleepTime)
+    {
+      setEventSleepTime(handle, nextEventSleepTime, eventsIndex);
+    }
+    else
+    {
+      setBatterySleepTime(handle, nextBatterySleepTime, batteryWakeup);
+    }
   }
   else
   {
-    setPacketType(handle, BatteryPacket);
+    setBatterySleepTime(handle, nextBatterySleepTime, batteryWakeup);
   }
 
   if (JUST_POWERED_ON)
