@@ -20,9 +20,6 @@ void onPowerOn(nvs_handle_t handle, struct timeval *events,
 
 #if NVS_DEBUG
   printEventsArray(events, NUM_EVENTS);
-  // printUUID(deviceId);
-  // printEventsIndex(eventsIndex);
-  // printPacketType(packetType);
 #endif
 
   return;
