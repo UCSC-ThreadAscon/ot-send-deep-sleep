@@ -48,7 +48,7 @@ void onWakeup(nvs_handle_t handle,
               struct timeval *events,
               uuid *deviceId,
               otSockAddr *socket,
-              Data *dataPtr);
+              Data *data);
 
 void sendBatteryPacket(otSockAddr *socket, uuid deviceId);
 void sendEventPacket(otSockAddr *socket, uuid deviceId);
