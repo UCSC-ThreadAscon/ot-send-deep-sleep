@@ -17,7 +17,10 @@ otSockAddr createSocket(const char *recvAddrString);
 void coapStart(void);
 
 /* ---- CoAP Client API ---- */
-void request(otSockAddr *socket, void *payload, size_t payloadSize);
+void request(otSockAddr *socket,
+             void *payload,
+             size_t payloadSize,
+             const char *uri);
 
 /* ---- CoAP Response Handler ---- */
 void responseCallback(void *aContext,

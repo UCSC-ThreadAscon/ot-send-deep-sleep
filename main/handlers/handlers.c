@@ -32,7 +32,7 @@ void sendEventPacket(otSockAddr *socket, uuid deviceId)
 {
   *socket = createSocket(CONFIG_SERVER_IP_ADDRESS);
   EventPayload event = createEventPayload(deviceId);
-  request(socket, (void *) &event, sizeof(event));
+  request(socket, (void *) &event, sizeof(event), EVENT_URI);
   return;
 }
 
@@ -40,6 +40,6 @@ void sendBatteryPacket(otSockAddr *socket, uuid deviceId)
 {
   *socket = createSocket(CONFIG_SERVER_IP_ADDRESS);
   BatteryPayload battery = createBatteryPayload(deviceId);
-  request(socket, (void *) &battery, sizeof(battery));
+  request(socket, (void *) &battery, sizeof(battery), BATTERY_URI);
   return;
 }
