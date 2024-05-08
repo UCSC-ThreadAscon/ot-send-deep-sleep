@@ -8,7 +8,6 @@
 #include "experiment.h"
 #include "init.h"
 #include "event.h"
-#include "battery.h"
 #include "payload.h"
 #include "storage.h"
 #include "uuid.h"
@@ -22,43 +21,14 @@
 #define NVS_EVENTS_ARRAY "events"
 #define NVS_UUID "uuid"
 #define NVS_EVENTS_INDEX "events_index"
-#define NVS_PACKET_TYPE "packet_type"
-#define NVS_BATTERY_WAKEUP "battery_wakeup"
-#define NVS_DEBUG_STATS "debug_stats"
 
-typedef enum PacketSendType
-{
-  EventPacket,
-  BatteryPacket
-}
-PacketSendType;
-
-void onPowerOn(nvs_handle_t handle, struct timeval *events,
-               uuid *deviceId, struct timeval *batteryWakeup,
-               struct timeval tvNow);
-void wakeupInit(nvs_handle_t handle, struct timeval *events, uuid *deviceId,
-                struct timeval *batteryWakeup);
+void onPowerOn(nvs_handle_t handle, struct timeval *events, uuid *deviceId);
+void wakeupInit(nvs_handle_t handle, struct timeval *events, uuid *deviceId);
 
 void onWakeup(nvs_handle_t handle,
               struct timeval *events,
               uuid *deviceId,
-              otSockAddr *socket,
-              struct timeval *batteryWakeup,
-              struct timeval tvNow);
+              otSockAddr *socket);
 
-typedef struct DebugStats
-{
-  int eventPacketsSent;
-  int batteryPacketsSent;
-  struct timeval powerOnTime;
-}
-DebugStats;
-
-DebugStats initDebugStats(struct timeval tvNow);
-void printDebugStats(DebugStats stats, nvs_handle_t handle);
-DebugStats readDebugStats(nvs_handle_t handle);
-void writeDebugStats(DebugStats *statsPtr, nvs_handle_t handle);
-
-void printSleepTimes(uint64_t batterySleepTime, uint64_t eventSleepTime);
 bool noMoreEventsToSend(uint8_t eventsIndex);
-void printPacketType(PacketSendType packetType);
+void eventPacketsStats(uint8_t eventsIndex);

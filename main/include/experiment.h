@@ -4,8 +4,7 @@
 /**
  * Battery lifetime packets will be sent every 30 SECONDS.
 */
-#define BATTERY_WAIT_TIME_SEC 30
-#define BATTERY_WAIT_TIME_MS 1000 * BATTERY_WAIT_TIME_SEC
+#define BATTERY_WAIT_TIME_MS 1000 * 30
 
 /*
  * The duration of each experimential trial will always be:
@@ -24,8 +23,7 @@
 #if (CONFIG_SCENARIO == 1)
 #define NUM_EVENTS NUM_EVENTS_FRONT_DOOR
 #elif (CONFIG_SCENARIO == 2)
-// #define NUM_EVENTS NUM_EVENTS_AIR_MONITOR
-#define NUM_EVENTS 2
+#define NUM_EVENTS NUM_EVENTS_AIR_MONITOR
 #else
 #define NUM_EVENTS NUM_EVENTS_SECOND_STORY
 #endif
@@ -42,4 +40,4 @@
  * The experimental runtime for testing purposes will be
  * 10 minutes, rather than 183 minutes.
 */
-#define EXP_TIME_SECONDS_TEST 5 * 60
+#define EXP_TIME_SECONDS_TEST 10 * 60

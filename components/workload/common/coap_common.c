@@ -10,9 +10,9 @@ void coapStart() {
   otError error = otCoapStart(OT_INSTANCE, COAP_SOCK_PORT);
 
   if (error != OT_ERROR_NONE) {
-    otLogCritPlat("Failed to start COAP socket.");
+    otLogCritPlat("Failed to start COAP server.");
   } else {
-    otLogNotePlat("Started CoAP socket at port %d.", COAP_SERVER_PORT);
+    otLogNotePlat("Started CoAP server at port %d.", COAP_SERVER_PORT);
   }
   return;
 }
