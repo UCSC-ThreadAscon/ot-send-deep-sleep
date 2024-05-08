@@ -23,8 +23,10 @@ void printDebugStats(DebugStats stats)
   uint64_t msElapsed = timeDiffMs(stats.powerOnTime, getCurrentTimeval());
   double minutesElapsed = MS_TO_MINUTES((double) msElapsed);
 
+  otLogNotePlat("-----------------------------");
   otLogNotePlat("Time Elasped: ~%.3f minutes.", minutesElapsed);
   otLogNotePlat("Event packets sent: %d.", stats.eventPacketsSent);
   otLogNotePlat("Battery packets sent: %d.", stats.batteryPacketsSent);
+  otLogNotePlat("-----------------------------");
   return;
 }
