@@ -33,6 +33,8 @@ uint64_t getNextEventSleepTime(struct timeval *events, uint8_t eventsIndex,
 uint64_t getNextBatterySleepTime(struct timeval batteryWakeupTime,
                                  struct timeval tvNow)
 {
+  otLogNotePlat("tvNow: %" PRIu64 ".", toMicro(tvNow));
+  otLogNotePlat("batteryWakeupTime: %" PRIu64 ".", toMicro(batteryWakeupTime));
   return timeDiffMs(tvNow, batteryWakeupTime);
 }
 

@@ -16,6 +16,8 @@ void onPowerOn(nvs_handle_t handle, struct timeval *events,
   PacketSendType packetType = BatteryPacket;
   nvsWriteByteUInt(handle, NVS_PACKET_TYPE, packetType);
 
+  batteryWakeup->tv_sec = tvNow.tv_sec;
+  batteryWakeup->tv_usec = tvNow.tv_usec;
   moveToNextBatteryWakeup(handle, batteryWakeup, tvNow);
 
 #if NVS_DEBUG
