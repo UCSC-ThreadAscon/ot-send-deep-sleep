@@ -12,4 +12,11 @@ typedef struct EventPayload
 }
 EventPayload;
 
+typedef struct BatteryPayload
+{
+  uuid deviceId;
+  uint8_t batteryLife;
+}
+BatteryPayload;
+
 EventPayload createEventPayload(uuid deviceId);
