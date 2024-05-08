@@ -60,7 +60,9 @@ void onWakeup(nvs_handle_t handle,
       incrementEventsIndex(handle, eventsIndex);
 
       data->status = Event;
+  
       data->batterySleepTime = batterySleepTime - eventSleepTime;
+      if (data->batterySleepTime < 0) { batterySleepTime = 0; }
     }
 
     /**
