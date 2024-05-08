@@ -22,6 +22,17 @@
 #define NVS_UUID "uuid"
 #define NVS_EVENTS_INDEX "events_index"
 
+typedef enum Status {
+  PowerOn,
+  Event,
+  Battery
+} Status;
+
+typedef struct Data {
+  uint64_t batterySleepTime; // in milliseconds
+  Status status;
+} Data;
+
 void onPowerOn(nvs_handle_t handle, struct timeval *events, uuid *deviceId);
 void wakeupInit(nvs_handle_t handle, struct timeval *events, uuid *deviceId);
 
