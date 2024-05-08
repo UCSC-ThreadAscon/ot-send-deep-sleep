@@ -59,5 +59,6 @@ void printDebugStats(DebugStats stats, nvs_handle_t handle);
 DebugStats readDebugStats(nvs_handle_t handle);
 void writeDebugStats(DebugStats *statsPtr, nvs_handle_t handle);
 
+void printSleepTimes(uint64_t batterySleepTime, uint64_t eventSleepTime);
 bool noMoreEventsToSend(uint8_t eventsIndex);
 void printPacketType(PacketSendType packetType);

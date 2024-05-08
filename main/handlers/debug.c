@@ -53,3 +53,12 @@ void printDebugStats(DebugStats stats, nvs_handle_t handle)
   otLogNotePlat("-----------------------------");
   return;
 }
+
+void printSleepTimes(uint64_t batterySleepTime, uint64_t eventSleepTime)
+{
+  otLogNotePlat("-----------------------------");
+  otLogNotePlat("Next Battery Sleep Time: %" PRIu64 ".", batterySleepTime);
+  otLogNotePlat("Next Event Sleep Time: %" PRIu64 ".", eventSleepTime);
+  otLogNotePlat("-----------------------------");
+  return;
+}
