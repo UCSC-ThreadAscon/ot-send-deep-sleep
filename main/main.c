@@ -25,7 +25,7 @@ void app_main(void)
   }
   else
   {
-    wakeupInit(handle, events, &deviceId);
+    wakeupInit(handle, events, &deviceId, &data);
   }
 
   onWakeup(handle, events, &deviceId, &socket);
