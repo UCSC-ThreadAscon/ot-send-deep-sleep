@@ -26,18 +26,20 @@ static inline void incrementEventsIndex(nvs_handle_t handle,
   return;
 }
 
-int64_t getNextSleepTime(struct timeval *events, uint8_t eventsIndex)
+int64_t getNextSleepTime(struct timeval *events,
+                         uint8_t eventsIndex,
+                         struct timeval *now)
 {
-    struct timeval tvNow = getCurrentTimeval();
     struct timeval tvNextEvent = events[eventsIndex];
-    return timeDiffMs(tvNow, tvNextEvent);
+    return timeDiffMs(*now, tvNextEvent);
 }
 
 void onWakeup(nvs_handle_t handle,
               struct timeval *events,
               uuid *deviceId,
               otSockAddr *socket,
-              Data *data)
+              Data *data,
+              struct timeval *now)
 {
   uint8_t eventsIndex = nvsReadByteUInt(handle, NVS_EVENTS_INDEX);
   Status prevStatus = data->status;
@@ -47,7 +49,7 @@ void onWakeup(nvs_handle_t handle,
     /**
      * STEP 1: Get sleep times for event and battery packet.
     */
-    int64_t eventSleepTime = getNextSleepTime(events, eventsIndex);
+    int64_t eventSleepTime = getNextSleepTime(events, eventsIndex, now);
     int64_t batterySleepTime = data->batterySleepTime;
 
     if (eventSleepTime < 0) {

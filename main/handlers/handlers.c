@@ -3,10 +3,10 @@
 void onPowerOn(nvs_handle_t handle,
                struct timeval *events,
                uuid *deviceId,
-               Data *dataPtr)
+               Data *dataPtr,
+               struct timeval *now)
 {
-  initEventsArray(events, getCurrentTimeval(),
-                  getFutureTimeval(EXP_TIME_SECONDS_TEST));
+  initEventsArray(events, *now, getFutureTimeval(EXP_TIME_SECONDS_TEST));
   nvsWriteBlob(handle, NVS_EVENTS_ARRAY, events, EVENTS_ARRAY_SIZE);
 
   generateUUID(deviceId);
