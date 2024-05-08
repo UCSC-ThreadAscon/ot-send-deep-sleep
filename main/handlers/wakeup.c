@@ -44,7 +44,9 @@ void onWakeup(nvs_handle_t handle,
 
   if (!noMoreEventsToSend(eventsIndex))
   {
-    // STEP 1: Get sleep times for event and battery packet.
+    /**
+     * STEP 1: Get sleep times for event and battery packet.
+    */
     int64_t eventSleepTime = getNextSleepTime(events, eventsIndex);
     int64_t batterySleepTime = data->batterySleepTime;
 
@@ -81,22 +83,26 @@ void onWakeup(nvs_handle_t handle,
       data->batterySleepTime = BATTERY_WAIT_TIME_MS;
    }
 
-    // STEP 3: Update Data struct with new status and battery sleep time.
-    //         Write it to NVS.
+    /**
+     * STEP 3: Update Data struct with new status and battery sleep time.
+     *         Write it to NVS.
+    */
     nvsWriteBlob(handle, NVS_DATA, data, sizeof(Data));
   }
   else {
-    // Send only battery lifetime packets.
+    /**
+     * Send only battery lifetime packets.
+    */
     initDeepSleepTimerMs(data->batterySleepTime);
-
     data->status = Battery;
     data->batterySleepTime = BATTERY_WAIT_TIME_MS;
-
     nvsWriteBlob(handle, NVS_DATA, data, sizeof(Data));
   }
 
-  // STEP 4: Whatever you decided on the previous wakeup,
-  //         send that type of packet.
+  /**
+   * STEP 4: Whatever you decided on the previous wakeup,
+   *         send that type of packet.
+  */
   coapStart();
   if (prevStatus == Event) {
     sendEventPacket(socket, *deviceId);
