@@ -21,7 +21,7 @@
 #define NVS_EVENTS_ARRAY "events"
 #define NVS_UUID "uuid"
 #define NVS_EVENTS_INDEX "events_index"
-#define NVS_STATUS "status"
+#define NVS_DATA "status"
 
 typedef enum Status {
   PowerOn,
@@ -39,7 +39,10 @@ void onPowerOn(nvs_handle_t handle,
                uuid *deviceId,
                Data *dataPtr);
 
-void wakeupInit(nvs_handle_t handle, struct timeval *events, uuid *deviceId);
+void wakeupInit(nvs_handle_t handle,
+                struct timeval *events,
+                uuid *deviceId,
+                Data *dataPtr);
 
 void onWakeup(nvs_handle_t handle,
               struct timeval *events,

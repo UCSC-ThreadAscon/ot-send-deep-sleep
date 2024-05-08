@@ -17,7 +17,7 @@ void onPowerOn(nvs_handle_t handle,
 
   dataPtr->batterySleepTime = BATTERY_WAIT_TIME_MS;
   dataPtr->status = PowerOn;
-  nvsWriteBlob(handle, NVS_STATUS, dataPtr, sizeof(Data));
+  nvsWriteBlob(handle, NVS_DATA, dataPtr, sizeof(Data));
 
 #if NVS_DEBUG
   printEventsArray(events, NUM_EVENTS);

@@ -1,10 +1,14 @@
 #include "main.h"
 #include "assert.h"
 
-void wakeupInit(nvs_handle_t handle, struct timeval *events, uuid *deviceId)
+void wakeupInit(nvs_handle_t handle,
+                struct timeval *events,
+                uuid *deviceId,
+                Data *dataPtr)
 {
   nvsReadBlob(handle, NVS_EVENTS_ARRAY, events, EVENTS_ARRAY_SIZE);
   nvsReadBlob(handle, NVS_UUID, deviceId, UUID_SIZE_BYTES);
+  nvsReadBlob(handle, NVS_DATA, dataPtr, sizeof(Data));
 
 #if NVS_DEBUG
   printEventsArray(events, NUM_EVENTS);
