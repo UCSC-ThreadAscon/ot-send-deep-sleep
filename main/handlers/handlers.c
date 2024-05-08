@@ -26,6 +26,8 @@ void onPowerOn(nvs_handle_t handle, struct timeval *events,
   stats.eventPacketsSent = 0;
   stats.batteryPacketsSent = 0;
   stats.powerOnTime = tvNow;
+
+  printDebugStats(stats);
 #endif
 
   return;

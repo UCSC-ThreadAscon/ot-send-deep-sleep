@@ -53,5 +53,6 @@ typedef struct DebugStats
 }
 DebugStats;
 
+void printDebugStats(DebugStats stats);
 bool noMoreEventsToSend(uint8_t eventsIndex);
 void printPacketType(PacketSendType packetType);
