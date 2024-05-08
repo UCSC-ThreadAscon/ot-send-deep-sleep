@@ -55,8 +55,8 @@ void onWakeup(nvs_handle_t handle,
      *
      * 4. Whatever you decided on the previous wakeup, send that type of packet.
     */
-    uint64_t sleepTime = getNextSleepTime(events, eventsIndex);
-    initDeepSleepTimerMs(sleepTime);
+    uint64_t eventSleepTime = getNextSleepTime(events, eventsIndex);
+    initDeepSleepTimerMs(eventSleepTime);
     incrementEventsIndex(handle, eventsIndex);
   }
 
