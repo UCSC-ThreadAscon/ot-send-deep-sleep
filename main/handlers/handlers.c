@@ -1,5 +1,7 @@
 #include "main.h"
 
+static DebugStats stats;
+
 void onPowerOn(nvs_handle_t handle, struct timeval *events,
                uuid *deviceId, struct timeval *batteryWakeup,
                struct timeval tvNow)
@@ -22,10 +24,7 @@ void onPowerOn(nvs_handle_t handle, struct timeval *events,
   printEventsArray(events, NUM_EVENTS);
 #endif
 #if SHOW_DEBUG_STATS
-  DebugStats stats;
-  stats.eventPacketsSent = 0;
-  stats.batteryPacketsSent = 0;
-  stats.powerOnTime = tvNow;
+  stats = initDebugStats(tvNow);
   nvsWriteBlob(handle, NVS_DEBUG_STATS, &stats, sizeof(DebugStats));
 #endif
 

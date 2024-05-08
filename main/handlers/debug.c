@@ -18,6 +18,15 @@ void printPacketType(PacketSendType packetType)
   return;
 }
 
+DebugStats initDebugStats(struct timeval tvNow)
+{
+  DebugStats stats;
+  stats.eventPacketsSent = 0;
+  stats.batteryPacketsSent = 0;
+  stats.powerOnTime = tvNow;
+  return stats;
+}
+
 void printDebugStats(nvs_handle_t handle)
 {
   DebugStats stats;
