@@ -50,6 +50,13 @@ void onWakeup(nvs_handle_t handle,
     int64_t eventSleepTime = getNextSleepTime(events, eventsIndex);
     int64_t batterySleepTime = data->batterySleepTime;
 
+    if (eventSleepTime < 0) {
+      otLogNotePlat("Event sleep time less than 0: %" PRId64 ".", eventSleepTime);
+    }
+    if (batterySleepTime < 0) {
+      otLogNotePlat("Battery sleep time less than 0: %" PRId64 ".", batterySleepTime);
+    }
+
     /**
      *  STEP 2(a): If event packet is less, then you will send event packet
      *             on next wakeup.
