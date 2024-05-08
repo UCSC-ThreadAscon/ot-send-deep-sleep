@@ -83,7 +83,9 @@ void onWakeup(nvs_handle_t handle,
     nvsWriteBlob(handle, NVS_DATA, data, sizeof(Data));
   }
   else {
+    // Send only battery lifetime packets.
     initDeepSleepTimerMs(data->batterySleepTime);
+
     data->status = Battery;
     data->batterySleepTime = BATTERY_WAIT_TIME_MS;
 
