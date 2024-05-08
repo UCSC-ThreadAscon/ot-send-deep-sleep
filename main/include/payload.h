@@ -20,3 +20,4 @@ typedef struct BatteryPayload
 BatteryPayload;
 
 EventPayload createEventPayload(uuid deviceId);
+BatteryPayload createBatteryPayload(uuid deviceId);
