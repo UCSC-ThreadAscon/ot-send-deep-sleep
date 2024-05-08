@@ -79,10 +79,6 @@ void onWakeup(nvs_handle_t handle,
   {
     uint64_t nextEventSleepTime = getNextEventSleepTime(events, eventsIndex, tvNow);
 
-#if COMPARISON_DEBUG
-    printSleepTimes(nextBatterySleepTime, nextEventSleepTime);
-#endif
-
     if (nextEventSleepTime <= nextBatterySleepTime)
     {
       setEventSleepTime(handle, nextEventSleepTime, eventsIndex);
@@ -91,6 +87,10 @@ void onWakeup(nvs_handle_t handle,
     {
       setBatterySleepTime(handle, nextBatterySleepTime, batteryWakeup, tvNow);
     }
+
+#if COMPARISON_DEBUG
+    printSleepTimes(nextBatterySleepTime, nextEventSleepTime);
+#endif
   }
   else
   {

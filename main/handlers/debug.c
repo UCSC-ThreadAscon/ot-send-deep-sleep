@@ -59,6 +59,14 @@ void printSleepTimes(uint64_t batterySleepTime, uint64_t eventSleepTime)
   otLogNotePlat("-----------------------------");
   otLogNotePlat("Next Battery Sleep Time: %" PRIu64 ".", batterySleepTime);
   otLogNotePlat("Next Event Sleep Time: %" PRIu64 ".", eventSleepTime);
+  if (eventSleepTime <= batterySleepTime)
+  {
+    otLogNotePlat("Will send an event packet in the next round.");
+  }
+  else
+  {
+    otLogNotePlat("Will send a battery lifetime packet in the next round.");
+  }
   otLogNotePlat("-----------------------------");
   return;
 }
