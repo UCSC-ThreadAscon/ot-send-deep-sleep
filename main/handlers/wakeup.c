@@ -86,6 +86,8 @@ void onWakeup(nvs_handle_t handle,
     initDeepSleepTimerMs(data->batterySleepTime);
     data->status = Battery;
     data->batterySleepTime = BATTERY_WAIT_TIME_MS;
+
+    nvsWriteBlob(handle, NVS_DATA, data, sizeof(Data));
   }
 
   // STEP 4: Whatever you decided on the previous wakeup,
