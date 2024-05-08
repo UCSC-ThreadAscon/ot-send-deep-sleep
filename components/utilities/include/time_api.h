@@ -20,10 +20,10 @@
 #define MS_TO_MINUTES(ms) MS_TO_SECONDS(ms) / 60
 #define US_TO_MINUTES(us) MS_TO_MINUTES(US_TO_MS(us))
 
-int64_t toMicro(struct timeval time);
+uint64_t toMicro(struct timeval time);
 struct timeval getCurrentTimeval();
-struct timeval getFutureTimeval(int64_t seconds);
-int64_t timeDiffMs(struct timeval tv1, struct timeval tv2);
+struct timeval getFutureTimeval(uint64_t seconds);
+uint64_t timeDiffMs(struct timeval tv1, struct timeval tv2);
 struct timeval randomTime(struct timeval tv1, struct timeval tv2);
 
 int compareTimevals(const void* ptr1, const void* ptr2);

@@ -7,9 +7,9 @@
 #include "time_api.h"
 #include "assert.h"
 
-int64_t toMicro(struct timeval time)
+uint64_t toMicro(struct timeval time)
 {
-  return (int64_t)time.tv_sec * 1000000L + (int64_t)time.tv_usec;
+  return (uint64_t)time.tv_sec * 1000000L + (uint64_t)time.tv_usec;
 }
 
 struct timeval getCurrentTimeval()
@@ -22,7 +22,7 @@ struct timeval getCurrentTimeval()
 /**
  * What will be the timestamp "[insert number here]" seconds from now?
 */
-struct timeval getFutureTimeval(int64_t seconds)
+struct timeval getFutureTimeval(uint64_t seconds)
 {
   struct timeval tvFuture;
   gettimeofday(&tvFuture, NULL);
@@ -37,7 +37,7 @@ struct timeval getFutureTimeval(int64_t seconds)
  * This function assumes that "tv2" occurs later than "tv1". The function
  * returns the time elapsed starting at "tv1" to "tv2" in milliseconds.
 */
-int64_t timeDiffMs(struct timeval tv1, struct timeval tv2)
+uint64_t timeDiffMs(struct timeval tv1, struct timeval tv2)
 {
   return (tv2.tv_sec - tv1.tv_sec) * 1000 + (tv2.tv_usec - tv1.tv_usec) / 1000;
 }
@@ -74,8 +74,8 @@ int compareTimevals(const void* ptr1, const void* ptr2) {
   struct timeval timeval1 = *timevalPtr1;
   struct timeval timeval2 = *timevalPtr2;
 
-  int64_t micro1 = toMicro(timeval1);
-  int64_t micro2 = toMicro(timeval2);
+  uint64_t micro1 = toMicro(timeval1);
+  uint64_t micro2 = toMicro(timeval2);
 
   if (micro1 < micro2) {
     return -1;

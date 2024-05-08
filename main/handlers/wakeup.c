@@ -26,7 +26,7 @@ static inline void incrementEventsIndex(nvs_handle_t handle,
   return;
 }
 
-int64_t getNextSleepTime(struct timeval *events,
+uint64_t getNextSleepTime(struct timeval *events,
                          uint8_t eventsIndex,
                          struct timeval *now)
 {
@@ -49,15 +49,8 @@ void onWakeup(nvs_handle_t handle,
     /**
      * STEP 1: Get sleep times for event and battery packet.
     */
-    int64_t eventSleepTime = getNextSleepTime(events, eventsIndex, now);
-    int64_t batterySleepTime = data->batterySleepTime;
-
-    if (eventSleepTime < 0) {
-      otLogNotePlat("Event sleep time less than 0: %" PRId64 ".", eventSleepTime);
-    }
-    if (batterySleepTime < 0) {
-      otLogNotePlat("Battery sleep time less than 0: %" PRId64 ".", batterySleepTime);
-    }
+    uint64_t eventSleepTime = getNextSleepTime(events, eventsIndex, now);
+    uint64_t batterySleepTime = data->batterySleepTime;
 
     /**
      *  STEP 2(a): If event packet is less, then you will send event packet
@@ -74,9 +67,7 @@ void onWakeup(nvs_handle_t handle,
       incrementEventsIndex(handle, eventsIndex);
 
       data->status = Event;
-  
       data->batterySleepTime = batterySleepTime - eventSleepTime;
-      if (data->batterySleepTime < 0) { batterySleepTime = 0; }
     }
 
     /**
