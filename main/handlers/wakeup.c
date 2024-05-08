@@ -66,11 +66,10 @@ void onWakeup(nvs_handle_t handle,
   }
 
   coapStart();
-  if (data->status == Event) {
+  if (isDeepSleepWakeup()) {
     sendEventPacket(socket, *deviceId);
   }
-  else if ((data->status == PowerOn) || (data->status == Battery))
-  {
+  else {
     // The device has just been powered on.
     // The first packet to send will ALWAYS be the battery packet.
     sendBatteryPacket(socket, *deviceId);
