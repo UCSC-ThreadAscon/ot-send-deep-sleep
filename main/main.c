@@ -2,9 +2,9 @@
 
 void app_main(void)
 {
+  struct timeval now = getCurrentTimeval();
   initAppMain();
   checkConnection(esp_openthread_get_instance());
-  struct timeval now = getCurrentTimeval();
 
   struct timeval events[NUM_EVENTS];
   uuid deviceId;
