@@ -21,6 +21,12 @@ void onPowerOn(nvs_handle_t handle, struct timeval *events,
 #if NVS_DEBUG
   printEventsArray(events, NUM_EVENTS);
 #endif
+#if SHOW_DEBUG_STATS
+  DebugStats stats;
+  stats.eventPacketsSent = 0;
+  stats.batteryPacketsSent = 0;
+  stats.powerOnTime = tvNow;
+#endif
 
   return;
 }
