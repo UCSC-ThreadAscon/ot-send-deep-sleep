@@ -55,6 +55,6 @@ typedef struct DebugStats
 DebugStats;
 
 DebugStats initDebugStats(struct timeval tvNow);
-void printDebugStats(nvs_handle_t handle);
+void printDebugStats(DebugStats stats, nvs_handle_t handle);
 bool noMoreEventsToSend(uint8_t eventsIndex);
 void printPacketType(PacketSendType packetType);

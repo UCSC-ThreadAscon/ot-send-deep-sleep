@@ -27,12 +27,8 @@ DebugStats initDebugStats(struct timeval tvNow)
   return stats;
 }
 
-void printDebugStats(nvs_handle_t handle)
+void printDebugStats(DebugStats stats, nvs_handle_t handle)
 {
-  DebugStats stats;
-  EmptyMemory(&stats, sizeof(DebugStats));
-  nvsReadBlob(handle, NVS_DEBUG_STATS, &stats, sizeof(DebugStats));
-
   uint64_t msElapsed = timeDiffMs(stats.powerOnTime, getCurrentTimeval());
   double minutesElapsed = MS_TO_MINUTES((double) msElapsed);
 
