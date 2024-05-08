@@ -26,8 +26,7 @@ void onPowerOn(nvs_handle_t handle, struct timeval *events,
   stats.eventPacketsSent = 0;
   stats.batteryPacketsSent = 0;
   stats.powerOnTime = tvNow;
-
-  printDebugStats(stats);
+  nvsWriteBlob(handle, NVS_DEBUG_STATS, &stats, sizeof(DebugStats));
 #endif
 
   return;
@@ -38,6 +37,7 @@ void sendEventPacket(otSockAddr *socket, uuid deviceId)
   *socket = createSocket(CONFIG_SERVER_IP_ADDRESS);
   EventPayload event = createEventPayload(deviceId);
   request(socket, (void *) &event, sizeof(event));
+
   return;
 }
 

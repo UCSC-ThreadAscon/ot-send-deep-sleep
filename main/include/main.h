@@ -24,6 +24,7 @@
 #define NVS_EVENTS_INDEX "events_index"
 #define NVS_PACKET_TYPE "packet_type"
 #define NVS_BATTERY_WAKEUP "battery_wakeup"
+#define NVS_DEBUG_STATS "debug_stats"
 
 typedef enum PacketSendType
 {
@@ -53,6 +54,6 @@ typedef struct DebugStats
 }
 DebugStats;
 
-void printDebugStats(DebugStats stats);
+void printDebugStats(nvs_handle_t handle);
 bool noMoreEventsToSend(uint8_t eventsIndex);
 void printPacketType(PacketSendType packetType);
