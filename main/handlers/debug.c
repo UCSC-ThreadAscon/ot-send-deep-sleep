@@ -27,6 +27,20 @@ DebugStats initDebugStats(struct timeval tvNow)
   return stats;
 }
 
+DebugStats readDebugStats(nvs_handle_t handle)
+{
+  DebugStats stats;
+  EmptyMemory(&stats, sizeof(DebugStats));
+  nvsReadBlob(handle, NVS_DEBUG_STATS, &stats, sizeof(DebugStats));
+  return stats;
+}
+
+void writeDebugStats(DebugStats *statsPtr, nvs_handle_t handle)
+{
+  nvsWriteBlob(handle, NVS_DEBUG_STATS, statsPtr, sizeof(DebugStats));
+  return;
+}
+
 void printDebugStats(DebugStats stats, nvs_handle_t handle)
 {
   uint64_t msElapsed = timeDiffMs(stats.powerOnTime, getCurrentTimeval());

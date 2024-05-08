@@ -96,11 +96,11 @@ void onWakeup(nvs_handle_t handle,
   coapStart();
   if (currentPacketType == EventPacket)
   {
-    sendEventPacket(socket, *deviceId);
+    sendEventPacket(socket, *deviceId, handle);
   }
   else
   {
-    sendBatteryPacket(socket, *deviceId);
+    sendBatteryPacket(socket, *deviceId, handle);
   }
 
 #if SHOW_DEBUG_STATS

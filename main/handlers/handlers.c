@@ -1,7 +1,5 @@
 #include "main.h"
 
-static DebugStats stats;
-
 void onPowerOn(nvs_handle_t handle, struct timeval *events,
                uuid *deviceId, struct timeval *batteryWakeup,
                struct timeval tvNow)
@@ -24,24 +22,40 @@ void onPowerOn(nvs_handle_t handle, struct timeval *events,
   printEventsArray(events, NUM_EVENTS);
 #endif
 #if SHOW_DEBUG_STATS
-  stats = initDebugStats(tvNow);
-  nvsWriteBlob(handle, NVS_DEBUG_STATS, &stats, sizeof(DebugStats));
+  DebugStats stats = initDebugStats(tvNow);
+  writeDebugStats(&stats, handle);
 #endif
 
   return;
 }
 
-void sendEventPacket(otSockAddr *socket, uuid deviceId)
+void sendEventPacket(otSockAddr *socket, uuid deviceId,
+                     nvs_handle_t handle)
 {
   *socket = createSocket(CONFIG_SERVER_IP_ADDRESS);
   EventPayload event = createEventPayload(deviceId);
   request(socket, (void *) &event, sizeof(event));
 
+#if SHOW_DEBUG_STATS
+  DebugStats stats = readDebugStats(handle);
+  stats.eventPacketsSent += 1;
+  writeDebugStats(&stats, handle);
+  printDebugStats(stats, handle);
+#endif
+
   return;
 }
 
-void sendBatteryPacket(otSockAddr *socket, uuid deviceId)
+void sendBatteryPacket(otSockAddr *socket, uuid deviceId,
+                       nvs_handle_t handle)
 {
+#if SHOW_DEBUG_STATS
+  DebugStats stats = readDebugStats(handle);
+  stats.batteryPacketsSent += 1;
+  writeDebugStats(&stats, handle);
+  printDebugStats(stats, handle);
+#endif
+
   deepSleepStart();
   return;
 }

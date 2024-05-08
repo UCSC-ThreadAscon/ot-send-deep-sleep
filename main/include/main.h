@@ -56,5 +56,8 @@ DebugStats;
 
 DebugStats initDebugStats(struct timeval tvNow);
 void printDebugStats(DebugStats stats, nvs_handle_t handle);
+DebugStats readDebugStats(nvs_handle_t handle);
+void writeDebugStats(DebugStats *statsPtr, nvs_handle_t handle);
+
 bool noMoreEventsToSend(uint8_t eventsIndex);
 void printPacketType(PacketSendType packetType);
