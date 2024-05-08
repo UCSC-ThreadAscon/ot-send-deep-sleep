@@ -38,6 +38,23 @@ void onWakeup(nvs_handle_t handle,
 
   if (!noMoreEventsToSend(eventsIndex))
   {
+    /**
+     * TO-DO:
+     *  1. Get sleep time for event packet.
+     *  2. Get sleep time for battery packet.
+     *
+     *  3(a). If event packet is less, then you will send event packet
+     *        on next wakeup.
+     *
+     *        battery sleep time in NVS = battery sleep time - event packet sleep time.
+     *
+     *  3(b). If battery packet is less, you will send a battery packet on next
+     *        wakeup.
+     *
+     *        battery sleep time in NVS = 30 seconds.
+     *
+     * 4. Whatever you decided on the previous wakeup, send that type of packet.
+    */
     uint64_t sleepTime = getNextSleepTime(events, eventsIndex);
     initDeepSleepTimerMs(sleepTime);
     incrementEventsIndex(handle, eventsIndex);
