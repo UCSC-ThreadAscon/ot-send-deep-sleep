@@ -82,6 +82,11 @@ void onWakeup(nvs_handle_t handle,
     //         Write it to NVS.
     nvsWriteBlob(handle, NVS_DATA, data, sizeof(Data));
   }
+  else {
+    initDeepSleepTimerMs(data->batterySleepTime);
+    data->status = Battery;
+    data->batterySleepTime = BATTERY_WAIT_TIME_MS;
+  }
 
   // STEP 4: Whatever you decided on the previous wakeup,
   //         send that type of packet.
