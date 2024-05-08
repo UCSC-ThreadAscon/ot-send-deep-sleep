@@ -9,11 +9,13 @@ void app_main(void)
   uuid deviceId;
   otSockAddr socket;
   nvs_handle_t handle;
+  Data data;
 
   EmptyMemory(events, sizeof(struct timeval));
   EmptyMemory(&deviceId, sizeof(uuid));
   EmptyMemory(&socket, sizeof(otSockAddr));
   EmptyMemory(&handle, sizeof(nvs_handle_t));
+  EmptyMemory(&data, sizeof(Data));
 
   openReadWrite(NVS_NAMESPACE, &handle);
 
