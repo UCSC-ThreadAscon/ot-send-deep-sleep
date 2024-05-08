@@ -28,3 +28,11 @@ void sendEventPacket(otSockAddr *socket, uuid deviceId)
   request(socket, (void *) &event, sizeof(event));
   return;
 }
+
+void sendBatteryPacket(otSockAddr *socket, uuid deviceId)
+{
+  *socket = createSocket(CONFIG_SERVER_IP_ADDRESS);
+  BatteryPayload battery = createBatteryPayload(deviceId);
+  request(socket, (void *) &battery, sizeof(battery));
+  return;
+}

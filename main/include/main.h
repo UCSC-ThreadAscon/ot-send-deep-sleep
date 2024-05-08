@@ -30,5 +30,8 @@ void onWakeup(nvs_handle_t handle,
               uuid *deviceId,
               otSockAddr *socket);
 
+void sendBatteryPacket(otSockAddr *socket, uuid deviceId);
+void sendEventPacket(otSockAddr *socket, uuid deviceId);
+
 bool noMoreEventsToSend(uint8_t eventsIndex);
 void eventPacketsStats(uint8_t eventsIndex);

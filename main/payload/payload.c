@@ -10,3 +10,13 @@ EventPayload createEventPayload(uuid deviceId) {
 
   return newEvent;
 }
+
+BatteryPayload createBatteryPayload(uuid deviceId) {
+  BatteryPayload battery;
+
+  EmptyMemory(&battery, sizeof(BatteryPayload));
+
+  battery.deviceId = deviceId;
+  battery.batteryLife = 100;
+  return battery;
+}
