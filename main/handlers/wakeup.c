@@ -54,6 +54,9 @@ void onWakeup(nvs_handle_t handle,
      *
      *             battery sleep time in NVS =
      *                battery sleep time - event packet sleep time.
+     *
+     *             If the event packet sleep time is negative, that is all right.
+     *             Just send it right now if that is the case.
     */
     if (eventSleepTime < batterySleepTime) {
       initDeepSleepTimerMs(eventSleepTime);
