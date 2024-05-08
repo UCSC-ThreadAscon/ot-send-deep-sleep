@@ -45,5 +45,13 @@ void onWakeup(nvs_handle_t handle,
               struct timeval *batteryWakeup,
               struct timeval tvNow);
 
+typedef struct DebugStats
+{
+  int eventPacketsSent;
+  int batteryPacketsSent;
+  struct timeval powerOnTime;
+}
+DebugStats;
+
 bool noMoreEventsToSend(uint8_t eventsIndex);
 void printPacketType(PacketSendType packetType);
