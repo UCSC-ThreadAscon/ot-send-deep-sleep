@@ -36,7 +36,8 @@ uint64_t getNextSleepTime(struct timeval *events, uint8_t eventsIndex)
 void onWakeup(nvs_handle_t handle,
               struct timeval *events,
               uuid *deviceId,
-              otSockAddr *socket)
+              otSockAddr *socket,
+              Data *dataPtr)
 {
   uint8_t eventsIndex = nvsReadByteUInt(handle, NVS_EVENTS_INDEX);
 

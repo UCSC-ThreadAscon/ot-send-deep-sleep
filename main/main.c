@@ -28,7 +28,7 @@ void app_main(void)
     wakeupInit(handle, events, &deviceId, &data);
   }
 
-  onWakeup(handle, events, &deviceId, &socket);
+  onWakeup(handle, events, &deviceId, &socket, &data);
   nvs_close(handle);
   return;
 }
