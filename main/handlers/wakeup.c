@@ -48,9 +48,11 @@ void onWakeup(nvs_handle_t handle,
     coapStart();
     sendEventPacket(socket, *deviceId);
   }
-  else // the device has just been powered on.
+  else
   {
-    deepSleepStart();
+    // The device has just been powered on.
+    // The first packet to send will ALWAYS be the battery packet.
+    sendBatteryPacket(socket, *deviceId);
   }
 
 #if EVENT_DEBUG
