@@ -52,15 +52,19 @@ void onWakeup(nvs_handle_t handle,
     uint64_t eventSleepTime = getNextSleepTime(events, eventsIndex, now);
     uint64_t batterySleepTime = data->batterySleepTime;
 
+    // If event sleep time === battery sleep time, delay battery sleep time
+    // by 5 seconds, so the event packet gets sent first.
+    if (eventSleepTime == batterySleepTime) {
+      batterySleepTime += SECONDS_TO_MS(5);
+      data->batterySleepTime = batterySleepTime;
+    }
+
     /**
      *  STEP 2(a): If event packet is less, then you will send event packet
      *             on next wakeup.
      *
      *             battery sleep time in NVS =
      *                battery sleep time - event packet sleep time.
-     *
-     *             If the event packet sleep time is negative, that is all right.
-     *             Just send it right now if that is the case.
     */
     if (eventSleepTime < batterySleepTime) {
       initDeepSleepTimerMs(eventSleepTime);
@@ -82,20 +86,6 @@ void onWakeup(nvs_handle_t handle,
       data->status = Battery;
       data->batterySleepTime = BATTERY_WAIT_TIME_MS;
    }
-
-    /**
-     * Step 2(c): If the battery and event sleep times are the same:
-     *
-     *            1. Send the battery packet on next wakeup.
-     *
-     *               battery sleep time in NVS = reset to 30 seconds
-     *
-     *            2. Increase the event wakeup time so that it sends right
-     *               after the battery packet (two wakeups later):
-     *
-     *               event[eventsIndex] =
-     *                  (event[eventsIndex] + battery sleep time) + 1 second
-    */
 
     /**
      * STEP 3: Update Data struct with new status and battery sleep time.
