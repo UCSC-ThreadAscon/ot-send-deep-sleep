@@ -1,6 +1,9 @@
 #include "main.h"
 
-void onPowerOn(nvs_handle_t handle, struct timeval *events, uuid *deviceId)
+void onPowerOn(nvs_handle_t handle,
+               struct timeval *events,
+               uuid *deviceId,
+               Data *dataPtr)
 {
   initEventsArray(events, getCurrentTimeval(),
                   getFutureTimeval(EXP_TIME_SECONDS_TEST));
@@ -12,10 +15,14 @@ void onPowerOn(nvs_handle_t handle, struct timeval *events, uuid *deviceId)
   uint8_t eventsIndex = 0;
   nvsWriteByteUInt(handle, NVS_EVENTS_INDEX, eventsIndex);
 
+  dataPtr->batterySleepTime = BATTERY_WAIT_TIME_MS;
+  dataPtr->status = PowerOn;
+  nvsWriteBlob(handle, NVS_STATUS, dataPtr, sizeof(Data));
+
 #if NVS_DEBUG
   printEventsArray(events, NUM_EVENTS);
-  printUUID(deviceId);
   printEventsIndex(eventsIndex);
+  // printUUID(deviceId);
 #endif
 
   return;

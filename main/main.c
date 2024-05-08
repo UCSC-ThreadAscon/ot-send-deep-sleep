@@ -21,7 +21,7 @@ void app_main(void)
 
   if (JUST_POWERED_ON)
   {
-    onPowerOn(handle, events, &deviceId);
+    onPowerOn(handle, events, &deviceId, &data);
   }
   else
   {
