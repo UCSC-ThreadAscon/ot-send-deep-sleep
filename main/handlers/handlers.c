@@ -25,35 +25,16 @@ void onPowerOn(nvs_handle_t handle, struct timeval *events,
   return;
 }
 
-static int eventPacketsSent = 0;
-static int batteryPacketsSent = 0;
-
-void printStats()
-{
-  otLogNotePlat("Sent %d event packets so far.", eventPacketsSent);
-  otLogNotePlat("Sent %d battery packets so far.", batteryPacketsSent);
-}
-
 void sendEventPacket(otSockAddr *socket, uuid deviceId)
 {
   *socket = createSocket(CONFIG_SERVER_IP_ADDRESS);
   EventPayload event = createEventPayload(deviceId);
   request(socket, (void *) &event, sizeof(event));
-
-#if SHOW_DEBUG_STATS
-  eventPacketsSent += 1;
-  printStats();
-#endif
   return;
 }
 
 void sendBatteryPacket(otSockAddr *socket, uuid deviceId)
 {
-#if SHOW_DEBUG_STATS
-  batteryPacketsSent += 1;
-  printStats();
-#endif
-
   deepSleepStart();
   return;
 }
