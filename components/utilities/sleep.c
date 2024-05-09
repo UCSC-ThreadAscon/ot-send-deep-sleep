@@ -1,11 +1,12 @@
 #include "sleep.h"
 
-static int wakeupTimeMs;
+static uint64_t wakeupTimeMicro;
 
-void initDeepSleepTimerMs(int timeMs)
+void initDeepSleepTimerMicro(uint64_t timeMicro)
 {
-  wakeupTimeMs = timeMs;
-  ESP_ERROR_CHECK(esp_sleep_enable_timer_wakeup(MS_TO_US(timeMs)));
+  wakeupTimeMicro = timeMicro;
+  ESP_ERROR_CHECK(esp_sleep_enable_timer_wakeup(timeMicro));
+  return;
 }
 
 bool isDeepSleepWakeup(void) {
@@ -14,8 +15,9 @@ bool isDeepSleepWakeup(void) {
 }
 
 void deepSleepStart() {
-  double wakeupTimeMins = MS_TO_MINUTES( (double) wakeupTimeMs);
-  otLogNotePlat("Going to deep sleep for %d ms, or ~%.3f minutes.",
+  double wakeupTimeMs = US_TO_MS((double) wakeupTimeMicro);
+  double wakeupTimeMins = US_TO_MINUTES( (double) wakeupTimeMicro);
+  otLogNotePlat("Going to deep sleep for %.3f ms, or ~%.3f minutes.",
                 wakeupTimeMs, wakeupTimeMins);
   esp_deep_sleep_start();
   return;

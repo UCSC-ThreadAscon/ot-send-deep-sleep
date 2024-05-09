@@ -60,7 +60,7 @@ void onWakeup(nvs_handle_t handle,
      *                battery sleep time - event packet sleep time.
     */
     if (eventSleepMicro < batterySleepTime) {
-      initDeepSleepTimerMs(eventSleepMicro);
+      initDeepSleepTimerMicro(eventSleepMicro);
       incrementEventsIndex(handle, eventsIndex);
 
       data->status = Event;
@@ -74,7 +74,7 @@ void onWakeup(nvs_handle_t handle,
      *             battery sleep time in NVS = reset to 30 seconds.
     */
    else if (eventSleepMicro > batterySleepTime) {
-      initDeepSleepTimerMs(batterySleepTime);
+      initDeepSleepTimerMicro(batterySleepTime);
 
       data->status = Battery;
       data->batterySleepTime = BATTERY_WAIT_TIME_MICRO;
@@ -90,7 +90,7 @@ void onWakeup(nvs_handle_t handle,
     /**
      * Send only battery lifetime packets.
     */
-    initDeepSleepTimerMs(data->batterySleepTime);
+    initDeepSleepTimerMicro(data->batterySleepTime);
     data->status = Battery;
     data->batterySleepTime = BATTERY_WAIT_TIME_MICRO;
     nvsWriteBlob(handle, NVS_DATA, data, sizeof(Data));

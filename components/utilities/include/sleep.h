@@ -14,6 +14,6 @@
 #include "esp_timer.h"
 #include "openthread/logging.h"
 
-void initDeepSleepTimerMs(int wakeupTimeMs);
+void initDeepSleepTimerMicro(uint64_t timeMicro);
 bool isDeepSleepWakeup(void);
 void deepSleepStart(void);
