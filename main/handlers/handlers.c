@@ -19,6 +19,8 @@ void onPowerOn(nvs_handle_t handle,
   dataPtr->status = PowerOn;
   nvsWriteBlob(handle, NVS_DATA, dataPtr, sizeof(Data));
 
+  printDeviceInfo();
+
 #if NVS_DEBUG
   printEventsArray(events, NUM_EVENTS);
 #endif

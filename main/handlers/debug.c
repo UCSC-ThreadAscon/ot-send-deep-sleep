@@ -17,3 +17,16 @@ void eventPacketsStats(uint8_t eventsIndex)
   }
   return;
 }
+
+void printDeviceInfo() {
+  printMeshLocalEid(OT_INSTANCE);
+
+#if (CONFIG_SCENARIO == 1)
+  otLogNotePlat("This device is the front door motion sensor.");
+#elif (CONFIG_SCENARIO == 2)
+  otLogNotePlat("This device is the air quality monitor.");
+#else
+  otLogNotePlat("This device is the second story door motion sensor.");
+#endif
+  return;
+}

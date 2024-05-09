@@ -57,3 +57,5 @@ void sendEventPacket(otSockAddr *socket, uuid deviceId);
 
 bool noMoreEventsToSend(uint8_t eventsIndex);
 void eventPacketsStats(uint8_t eventsIndex);
+
+void printDeviceInfo();
