@@ -14,12 +14,34 @@
  * This method of segmentation will AVOID DUPLICATE events, when there are two
  * events that will be sent at the same time (or are really close).
  *
+ *
  * |-----------|-----------|.....|-----------|
  * 0    ^     i_1    ^    i_2   i_n-1   ^    183
  *      |            |                  |
  *      |            |                  |
- * one random event -|           one random event 
+ * one random event -|           one random event
+ * 
+ * Another way to view it:       |-----------|
+ * Choose a time in [i, j)       i     ^     j
+ *                                     |
+ *                                     |
+ *                                     R
+ *
+ * where the random event R = r (mod (j - i)) + i
+ * where                  r = esp_random();
 */
+struct timeval segmentation(struct timeval start, struct timeval end)
+{
+  struct timeval randomTime;
+  randomTime.tv_usec = 0;
+
+  time_t R = esp_random();
+  time_t i = start.tv_sec;
+  time_t j = end.tv_sec;
+
+  randomTime.tv_sec = (R % (j - i)) + i;
+  return randomTime;
+}
 
 void initEventsArray(struct timeval *events,
                      struct timeval start,
