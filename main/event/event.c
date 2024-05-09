@@ -1,5 +1,27 @@
 #include "main.h"
 #include "math.h"
+/*
+ * Segmentation Helper Function:       |-----------|
+ * Choose a time in [i, j)             i     ^     j
+ *                                           |
+ *                                           |
+ *                                           R
+ *
+ * where the random event R = r (mod (j - i)) + i
+ * and where              r = esp_random();
+ */
+struct timeval segmentHelper(struct timeval start, struct timeval end)
+{
+  struct timeval randomTime;
+  randomTime.tv_usec = 0;
+
+  time_t R = esp_random();
+  time_t i = start.tv_sec;
+  time_t j = end.tv_sec;
+
+  randomTime.tv_sec = (R % (j - i)) + i;
+  return randomTime;
+}
 
 /**
  * STEP 1: Segmentation
@@ -20,27 +42,13 @@
  *      |            |                  |
  *      |            |                  |
  * one random event -|           one random event
- * 
- * Another way to view it:       |-----------|
- * Choose a time in [i, j)       i     ^     j
- *                                     |
- *                                     |
- *                                     R
- *
- * where the random event R = r (mod (j - i)) + i
- * where                  r = esp_random();
 */
-struct timeval segmentation(struct timeval start, struct timeval end)
+void segmentation(struct timeval *events,
+                  struct timeval start,
+                  struct timeval end)
 {
-  struct timeval randomTime;
-  randomTime.tv_usec = 0;
-
-  time_t R = esp_random();
-  time_t i = start.tv_sec;
-  time_t j = end.tv_sec;
-
-  randomTime.tv_sec = (R % (j - i)) + i;
-  return randomTime;
+  // int numSegments = (int) floor(EXP_TIME_SECONDS / NUM_EVENTS);
+  return;
 }
 
 void initEventsArray(struct timeval *events,
