@@ -27,7 +27,6 @@ void avoidBatteryOverlap(struct timeval *events)
   return;
 }
 
-
 /*
  * STEP 2: Use Seconds
  * -------------------
@@ -105,5 +104,6 @@ void initEventsArray(struct timeval *events,
                      struct timeval end)
 {
   segmentation(events, start, end);
+  avoidBatteryOverlap(events);
   return;
 }
