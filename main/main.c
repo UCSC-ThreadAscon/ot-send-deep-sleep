@@ -2,7 +2,6 @@
 
 void app_main(void)
 {
-  struct timeval now = getCurrentTimeval();
   initAppMain();
   checkConnection(esp_openthread_get_instance());
 
@@ -22,14 +21,14 @@ void app_main(void)
 
   if (JUST_POWERED_ON)
   {
-    onPowerOn(handle, events, &deviceId, &data, &now);
+    onPowerOn(handle, events, &deviceId, &data);
   }
   else
   {
     wakeupInit(handle, events, &deviceId, &data);
   }
 
-  onWakeup(handle, events, &deviceId, &socket, &data, &now);
+  onWakeup(handle, events, &deviceId, &socket, &data);
   nvs_close(handle);
   return;
 }

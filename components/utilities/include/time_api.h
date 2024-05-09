@@ -23,7 +23,7 @@
 #define SECONDS_TO_MS(secs) secs * 1000
 
 uint64_t toMicro(struct timeval time);
-struct timeval getCurrentTimeval();
+struct timeval getTimevalNow();
 struct timeval getFutureTimeval(uint64_t seconds);
 uint64_t timeDiffMs(struct timeval tv1, struct timeval tv2);
 uint64_t timeDiffMicro(struct timeval tv1, struct timeval tv2);

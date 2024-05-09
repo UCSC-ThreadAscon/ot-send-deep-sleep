@@ -12,7 +12,7 @@ uint64_t toMicro(struct timeval time)
   return (uint64_t)time.tv_sec * 1000000L + (uint64_t)time.tv_usec;
 }
 
-struct timeval getCurrentTimeval()
+struct timeval getTimevalNow()
 {
   struct timeval tvNow;
   gettimeofday(&tvNow, NULL);

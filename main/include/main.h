@@ -37,8 +37,7 @@ typedef struct Data {
 void onPowerOn(nvs_handle_t handle,
                struct timeval *events,
                uuid *deviceId,
-               Data *dataPtr,
-               struct timeval *now);
+               Data *dataPtr);
 
 void wakeupInit(nvs_handle_t handle,
                 struct timeval *events,
@@ -49,8 +48,7 @@ void onWakeup(nvs_handle_t handle,
               struct timeval *events,
               uuid *deviceId,
               otSockAddr *socket,
-              Data *data,
-              struct timeval *now);
+              Data *data);
 
 void sendBatteryPacket(otSockAddr *socket, uuid deviceId);
 void sendEventPacket(otSockAddr *socket, uuid deviceId);
