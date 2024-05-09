@@ -5,7 +5,7 @@ void onPowerOn(nvs_handle_t handle,
                uuid *deviceId,
                Data *dataPtr)
 {
-  initEventsArray(events, getTimevalNow(), getFutureTimeval(EXP_TIME_SECONDS));
+  initEventsArray(events);
   nvsWriteBlob(handle, NVS_EVENTS_ARRAY, events, EVENTS_ARRAY_SIZE);
 
   generateUUID(deviceId);

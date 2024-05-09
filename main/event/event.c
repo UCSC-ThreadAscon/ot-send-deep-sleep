@@ -99,11 +99,12 @@ void segmentation(struct timeval *events,
   return;
 }
 
-void initEventsArray(struct timeval *events,
-                     struct timeval start,
-                     struct timeval end)
+void initEventsArray(struct timeval *events)
 {
-  segmentation(events, start, end);
+  struct timeval now = getTimevalNow();
+  struct timeval expEnd = getFutureTimeval(EXP_TIME_SECONDS);
+
+  segmentation(events, now, expEnd);
   avoidBatteryOverlap(events);
   return;
 }
