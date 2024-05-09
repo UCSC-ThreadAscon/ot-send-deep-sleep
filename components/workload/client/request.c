@@ -96,6 +96,8 @@ void request(otSockAddr *socket,
   addPayload(aRequest, payload, payloadSize);
   send(aRequest, &aMessageInfo);
 
+#if COAP_DEBUG
   printMessageSent(socket, payloadSize);
+#endif
   return;
 }

@@ -11,9 +11,12 @@ void coapStart() {
 
   if (error != OT_ERROR_NONE) {
     otLogCritPlat("Failed to start COAP socket.");
-  } else {
+  }
+#if COAP_DEBUG
+  else {
     otLogNotePlat("Started CoAP socket at port %d.", COAP_SERVER_PORT);
   }
+#endif
   return;
 }
 

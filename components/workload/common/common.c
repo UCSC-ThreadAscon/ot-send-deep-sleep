@@ -21,7 +21,9 @@ void checkConnection(otInstance *aInstance)
   }
   while(OT_DISCONNECTED(currentRole));
 
+#if OT_DEBUG
   otLogNotePlat("OpenThread Connection has been established.");
+#endif
   return;
 }
 

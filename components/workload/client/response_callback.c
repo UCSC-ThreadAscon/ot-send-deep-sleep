@@ -27,8 +27,10 @@ void responseCallback(void *aContext,
     otIp6AddressToString(&(aMessageInfo->mPeerAddr), senderAddr,
                          OT_IP6_ADDRESS_STRING_SIZE);
 
+#if COAP_DEBUG
     otLogNotePlat("Response from %s of size %" PRIu16 " bytes.",
                   senderAddr, payloadLen);
+#endif
   }
 
   deepSleepStart();
