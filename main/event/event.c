@@ -13,6 +13,12 @@
  *
  * This method of segmentation will AVOID DUPLICATE events, when there are two
  * events that will be sent at the same time (or are really close).
+ *
+ * |-----------|-----------|.....|-----------|
+ * 0    ^     i_1    ^    i_2   i_n-1   ^    n
+ *      |            |                  |
+ *      |            |                  |
+ * one random event -|           one random event 
 */
 
 void initEventsArray(struct timeval *events,
