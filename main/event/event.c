@@ -15,7 +15,7 @@
  * events that will be sent at the same time (or are really close).
  *
  * |-----------|-----------|.....|-----------|
- * 0    ^     i_1    ^    i_2   i_n-1   ^    n
+ * 0    ^     i_1    ^    i_2   i_n-1   ^    183
  *      |            |                  |
  *      |            |                  |
  * one random event -|           one random event 
