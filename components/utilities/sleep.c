@@ -17,8 +17,10 @@ bool isDeepSleepWakeup(void) {
 void deepSleepStart() {
   double wakeupTimeMs = US_TO_MS((double) wakeupTimeMicro);
   double wakeupTimeMins = US_TO_MINUTES( (double) wakeupTimeMicro);
+#if DEEP_SLEEP_DEBUG
   otLogNotePlat("Going to deep sleep for %.3f ms, or ~%.3f minutes.",
                 wakeupTimeMs, wakeupTimeMins);
+#endif
   esp_deep_sleep_start();
   return;
 }

@@ -21,8 +21,6 @@ void onPowerOn(nvs_handle_t handle,
 
 #if NVS_DEBUG
   printEventsArray(events, NUM_EVENTS);
-  printEventsIndex(eventsIndex);
-  // printUUID(deviceId);
 #endif
 
   return;

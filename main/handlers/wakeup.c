@@ -12,7 +12,6 @@ void wakeupInit(nvs_handle_t handle,
 
 #if NVS_DEBUG
   printEventsArray(events, NUM_EVENTS);
-  // printUUID(deviceId);
 #endif
 
   return;
