@@ -53,15 +53,6 @@ void onWakeup(nvs_handle_t handle,
     uint64_t batterySleepTime = data->batterySleepTime;
 
     /**
-     * If event sleep time === battery sleep time, delay battery sleep time
-     * by 5 seconds, so the event packet gets sent first.
-    */
-    if (eventSleepTime == batterySleepTime) {
-      batterySleepTime += SECONDS_TO_MS(5);
-      data->batterySleepTime = batterySleepTime;
-    }
-
-    /**
      *  STEP 2(a): If event packet is less, then you will send event packet
      *             on next wakeup.
      *
