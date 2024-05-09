@@ -26,12 +26,12 @@ static inline void incrementEventsIndex(nvs_handle_t handle,
   return;
 }
 
-uint64_t getNextSleepTime(struct timeval *events,
-                         uint8_t eventsIndex,
-                         struct timeval *now)
+uint64_t getNextSleepMicro(struct timeval *events,
+                           uint8_t eventsIndex,
+                           struct timeval *now)
 {
     struct timeval tvNextEvent = events[eventsIndex];
-    return timeDiffMs(*now, tvNextEvent);
+    return timeDiffMicro(*now, tvNextEvent);
 }
 
 void onWakeup(nvs_handle_t handle,
@@ -49,7 +49,7 @@ void onWakeup(nvs_handle_t handle,
     /**
      * STEP 1: Get sleep times for event and battery packet.
     */
-    uint64_t eventSleepTime = getNextSleepTime(events, eventsIndex, now);
+    uint64_t eventSleepMicro = getNextSleepMicro(events, eventsIndex, now);
     uint64_t batterySleepTime = data->batterySleepTime;
 
     /**
@@ -59,12 +59,12 @@ void onWakeup(nvs_handle_t handle,
      *             battery sleep time in NVS =
      *                battery sleep time - event packet sleep time.
     */
-    if (eventSleepTime < batterySleepTime) {
-      initDeepSleepTimerMs(eventSleepTime);
+    if (eventSleepMicro < batterySleepTime) {
+      initDeepSleepTimerMs(eventSleepMicro);
       incrementEventsIndex(handle, eventsIndex);
 
       data->status = Event;
-      data->batterySleepTime = batterySleepTime - eventSleepTime;
+      data->batterySleepTime = batterySleepTime - eventSleepMicro;
     }
 
     /**
@@ -73,11 +73,11 @@ void onWakeup(nvs_handle_t handle,
      *
      *             battery sleep time in NVS = reset to 30 seconds.
     */
-   else if (eventSleepTime > batterySleepTime) {
+   else if (eventSleepMicro > batterySleepTime) {
       initDeepSleepTimerMs(batterySleepTime);
 
       data->status = Battery;
-      data->batterySleepTime = BATTERY_WAIT_TIME_MS;
+      data->batterySleepTime = BATTERY_WAIT_TIME_MICRO;
    }
 
     /**
@@ -92,7 +92,7 @@ void onWakeup(nvs_handle_t handle,
     */
     initDeepSleepTimerMs(data->batterySleepTime);
     data->status = Battery;
-    data->batterySleepTime = BATTERY_WAIT_TIME_MS;
+    data->batterySleepTime = BATTERY_WAIT_TIME_MICRO;
     nvsWriteBlob(handle, NVS_DATA, data, sizeof(Data));
   }
 
