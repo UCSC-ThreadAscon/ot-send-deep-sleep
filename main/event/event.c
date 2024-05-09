@@ -52,8 +52,10 @@ void segmentation(struct timeval *events,
                   struct timeval start,
                   struct timeval end)
 {
-  time_t segmentDurMins = (time_t) floor(EXP_TIME_SECONDS / NUM_EVENTS);
+  time_t segmentDurMins = (time_t) floor(EXP_TIME_MINUTES / NUM_EVENTS);
   time_t segmentDurSecs = MINUTES_TO_SECONDS(segmentDurMins);
+
+  otLogNotePlat("segmentDurSecs is %d", (int) segmentDurSecs);
 
   struct timeval i; i.tv_usec = 0;
   struct timeval j; j.tv_usec = 0;

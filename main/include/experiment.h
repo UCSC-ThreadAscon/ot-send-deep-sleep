@@ -15,7 +15,8 @@
  * The ceil(182.5) = 183 minutes, and 183 minutes is equivalent to
  * exactly 10980 seconds.
 */
-#define EXP_TIME_SECONDS 10980
+#define EXP_TIME_MINUTES 183
+#define EXP_TIME_SECONDS MINUTES_TO_SECONDS(EXP_TIME_MINUTES)
 
 #define NUM_EVENTS_FRONT_DOOR 36
 #define NUM_EVENTS_AIR_MONITOR 10
