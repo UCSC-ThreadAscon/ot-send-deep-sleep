@@ -22,6 +22,7 @@
 
 #define SECONDS_TO_MS(secs) secs * 1000
 #define MINUTES_TO_SECONDS(mins) mins * 60
+#define SECONDS_TO_MINUTES(secs) secs / 60
 
 uint64_t toMicro(struct timeval time);
 struct timeval getTimevalNow();

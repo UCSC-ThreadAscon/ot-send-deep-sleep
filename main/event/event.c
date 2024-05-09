@@ -42,16 +42,15 @@ void avoidBatteryOverlap(struct timeval *events)
  * where R = r (mod (j - i)) + i,
  * and   r = esp_random();
  */
-struct timeval randomSeconds(struct timeval tvI, struct timeval tvJ)
+struct timeval randomSeconds(time_t iMins, time_t jMins)
 {
   struct timeval randomTime;
-  randomTime.tv_usec = 0;
+  EmptyMemory(&randomTime, sizeof(struct timeval));
 
   time_t R = esp_random();
-  time_t i = tvI.tv_sec;
-  time_t j = tvJ.tv_sec;
+  time_t randomMins = (R % (jMins - iMins)) + iMins;
 
-  randomTime.tv_sec = (R % (j - i)) + i;
+  randomTime.tv_sec = MINUTES_TO_SECONDS(randomMins);
   return randomTime;
 }
 
@@ -82,18 +81,15 @@ void segmentation(struct timeval *events,
                   struct timeval end)
 {
   time_t segmentDurMins = (time_t) floor(EXP_TIME_MINUTES / NUM_EVENTS);
-  time_t segmentDurSecs = MINUTES_TO_SECONDS(segmentDurMins);
 
-  struct timeval i; i.tv_usec = 0;
-  struct timeval j; j.tv_usec = 0;
+  time_t iMins = (time_t) floor(SECONDS_TO_MINUTES((double) start.tv_sec));
 
-  i.tv_sec = start.tv_sec;
   for (int e = 0; e < NUM_EVENTS; e++) {
-    j.tv_sec = i.tv_sec + segmentDurSecs;
-    events[e] = randomSeconds(i, j);
+    time_t jMins = iMins + segmentDurMins;
+    events[e] = randomSeconds(iMins, jMins);
 
-    // Equivalent to "i.tv_sec += segmentDurSecs".
-    i.tv_sec = j.tv_sec;
+    // Equivalent to "i.Mins += segmentDurMins".
+    iMins = jMins;
   }
 
   return;
