@@ -39,6 +39,6 @@
 
 /**
  * The experimental runtime for testing purposes will be
- * 10 minutes, rather than 183 minutes.
+ * 30 minutes, rather than 183 minutes.
 */
-#define EXP_TIME_SECONDS_TEST 10 * 60
+#define EXP_TIME_SECONDS_TEST 30 * 60
