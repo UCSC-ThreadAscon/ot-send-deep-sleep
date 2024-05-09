@@ -55,8 +55,6 @@ void segmentation(struct timeval *events,
   time_t segmentDurMins = (time_t) floor(EXP_TIME_MINUTES / NUM_EVENTS);
   time_t segmentDurSecs = MINUTES_TO_SECONDS(segmentDurMins);
 
-  otLogNotePlat("segmentDurSecs is %d", (int) segmentDurSecs);
-
   struct timeval i; i.tv_usec = 0;
   struct timeval j; j.tv_usec = 0;
 
@@ -77,12 +75,5 @@ void initEventsArray(struct timeval *events,
                      struct timeval end)
 {
   segmentation(events, start, end);
-
-  // for (int i = 0; i < NUM_EVENTS; i++)
-  // {
-  //   events[i] = randomTime(start, end);
-  // }
-
-  // qsort(events, NUM_EVENTS, sizeof(struct timeval), compareTimevals);
   return;
 }
