@@ -1,16 +1,21 @@
 #include "main.h"
 #include "math.h"
 /*
- * Segmentation Helper Function:       |-----------|
- * Choose a time in [i, j)             i     ^     j
- *                                           |
- *                                           |
- *                                           R
+ * STEP 2: Use Seconds
+ * -------------------
+ *  Choose a random time in [i, j), where i and j are EXACT SECONDS
+ *  (not ms or us, SECONDS). The random time R will also be in EXACT SECONDS.
  *
- * where the random event R = r (mod (j - i)) + i
- * and where              r = esp_random();
+ *  |-----------|
+ *  i     ^     j
+ *        |
+ *        |
+ *        R
+ *
+ * where R = r (mod (j - i)) + i,
+ * and   r = esp_random();
  */
-struct timeval segmentHelper(struct timeval start, struct timeval end)
+struct timeval randomSeconds(struct timeval start, struct timeval end)
 {
   struct timeval randomTime;
   randomTime.tv_usec = 0;
