@@ -16,6 +16,16 @@
  *  packet            event         Sent 30 seconds
  *  sent            packet here!    later
 */
+void avoidBatteryOverlap(struct timeval *events)
+{
+  for (int e = 0; e < NUM_EVENTS; e++)
+  {
+    struct timeval event = events[e];
+    event.tv_sec += 15;
+    events[e] = event;
+  }
+  return;
+}
 
 
 /*
