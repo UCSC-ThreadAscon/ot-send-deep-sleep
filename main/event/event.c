@@ -1,5 +1,23 @@
 #include "main.h"
 #include "math.h"
+
+/**
+ * STEP 3: AVOID OVERLAP WITH BATTERY
+ * ----------------------------------
+ * Battery packets are sent EVERY 30 SECONDS, and the FIRST battery packet
+ * is sent WHEN POWERED ON. As a result, add 15 seconds to each event wakeup time
+ * so minimize overlap between when two Battery packets are sent.
+ *
+ *   B-----------------X----------------B
+ *   ^                 ^                ^
+ *   |                 |                |
+ *   |                 |                |
+ *  Battery           Send          Another one
+ *  packet            event         Sent 30 seconds
+ *  sent            packet here!    later
+*/
+
+
 /*
  * STEP 2: Use Seconds
  * -------------------
@@ -41,6 +59,8 @@ struct timeval randomSeconds(struct timeval tvI, struct timeval tvJ)
  * This method of segmentation will AVOID DUPLICATE events, when there are two
  * events that will be sent at the same time (or are really close).
  *
+ * In addition, segementation also AVOIDS OVERLAP BETWEEN CONSECUTIVE EVENTS,
+ * only one event will appear in each segment.
  *
  * |-----------|-----------|.....|-----------|
  * 0    ^     a_1    ^    a_2   a_n-1   ^    183
