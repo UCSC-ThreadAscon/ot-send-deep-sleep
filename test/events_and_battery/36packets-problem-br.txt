@@ -190,3 +190,63 @@ I(1929166) OPENTHREAD:[N] Platform------: [33453 ms] last battery packet by fd84
 I(1963176) OPENTHREAD:[N] Platform------: [34012 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
 I(1996866) OPENTHREAD:[N] Platform------: [33693 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
 I(2030636) OPENTHREAD:[N] Platform------: [33766 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I(2064686) OPENTHREAD:[N] Platform------: [34053 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I (2086296) OPENTHREAD: Received PIO
+I(2097956) OPENTHREAD:[N] Platform------: [33271 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I(2131036) OPENTHREAD:[N] Platform------: [33077 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I (2155476) OPENTHREAD: Received PIO
+I(2164126) OPENTHREAD:[N] Platform------: [33091 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I (2173146) OPENTHREAD: Received PIO
+I (2173146) OPENTHREAD: Received RIO
+I (2173146) OPENTHREAD: prefix 2600:1700:87F1:800:: lifetime 3600
+
+I (2176956) OPENTHREAD: Received PIO
+I(2197986) OPENTHREAD:[N] Platform------: [33854 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I(2231356) OPENTHREAD:[N] Platform------: [33375 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I (2241276) OPENTHREAD: Received PIO
+I(2265316) OPENTHREAD:[N] Platform------: [33956 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I (2277736) OPENTHREAD: Received PIO
+I (2282616) OPENTHREAD: Received PIO
+I(2298826) OPENTHREAD:[N] Platform------: [33516 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I(2332136) OPENTHREAD:[N] Platform------: [33304 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I(2365556) OPENTHREAD:[N] Platform------: [33422 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I(2398746) OPENTHREAD:[N] Platform------: [33189 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I(2432046) OPENTHREAD:[N] Platform------: [33307 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I (2454216) OPENTHREAD: Received PIO
+I(2465896) OPENTHREAD:[N] Platform------: [33842 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I(2499366) OPENTHREAD:[N] Platform------: [33471 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I(2533316) OPENTHREAD:[N] Platform------: [33954 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I(2567166) OPENTHREAD:[N] Platform------: [33849 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I(2600326) OPENTHREAD:[N] Platform------: [33156 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I(2634176) OPENTHREAD:[N] Platform------: [33851 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I(2667486) OPENTHREAD:[N] Platform------: [33316 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I (2700866) OPENTHREAD: Received PIO
+I (2700866) OPENTHREAD: Received RIO
+I (2700866) OPENTHREAD: prefix 2600:1700:87F1:800:: lifetime 3600
+
+I(2701206) OPENTHREAD:[N] Platform------: [33715 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I (2703396) OPENTHREAD: Received PIO
+I(2735206) OPENTHREAD:[N] Platform------: [33997 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I (2754326) OPENTHREAD: Received PIO
+I(2768616) OPENTHREAD:[N] Platform------: [33416 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I (2771486) OPENTHREAD: Received PIO
+I(2801856) OPENTHREAD:[N] Platform------: [33239 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I(2835826) OPENTHREAD:[N] Platform------: [33970 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I(2868956) OPENTHREAD:[N] Platform------: [33130 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I(2902806) OPENTHREAD:[N] Platform------: [33852 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I (2931616) OPENTHREAD: Received PIO
+I(2936136) OPENTHREAD:[N] Platform------: [33324 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I(2969636) OPENTHREAD:[N] Platform------: [33505 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I (2978016) OPENTHREAD: Received PIO
+I(3002916) OPENTHREAD:[N] Platform------: [33283 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I(3036246) OPENTHREAD:[N] Platform------: [33328 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I (3042856) OPENTHREAD: Received PIO
+I (3042856) OPENTHREAD: Received RIO
+I (3042856) OPENTHREAD: prefix 2600:1700:87F1:800:: lifetime 3600
+
+I (3045286) OPENTHREAD: Received PIO
+I (3055636) OPENTHREAD: Received PIO
+I(3070026) OPENTHREAD:[N] Platform------: [33778 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I(3104026) OPENTHREAD:[N] Platform------: [34003 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I (3112836) OPENTHREAD: Received PIO
+I(3137826) OPENTHREAD:[N] Platform------: [33793 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
