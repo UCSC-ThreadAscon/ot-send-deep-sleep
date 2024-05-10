@@ -44,6 +44,11 @@ void wakeupInit(nvs_handle_t handle,
                 uuid *deviceId,
                 Data *dataPtr);
 
+#define MARGIN_SECONDS 1
+#define BACKOFF_SECONDS 2
+#define MARGIN_US SECONDS_TO_US(MARGIN_SECONDS)
+#define BACKOFF_US SECONDS_TO_US(BACKOFF_SECONDS)
+
 void onWakeup(nvs_handle_t handle,
               struct timeval *events,
               uuid *deviceId,
