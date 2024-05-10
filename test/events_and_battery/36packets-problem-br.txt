@@ -1,0 +1,192 @@
+None
+Waiting for the device to reconnect
+I (3676) wifi:new:<10,0>, old:<1,0>, ap:<255,255>, sta:<10,0>, prof:1, snd_ch_cfg:0x0
+I (3686) wifi:state: init -> auth (0xb0)
+I (4686) wifi:state: auth -> init (0x200)
+I (4686) wifi:new:<10,0>, old:<10,0>, ap:<255,255>, sta:<10,0>, prof:1, snd_ch_cfg:0x0
+I (4686) example_connect: Wi-Fi disconnected, trying to reconnect...
+I (7106) example_connect: Wi-Fi disconnected, trying to reconnect...
+I (9516) wifi:new:<10,0>, old:<10,0>, ap:<255,255>, sta:<10,0>, prof:1, snd_ch_cfg:0x0
+I (9516) wifi:state: init -> auth (0xb0)
+I (9526) wifi:state: auth -> assoc (0x0)
+I (9526) wifi:Association refused temporarily, comeback time 292 (TUs)
+I (9826) wifi:state: assoc -> assoc (0x0)
+I (9826) wifi:Association refused temporarily, comeback time 292 (TUs)
+I (10126) wifi:state: assoc -> assoc (0x0)
+I (10136) wifi:Association refused temporarily, comeback time 292 (TUs)
+I (10436) wifi:state: assoc -> assoc (0x0)
+I (11436) wifi:state: assoc -> init (0x200)
+I (11436) wifi:new:<10,0>, old:<10,0>, ap:<255,255>, sta:<10,0>, prof:1, snd_ch_cfg:0x0
+I (11436) example_connect: Wi-Fi disconnected, trying to reconnect...
+I (13856) example_connect: Wi-Fi disconnected, trying to reconnect...
+I (16266) wifi:new:<10,0>, old:<10,0>, ap:<255,255>, sta:<10,0>, prof:1, snd_ch_cfg:0x0
+I (16266) wifi:state: init -> auth (0xb0)
+I (16276) wifi:state: auth -> assoc (0x0)
+I (16276) wifi:state: assoc -> run (0x10)
+I (16296) wifi:connected with JohnT-WiFi, aid = 23, channel 10, BW20, bssid = cc:ab:2c:11:ff:04
+I (16296) wifi:security: WPA2-PSK, phy: bgn, rssi: -24
+I (16296) wifi:pm start, type: 1
+
+I (16296) wifi:dp: 1, bi: 102400, li: 3, scale listen interval from 307200 us to 307200 us
+I (16296) wifi:set rx beacon pti, rx_bcn_pti: 0, bcn_timeout: 25000, mt_pti: 0, mt_time: 10000
+I (16306) wifi:<ba-add>idx:0 (ifx:0, cc:ab:2c:11:ff:04), tid:0, ssn:1, winSize:64
+I (16376) wifi:AP's beacon interval = 102400 us, DTIM period = 3
+I (17436) example_connect: Got IPv6 event: Interface "example_netif_sta" address: fe80:0000:0000:0000:86fc:e6ff:fe4f:01bc, type: ESP_IP6_ADDR_IS_LINK_LOCAL
+I (17436) wifi:<ba-add>idx:1 (ifx:0, cc:ab:2c:11:ff:04), tid:2, ssn:1, winSize:64
+I (18306) esp_netif_handlers: example_netif_sta ip: 192.168.1.138, mask: 255.255.255.0, gw: 192.168.1.254
+I (18306) example_connect: Got IPv4 event: Interface "example_netif_sta" address: 192.168.1.138
+I (18306) example_common: Connected to example_netif_sta
+I (18306) example_common: - IPv4 address: 192.168.1.138,
+I (18306) example_common: - IPv6 address: fe80:0000:0000:0000:86fc:e6ff:fe4f:01bc, type: ESP_IP6_ADDR_IS_LINK_LOCAL
+I (18306) example_common: - IPv6 address: 2600:1700:87f1:08c0:86fc:e6ff:fe4f:01bc, type: ESP_IP6_ADDR_IS_GLOBAL
+I (18306) wifi:Set ps type: 0, coexist: 0
+
+I(18316) OPENTHREAD:[N] RoutingManager: BR ULA prefix: fdc5:d605:e3c0::/48 (loaded)
+I(18316) OPENTHREAD:[N] RoutingManager: Local on-link prefix: fd3b:19b4:c971:8200::/64
+I (18336) OPENTHREAD: Platform UDP bound to port 49153
+I(18336) OPENTHREAD:[N] Mle-----------: Role disabled -> detached
+I(18346) OPENTHREAD:[N] Platform------: Successfully set TX Power.
+I (18366) OT_STATE: netif up
+I (18366) OPENTHREAD: NAT64 ready
+> I (19436) example_connect: Got IPv6 event: Interface "example_netif_sta" address: 2600:1700:87f1:08c0:86fc:e6ff:fe4f:01bc, type: ESP_IP6_ADDR_IS_GLOBAL
+I(44876) OPENTHREAD:[N] Mle-----------: RLOC16 7c00 -> fffe
+I(45086) OPENTHREAD:[N] Mle-----------: Attach attempt 1, AnyPartition reattaching with Active Dataset
+I(51666) OPENTHREAD:[N] RouterTable---: Allocate router id 31
+I(51666) OPENTHREAD:[N] Mle-----------: RLOC16 fffe -> 7c00
+I(51676) OPENTHREAD:[N] Mle-----------: Role detached -> leader
+I(51676) OPENTHREAD:[N] Mle-----------: Partition ID 0x1958b646
+I (51696) OPENTHREAD: Platform UDP bound to port 49154
+I (52076) OPENTHREAD: Received PIO
+I (52076) OPENTHREAD: Received RIO
+I (52076) OPENTHREAD: prefix 2600:1700:87F1:800:: lifetime 3600
+
+> exp-serverI (54126) OPENTHREAD: Platform UDP bound to port 53536
+> exp-server-I (54136) OPENTHREAD: Platform UDP bound to port 49155
+> exp-server-startI (56086) OPENTHREAD: Received PIO
+I (56086) OPENTHREAD: Received RIO
+I (56086) OPENTHREAD: prefix 2600:1700:87F1:800:: lifetime 3600
+
+
+
+I(57296) OPENTHREAD:[N] Platform------: OpenThread Connection has been established.
+I (57296) OPENTHREAD: Platform UDP bound to port 5683
+I(57296) OPENTHREAD:[N] Platform------: Started CoAP server at port 5683.
+I(57296) OPENTHREAD:[N] Platform------: Set up battery URI: 'battery'.
+I(57296) OPENTHREAD:[N] Platform------: Set up event URI: 'event'.
+Done
+>
+> I (60106) OPENTHREAD: Received PIO
+I (60106) OPENTHREAD: Received RIO
+I (60106) OPENTHREAD: prefix 2600:1700:87F1:800:: lifetime 600
+[0m
+I (61126) OPENTHREAD: Received PIO
+I (61906) OPENTHREAD: Received PIO
+I (61906) OPENTHREAD: Received RIO
+I (61906) OPENTHREAD: prefix 2600:1700:87F1:800:: lifetime 3600
+
+I (62436) example_connect: Got IPv6 event: Interface "example_netif_sta" address: fd3b:19b4:c971:8200:86fc:e6ff:fe4f:01bc, type: ESP_IP6_ADDR_IS_UNIQUE_LOCAL
+I(65106) OPENTHREAD:[N] Platform------: First battery packet sent by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I (77146) OPENTHREAD: Received PIO
+I (93166) OPENTHREAD: Received PIO
+I(98446) OPENTHREAD:[N] Platform------: [33341 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I (109186) OPENTHREAD: Received PIO
+I (130086) OPENTHREAD: Received PIO
+I(131886) OPENTHREAD:[N] Platform------: [33435 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I(136386) OPENTHREAD:[N] Platform------: First event packet sent by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I(136386) OPENTHREAD:[N] Platform------: [~1.188 minutes] 1 Event Packet(s) so far sent by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+W (162826) OPENTHREAD: Dropping unsupported mldv2 record of type 6
+I(169336) OPENTHREAD:[N] Platform------: [37451 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I(203216) OPENTHREAD:[N] Platform------: [33886 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I(237206) OPENTHREAD:[N] Platform------: [33985 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I(270736) OPENTHREAD:[N] Platform------: [33527 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I(304816) OPENTHREAD:[N] Platform------: [34082 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I(338426) OPENTHREAD:[N] Platform------: [33609 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I (353826) OPENTHREAD: Received PIO
+I(369496) OPENTHREAD:[N] Platform------: [31077 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I(403426) OPENTHREAD:[N] Platform------: [33929 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I (417516) OPENTHREAD: Received PIO
+I (424416) OPENTHREAD: Received PIO
+I(437286) OPENTHREAD:[N] Platform------: [33852 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I(470666) OPENTHREAD:[N] Platform------: [33387 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I(504376) OPENTHREAD:[N] Platform------: [33704 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I(537886) OPENTHREAD:[N] Platform------: [33516 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I(555286) OPENTHREAD:[N] Platform------: [~8.170 minutes] 2 Event Packet(s) so far sent by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I(574866) OPENTHREAD:[N] Platform------: [36974 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I(608136) OPENTHREAD:[N] Platform------: [33278 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I(641976) OPENTHREAD:[N] Platform------: [33839 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I (647966) OPENTHREAD: Received PIO
+I (647966) OPENTHREAD: Received RIO
+I (647966) OPENTHREAD: prefix 2600:1700:87F1:800:: lifetime 3600
+
+I (651726) OPENTHREAD: Received PIO
+I (654736) OPENTHREAD: Received PIO
+I(675356) OPENTHREAD:[N] Platform------: [33376 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I(708576) OPENTHREAD:[N] Platform------: [33216 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I (717766) OPENTHREAD: Received PIO
+I(735656) OPENTHREAD:[N] Platform------: [~11.176 minutes] 3 Event Packet(s) so far sent by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I(746176) OPENTHREAD:[N] Platform------: [37608 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I(780136) OPENTHREAD:[N] Platform------: [33957 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I(814016) OPENTHREAD:[N] Platform------: [33880 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I(847196) OPENTHREAD:[N] Platform------: [33183 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I(880346) OPENTHREAD:[N] Platform------: [33151 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I(913706) OPENTHREAD:[N] Platform------: [33352 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I(947096) OPENTHREAD:[N] Platform------: [33390 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I (953936) OPENTHREAD: Received PIO
+I(975376) OPENTHREAD:[N] Platform------: [~15.171 minutes] 4 Event Packet(s) so far sent by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I(984636) OPENTHREAD:[N] Platform------: [37545 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I (992576) OPENTHREAD: Received PIO
+I (992576) OPENTHREAD: Received RIO
+I (992576) OPENTHREAD: prefix 2600:1700:87F1:800:: lifetime 3600
+
+I (995026) OPENTHREAD: Received PIO
+I(1017856) OPENTHREAD:[N] Platform------: [33218 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I (1034836) OPENTHREAD: Received PIO
+I (1047846) OPENTHREAD: Received PIO
+I(1051446) OPENTHREAD:[N] Platform------: [33589 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I (1059646) OPENTHREAD: Received PIO
+I (1062666) OPENTHREAD: Received PIO
+I(1085406) OPENTHREAD:[N] Platform------: [33963 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I(1119016) OPENTHREAD:[N] Platform------: [33608 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I(1152996) OPENTHREAD:[N] Platform------: [33982 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I(1186096) OPENTHREAD:[N] Platform------: [33101 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I(1219676) OPENTHREAD:[N] Platform------: [33575 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I(1253046) OPENTHREAD:[N] Platform------: [33377 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I (1254496) OPENTHREAD: Received PIO
+I(1286146) OPENTHREAD:[N] Platform------: [33094 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I(1320046) OPENTHREAD:[N] Platform------: [33905 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I(1353896) OPENTHREAD:[N] Platform------: [33843 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I(1387716) OPENTHREAD:[N] Platform------: [33821 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I (1398756) OPENTHREAD: Received PIO
+I (1398756) OPENTHREAD: Received RIO
+I (1398756) OPENTHREAD: prefix 2600:1700:87F1:800:: lifetime 3600
+
+I (1401746) OPENTHREAD: Received PIO
+I(1421256) OPENTHREAD:[N] Platform------: [33543 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I(1454366) OPENTHREAD:[N] Platform------: [~23.154 minutes] 5 Event Packet(s) so far sent by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I(1458586) OPENTHREAD:[N] Platform------: [37333 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I (1466346) OPENTHREAD: Received PIO
+I(1492346) OPENTHREAD:[N] Platform------: [33757 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I(1525766) OPENTHREAD:[N] Platform------: [33418 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I (1554136) OPENTHREAD: Received PIO
+I(1559096) OPENTHREAD:[N] Platform------: [33332 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I(1593036) OPENTHREAD:[N] Platform------: [33937 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I(1627006) OPENTHREAD:[N] Platform------: [33973 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I(1660706) OPENTHREAD:[N] Platform------: [33697 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I (1667806) OPENTHREAD: Received PIO
+I (1667806) OPENTHREAD: Received RIO
+I (1667806) OPENTHREAD: prefix 2600:1700:87F1:800:: lifetime 3600
+
+I (1671016) OPENTHREAD: Received PIO
+I(1694246) OPENTHREAD:[N] Platform------: [33542 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I(1728086) OPENTHREAD:[N] Platform------: [33842 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I (1739266) OPENTHREAD: Received PIO
+I(1761856) OPENTHREAD:[N] Platform------: [33771 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I(1794996) OPENTHREAD:[N] Platform------: [33141 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I(1828496) OPENTHREAD:[N] Platform------: [33496 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I (1855576) OPENTHREAD: Received PIO
+I(1862426) OPENTHREAD:[N] Platform------: [33935 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I(1895716) OPENTHREAD:[N] Platform------: [33282 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I(1929166) OPENTHREAD:[N] Platform------: [33453 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I(1963176) OPENTHREAD:[N] Platform------: [34012 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I(1996866) OPENTHREAD:[N] Platform------: [33693 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
+I(2030636) OPENTHREAD:[N] Platform------: [33766 ms] last battery packet by fd84:7733:23a0:f199:9dbf:b2a5:7bc7:a0ae.
