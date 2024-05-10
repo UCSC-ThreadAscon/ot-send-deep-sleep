@@ -69,7 +69,7 @@ void onWakeup(nvs_handle_t handle,
     }
 
     /**
-     *  STEP 2(b): If battery packet is less than, you will send a battery
+     *  STEP 2(b): If battery packet is less, you will send a battery
      *             packet on next wakeup.
      *
      *             battery sleep time in NVS = reset to 30 seconds.
