@@ -19,10 +19,10 @@ void batteryBackoffDebug(uint64_t diffUs, bool batteryFirst) {
   double diffSecs = US_TO_SECONDS((double) diffUs);
 
   if (batteryFirst) {
-    otLogWarnPlat("Battery will be sent ~%3.f secs before Event.", diffSecs);
+    otLogWarnPlat("Battery will be sent ~%.3f secs before Event.", diffSecs);
   }
   else {
-    otLogWarnPlat("Event will be sent ~%3.f secs before Battery.", diffSecs);
+    otLogWarnPlat("Event will be sent ~%.3f secs before Battery.", diffSecs);
   }
 
   otLogWarnPlat("Going to do battery backoff by %d secs.", BACKOFF_SECONDS);
