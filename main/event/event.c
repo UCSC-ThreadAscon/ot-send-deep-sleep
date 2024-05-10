@@ -6,7 +6,7 @@
  * ----------------------------------
  * Battery packets are sent EVERY 30 SECONDS, and the FIRST battery packet
  * is sent WHEN POWERED ON. As a result, add 15 seconds to each event wakeup time
- * so minimize overlap between when two Battery packets are sent.
+ * so minimize overlap between when two battery packets are sent.
  *
  *   B-----------------X----------------B
  *   ^                 ^                ^
