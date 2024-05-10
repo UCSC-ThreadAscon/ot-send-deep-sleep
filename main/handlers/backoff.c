@@ -15,9 +15,27 @@
 #define MARGIN_US SECONDS_TO_US(MARGIN_SECONDS)
 #define BACKOFF_US SECONDS_TO_US(BACKOFF_SECONDS)
 
-uint64_t batteryBackoff(uint64_t eventsSleepUs,
+void batteryBackoffDebug(uint64_t diffUs, bool batteryFirst) {
+  double diffSecs = US_TO_SECONDS((double) diffUs);
+
+  if (batteryFirst) {
+    otLogWarnPlat("Battery will be sent ~%3.f secs before Event.", diffSecs);
+  }
+  else {
+    otLogWarnPlat("Event will be sent ~%3.f secs before Battery.", diffSecs);
+  }
+
+  otLogWarnPlat("Going to do battery backoff by %d secs.", BACKOFF_SECONDS);
+  return;
+}
+
+uint64_t batteryBackoff(uint64_t eventSleepUs,
                         uint64_t batterySleepUs)
 {
+#if TIME_DIFF_DEBUG
+    printSleepTimes(eventSleepUs, batterySleepUs);
+#endif
+
   /**
    * CASE: Battery Packet Sent First
    *       (or Battery and Event Packets sent at the same time)
@@ -45,11 +63,14 @@ uint64_t batteryBackoff(uint64_t eventsSleepUs,
    *        |                           |
    *     same time               2 second difference        
   */
-  if (batterySleepUs <= eventsSleepUs)
+  if (batterySleepUs <= eventSleepUs)
   {
-    uint64_t diffUs = eventsSleepUs - batterySleepUs;
+    uint64_t diffUs = eventSleepUs - batterySleepUs;
     if (diffUs <= MARGIN_US)
     {
+#if TIME_DIFF_DEBUG
+      batteryBackoffDebug(diffUs, true);
+#endif
       return batterySleepUs + diffUs + BACKOFF_US;
     }
   }
@@ -70,9 +91,12 @@ uint64_t batteryBackoff(uint64_t eventsSleepUs,
    *      <= 1 second               +2 seconds more
   */
   else {
-    uint64_t diffUs = batterySleepUs - eventsSleepUs;
+    uint64_t diffUs = batterySleepUs - eventSleepUs;
     if (diffUs <= MARGIN_US)
     {
+#if TIME_DIFF_DEBUG
+      batteryBackoffDebug(diffUs, false);
+#endif
       return batterySleepUs + BACKOFF_US;
     }
   }

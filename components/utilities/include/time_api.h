@@ -19,6 +19,7 @@
 #define MS_TO_SECONDS(ms) ms / 1000
 #define MS_TO_MINUTES(ms) MS_TO_SECONDS(ms) / 60
 #define US_TO_MINUTES(us) MS_TO_MINUTES(US_TO_MS(us))
+#define US_TO_SECONDS(us) MS_TO_SECONDS(US_TO_MS(us))
 
 #define SECONDS_TO_MS(secs) secs * 1000
 #define SECONDS_TO_US(secs) MS_TO_US(SECONDS_TO_MS(secs))

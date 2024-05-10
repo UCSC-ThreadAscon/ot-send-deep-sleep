@@ -30,7 +30,7 @@ typedef enum Status {
 } Status;
 
 typedef struct Data {
-  uint64_t batterySleepTime; // in microseconds
+  uint64_t batterySleepMicro; // in microseconds
   Status status;
 } Data;
 

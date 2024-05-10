@@ -14,7 +14,7 @@ void onPowerOn(nvs_handle_t handle,
   uint8_t eventsIndex = 0;
   nvsWriteByteUInt(handle, NVS_EVENTS_INDEX, eventsIndex);
 
-  dataPtr->batterySleepTime = BATTERY_WAIT_TIME_MICRO;
+  dataPtr->batterySleepMicro = BATTERY_WAIT_TIME_MICRO;
   dataPtr->status = PowerOn;
   nvsWriteBlob(handle, NVS_DATA, dataPtr, sizeof(Data));
 
