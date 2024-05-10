@@ -33,9 +33,16 @@ void printDeviceInfo() {
 
 void printSleepTimes(uint64_t eventSleepMicro, uint64_t batterySleepMicro)
 {
-    otLogNotePlat("The next EVENT sleep time is: %" PRIu64 " mins.",
-                  US_TO_MINUTES(eventSleepMicro));
-    otLogNotePlat("The next BATTERY sleep time is %" PRIu64 " mins.",
-                  US_TO_MINUTES(batterySleepMicro));
+    otLogNotePlat(
+      "The next EVENT sleep time is %" PRIu64 " ms, or % " PRIu64 " mins.",
+      US_TO_MS(eventSleepMicro),
+      US_TO_MINUTES(eventSleepMicro)
+    );
+
+    otLogNotePlat(
+      "The next BATTERY sleep time is %" PRIu64 " ms, or % " PRIu64 " mins.",
+      US_TO_MS(batterySleepMicro),
+      US_TO_MINUTES(batterySleepMicro)
+    );
     return;
 }
