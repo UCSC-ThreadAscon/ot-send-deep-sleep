@@ -7,3 +7,4 @@
 #define DEEP_SLEEP_DEBUG 0
 #define OT_DEBUG 0
 #define COAP_DEBUG 0
+#define TIME_DIFF_DEBUG 1

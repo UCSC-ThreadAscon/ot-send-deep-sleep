@@ -49,6 +49,11 @@ void onWakeup(nvs_handle_t handle,
     uint64_t eventSleepMicro = getNextSleepMicro(events, eventsIndex);
     uint64_t batterySleepTime = data->batterySleepTime;
 
+#if TIME_DIFF_DEBUG
+    otLogNotePlat("The next EVENT sleep time is: %" PRIu64 ".");
+    otLogNotePlat("The next BATTERY sleep time is %" PRIu64 ".");
+#endif
+
     /**
      *  STEP 2(a): If event packet is less, then you will send event packet
      *             on next wakeup.
