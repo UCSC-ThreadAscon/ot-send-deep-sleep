@@ -55,6 +55,9 @@ void onWakeup(nvs_handle_t handle,
               otSockAddr *socket,
               Data *data);
 
+uint64_t batteryBackoff(uint64_t eventsSleepUs,
+                        uint64_t batterySleepUs);
+                      
 void sendBatteryPacket(otSockAddr *socket, uuid deviceId);
 void sendEventPacket(otSockAddr *socket, uuid deviceId);
 

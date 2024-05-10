@@ -10,11 +10,9 @@
 */
 #include "main.h"
 
-uint64_t batteryBackoff(uint64_t eventsSleepMicro,
-                        uint64_t batterySleepMicro)
+uint64_t batteryBackoff(uint64_t eventsSleepUs,
+                        uint64_t batterySleepUs)
 {
-  bool sendBatteryNext = batterySleepMicro <= eventsSleepMicro;
-
   /**
    * CASE: Battery Packet Sent First
    *
@@ -41,10 +39,37 @@ uint64_t batteryBackoff(uint64_t eventsSleepMicro,
    *        |                           |
    *     same time               2 second difference        
   */
-  if (sendBatteryNext)
+  if (batterySleepUs <= eventsSleepUs)
   {
-
+    uint64_t diffUs = eventsSleepUs - batterySleepUs;
+    if (diffUs <= MARGIN_US)
+    {
+      return batterySleepUs + diffUs + BACKOFF_US;
+    }
   }
 
-  return 0;
+  /**
+   * CASE: Event Packet Sent First
+   *
+   * Add 2 seconds more to the when the battery packet should be sent.
+   *
+   * Not as much of a concern, but do the backoff anyways as a precaution.
+   *
+   * Before:                  After:
+   * |---E-----B----|         |---E----------B----|
+   *     |-----|                  |----------|
+   *        ^                          ^
+   *        |                          |
+   *        |                          |
+   *      <= 1 second               2 seconds more
+  */
+  else {
+    uint64_t diffUs = batterySleepUs - eventsSleepUs;
+    if (diffUs <= MARGIN_US)
+    {
+      return batterySleepUs + BACKOFF_US;
+    }
+  }
+
+  return batterySleepUs;
 }
