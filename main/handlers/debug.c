@@ -30,3 +30,12 @@ void printDeviceInfo() {
 #endif
   return;
 }
+
+void printSleepTimes(uint64_t eventSleepMicro, uint64_t batterySleepMicro)
+{
+    otLogNotePlat("The next EVENT sleep time is: %" PRIu64 " mins.",
+                  US_TO_MINUTES(eventSleepMicro));
+    otLogNotePlat("The next BATTERY sleep time is %" PRIu64 " mins.",
+                  US_TO_MINUTES(batterySleepMicro));
+    return;
+}

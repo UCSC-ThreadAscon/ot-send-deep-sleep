@@ -57,3 +57,4 @@ bool noMoreEventsToSend(uint8_t eventsIndex);
 void eventPacketsStats(uint8_t eventsIndex);
 
 void printDeviceInfo();
+void printSleepTimes(uint64_t eventSleepMicro, uint64_t batterySleepMicro);
