@@ -67,7 +67,7 @@ uint64_t batteryBackoff(uint64_t eventsSleepUs,
    *        ^                          ^
    *        |                          |
    *        |                          |
-   *      <= 1 second               2 seconds more
+   *      <= 1 second               +2 seconds more
   */
   else {
     uint64_t diffUs = batterySleepUs - eventsSleepUs;
