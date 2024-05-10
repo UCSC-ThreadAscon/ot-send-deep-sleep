@@ -10,6 +10,11 @@
 */
 #include "main.h"
 
+#define MARGIN_SECONDS 1
+#define BACKOFF_SECONDS 2
+#define MARGIN_US SECONDS_TO_US(MARGIN_SECONDS)
+#define BACKOFF_US SECONDS_TO_US(BACKOFF_SECONDS)
+
 uint64_t batteryBackoff(uint64_t eventsSleepUs,
                         uint64_t batterySleepUs)
 {
