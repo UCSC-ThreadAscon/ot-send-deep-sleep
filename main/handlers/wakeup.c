@@ -50,8 +50,8 @@ void onWakeup(nvs_handle_t handle,
     uint64_t batterySleepTime = data->batterySleepTime;
 
 #if TIME_DIFF_DEBUG
-    otLogNotePlat("The next EVENT sleep time is: %" PRIu64 ".");
-    otLogNotePlat("The next BATTERY sleep time is %" PRIu64 ".");
+    otLogNotePlat("The next EVENT sleep time is: %" PRIu64 ".", eventSleepMicro);
+    otLogNotePlat("The next BATTERY sleep time is %" PRIu64 ".", batterySleepTime);
 #endif
 
     /**
