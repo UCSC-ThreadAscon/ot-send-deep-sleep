@@ -34,7 +34,7 @@ void printDeviceInfo() {
 void printSleepTimes(uint64_t eventSleepMicro, uint64_t batterySleepMicro)
 {
     otLogNotePlat(
-      "The next EVENT sleep time is %3.f ms, or %3.f mins.",
+      "The next EVENT sleep time is %.3f ms, or %.3f mins.",
       US_TO_MS((double) eventSleepMicro),
       US_TO_MINUTES((double) eventSleepMicro)
     );
