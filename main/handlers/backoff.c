@@ -20,6 +20,7 @@ uint64_t batteryBackoff(uint64_t eventsSleepUs,
 {
   /**
    * CASE: Battery Packet Sent First
+   *       (or Battery and Event Packets sent at the same time)
    *
    * Before:                After:
    * |---B-----E----|       |--------E---------B-|  
