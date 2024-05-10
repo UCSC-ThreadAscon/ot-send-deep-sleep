@@ -47,6 +47,7 @@ void onWakeup(nvs_handle_t handle,
      * STEP 1: Get sleep times for event and battery packet.
     */
     uint64_t eventSleepMicro = getNextSleepMicro(events, eventsIndex);
+    data->batterySleepTime = batteryBackoff(eventSleepMicro, data->batterySleepTime);
     uint64_t batterySleepTime = data->batterySleepTime;
 
 #if TIME_DIFF_DEBUG
