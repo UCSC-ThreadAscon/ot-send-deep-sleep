@@ -1,7 +1,7 @@
 /**
  * BATTERY BACKOFF STRATEGY
  * ------------------------
- * This file defines the functions used to ensure that every batter and
+ * This file defines the functions used to ensure that every battery and
  * event packet are always sent no more than BACKOFF_SECONDS apart.
  *
  * This invariant will prevent the case in which a battery and event packet
