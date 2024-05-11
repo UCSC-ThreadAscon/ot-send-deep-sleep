@@ -46,9 +46,9 @@ uint64_t batteryBackoff(uint64_t eventSleepUs,
    *        ^                             ^
    *        |                             |
    *        |                             |
-   *      <= 1 second                   2 seconds difference
+   * <= MARGIN_SECONDS second    BACKOFF_SECONDS seconds difference
    *
-   * In this case move the battery packet to 2 SECONDS AFTER
+   * In this case move the battery packet to BACKOFF_SECONDS AFTER
    * the event packet.
    *
    * This approach will even deal with the case when both packets are
@@ -61,7 +61,7 @@ uint64_t batteryBackoff(uint64_t eventSleepUs,
    *        |                           ^
    *        |                           |
    *        |                           |
-   *     same time               2 second difference        
+   *     same time         BACKOFF_SECONDS second difference        
   */
   if (batterySleepUs <= eventSleepUs)
   {
@@ -78,7 +78,7 @@ uint64_t batteryBackoff(uint64_t eventSleepUs,
   /**
    * CASE: Event Packet Sent First
    *
-   * Add 2 seconds more to the when the battery packet should be sent.
+   * Add BACKOFF_SECONDS more to the when the battery packet should be sent.
    *
    * Not as much of a concern, but do the backoff anyways as a precaution.
    *
@@ -88,7 +88,7 @@ uint64_t batteryBackoff(uint64_t eventSleepUs,
    *        ^                          ^
    *        |                          |
    *        |                          |
-   *      <= 1 second               +2 seconds more
+   *  <= MAGIN_SECONDS second     +BACKOFF_SECONDS seconds more
   */
   else {
     uint64_t diffUs = batterySleepUs - eventSleepUs;
