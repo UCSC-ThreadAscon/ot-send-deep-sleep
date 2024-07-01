@@ -2,7 +2,7 @@
 
 /** ---- Toggles debugging print statements ---- */
 #define TX_POWER_DEBUG 0
-#define NVS_DEBUG 1
+#define NVS_DEBUG 0
 #define EVENT_DEBUG 0
 #define DEEP_SLEEP_DEBUG 0
 #define OT_DEBUG 0
